@@ -1,0 +1,55 @@
+/* latin */
+@font-face {
+  font-family: 'Waiting for the Sunrise';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Waiting for the Sunrise'), local('WaitingfortheSunrise'), url(https://fonts.gstatic.com/s/waitingforthesunrise/v7/eNfH7kLpF1PZWpsetF-ha6dq3j6WwEb-fqwg9dMLRYwC1LhKU8qFLLahJuQDJSaO.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+
+.iron-image-0 {
+  display: inline-block;
+        overflow: hidden;
+        position: relative;
+}
+
+.iron-image-0 #sizedImgDiv.iron-image {
+  position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+        display: none;
+}
+
+.iron-image-0 #img.iron-image {
+  display: block;
+        width: auto;
+        height: auto;
+}
+
+.iron-image-0[sizing] #sizedImgDiv.iron-image {
+  display: block;
+}
+
+.iron-image-0[sizing] #img.iron-image {
+  display: none;
+}
+
+.iron-image-0 #placeholder.iron-image {
+  position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+        background-color: inherit;
+        opacity: 1;;
+}
+
+.iron-image-0 #placeholder.faded-out.iron-image {
+  transition: opacity 0.5s linear;
+        opacity: 0;
+}
