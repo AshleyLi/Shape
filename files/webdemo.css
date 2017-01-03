@@ -51,7 +51,7 @@ myscript-text-web {
 }
 
 canvas[id^=ms-capture-canvas] {
-    background: url(../img/poweredbymyscript.svg) bottom right / 140px 63px no-repeat;
+    background:  bottom right / 140px 63px no-repeat;
 }
 
 canvas[id^=ms-rendering-canvas] {
@@ -119,12 +119,12 @@ only screen and (min-resolution: 120dpi)
 
 .ooo-link-back {
     margin: 0 16px;
-    background: transparent url(../img/larr.svg) no-repeat center/contain;
+    background: transparent no-repeat center/contain;
 }
 
 .ooo-link-info {
     margin: 0 16px;
-    background: transparent url(../img/info.svg) no-repeat center/contain;
+    background: transparent no-repeat center/contain;
 }
 
 .ooo-header-logo {
