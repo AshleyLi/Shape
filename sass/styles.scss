@@ -1,0 +1,23 @@
+@import "bootstrap-compass";
+@import "bootstrap-variables";
+@import "bootstrap";
+
+/*	 Wrote by Ashley.*/
+h1{ color: #b00000;
+	span{
+		display: block;
+		text-align: center;
+		color: red;
+	}
+}
+
+.buttons.myscript-common-element {
+    position: absolute;
+    z-index: 2;
+    margin-left: -69px;
+    bottom: -50px;
+    left: 50%;
+}
+.ooo-footer{
+	display: none;
+}
