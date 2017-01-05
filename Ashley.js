@@ -8,17 +8,16 @@ window.Ashley = {
     var shapeName = responseObject.result.segments[0].candidates[0].label;
     $(".js_shapeName").text(shapeName);
 
-    var points = [];
+    var pointsX = [];
+    var pointsY = [];
     for ( i = 0 ; i < 4; i++){
-
         var pointX = Math.floor(responseObject.result.segments[0].candidates[0].primitives[i].firstPoint.x);
         var pointY = Math.floor(responseObject.result.segments[0].candidates[0].primitives[i].firstPoint.y);
-        // points[i][0] = pointX;
-        // points[i][1] = pointY;
-        console.log("(" + pointX + "," + pointY + ")" );
+        pointsX[i] = pointX;
+        pointsY[i] = pointY;
 
     }
-
+    console.log("pointsX = [" + pointsX + "] , pointsY = [" + pointsY + "]" );
 
   },
   requestCallback : function (requestObject){
