@@ -1,6 +1,6 @@
-@import "bootstrap-compass";
-@import "bootstrap-variables";
-@import "bootstrap";
+// // @import "bootstrap-compass";
+// // @import "bootstrap-variables";
+// @import "bootstrap";
 
 /*	 Wrote by Ashley.*/
 h1{ color: #b00000;
@@ -19,5 +19,11 @@ h1{ color: #b00000;
     left: 50%;
 }
 .ooo-footer{
-	display: none;
+	 display: none;
+}
+.ooo-section{
+	background-image:url('../img/iphoneWireframe.png');
+	background-position: center;
+	background-size: 400px;
+	background-repeat: no-repeat;
 }
