@@ -2,6 +2,8 @@
 // // @import "bootstrap-variables";
 // @import "bootstrap";
 
+$lightGrey: #bdc3c7;
+
 /*	 Wrote by Ashley.*/
 h1{ color: #b00000;
 	span{
@@ -26,4 +28,27 @@ h1{ color: #b00000;
 	background-position: center;
 	background-size: 400px;
 	background-repeat: no-repeat;
+}
+
+// END of BASIC UI
+
+// INFOMATION AREA
+.showInfo2{
+	display: block;
+	padding:20px;
+	position: absolute;
+	left: 50px;
+	top:100px;
+	background-color: white;
+	// border: 1px solid $lightGrey;
+	color: $lightGrey;
+	ul{
+		list-style: none;
+		margin: 0px;
+		padding: 0px;
+		li{
+			margin-bottom: 10px;
+		}
+
+	}
 }

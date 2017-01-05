@@ -25,6 +25,7 @@
     <link type="text/css" rel="stylesheet" href="./files/css.css">
     <link type="text/css" rel="stylesheet" href="./files/webdemo.css">
     <link rel="stylesheet" href="sass/styles.min.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
     <!--Configuration file used to store identifiers and some parameters-->
     <script type="text/javascript" src="./files/configuration.js"></script>
@@ -58,7 +59,17 @@
             <h1 class="ooo-shape">Suggested Components by Ashley</h1>
             <a id="info-header-link" class="ooo-link-info" href="https://webdemo.myscript.com/views/shape.html#description"></a>
         </header>
-        <!-- Background by Ashley -->
+        <!-- INFOMATION AREA  -->
+        <div class="showInfo2">
+          <ul>
+            <li>Shape: <span class="js_shapeName"></span></li>
+            <li>Width: <span class="js_shapeW">number</span></li>
+            <li>Height: <span class="js_shapeH">number</span></li>
+          </ul>
+        </div>
+
+
+        <!-- end of INFOMATION AREA  -->
         <section class="ooo-section">
             <div class="write-here">Write here</div>
             <!-- Declare a SHAPE WebComponent, with typeset=true to render the recognition result on the component -->
@@ -113,7 +124,7 @@
                 </paper-toast>
             </myscript-common-element>
         </section>
-        <footer class="ooo-footer">
+        <!-- <footer class="ooo-footer">
             <a id="myscript-footer-link" href="http://www.myscript.com/" target="_blank" title="MyScript">
             Copyright © MyScript® All Rights Reserved
         </a>
@@ -123,7 +134,7 @@
             <a id="dev-portal-link" href="http://dev.myscript.com/" target="_blank" title="Developer portal">
             Try our API
         </a>
-        </footer>
+        </footer> -->
     </div>
     <div class="overlay" style="display: none;">
         <div class="loader"></div>
