@@ -20,12 +20,15 @@
     <link rel="icon" type="image/png" sizes="96×96" href="https://webdemo.myscript.com/assets/img/demo/WebDemoIcon-Shape_96x96.png">
     <link rel="apple-touch-icon" type="image/png" sizes="96×96" href="https://webdemo.myscript.com/assets/img/demo/WebDemoIcon-Shape_96x96.png">
 
-    <title>Testing</title>
+    <title> Shape the world !!!</title>
 
     <link type="text/css" rel="stylesheet" href="./files/css.css">
     <link type="text/css" rel="stylesheet" href="./files/webdemo.css">
     <link rel="stylesheet" href="sass/styles.min.css">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
 
     <!--Configuration file used to store identifiers and some parameters-->
     <script type="text/javascript" src="./files/configuration.js"></script>
@@ -34,6 +37,10 @@
 
     <link rel="import" href="./bower_components/iron-image/iron-image.html">
     <link rel="import" href="./bower_components/myscript-common-element/myscript-common-element.html">
+    <script>
+    function myFunction() {
+      window.location.reload();
+    }</script>
 </head>
 
 <body touch-action="none" onload="load()">
@@ -56,11 +63,11 @@
         </div>
         <header class="ooo-header">
             <a id="index-header-link" class="ooo-link-back" href="https://webdemo.myscript.com/index.html"></a>
-            <h1 class="ooo-shape">Suggested Components by Ashley</h1>
+            <h1 class="ooo-shape">Component suggestions by Ashley</h1>
             <a id="info-header-link" class="ooo-link-info" href="https://webdemo.myscript.com/views/shape.html#description"></a>
         </header>
         <!-- INFOMATION AREA  -->
-        <div class="showInfo2">
+        <div class="showInfo2 alert alert-info" role="alert">
           <ul>
             <li>Shape: <span class="js_shapeName"></span></li>
             <li>pointsX: <span class="js_pointsX"></span></li>
@@ -69,6 +76,159 @@
             <li>Height: <span class="js_shapeH"></span></li>
           </ul>
         </div>
+        <!-- js_suggestions -->
+        <div class="popover popover-right js_suggestions" style="display:none;">
+          <h3 class="popover-title">I drawed a/an...</h3>
+
+          <div class="popover-content">
+            <!--[1] js_wildRectB: 寬矩形 && H > unitH -->
+            <div class="js_wildRectB"  style="display:none;">
+              <label for="">大的寬矩形</label>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image" checked>
+                  Image
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape">
+                  Shape
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView">
+                  TextView
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField">
+                  TextField
+                </label>
+              </div>
+              <div class="form-check disabled">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
+                  Button
+                </label>
+              </div>
+            </div>
+            <!--[2] js_wildRectS: 寬矩形 && H < unitH -->
+            <div class="js_wildRectS"  style="display:none;">
+              <label for="">小的寬矩形 </label>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Button" checked>
+                  Button
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField">
+                  TextField
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape">
+                  Shape
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Image">
+                  Image
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView">
+                  TextView
+                </label>
+              </div>
+            </div>
+            <!--[3] js_tallRectB: 高矩形 && H > unitH -->
+            <div class="js_tallRectB"  style="display:none;">
+              <label for="">大的高矩形</label>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image" checked>
+                  Image
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape">
+                  Shape
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView">
+                  TextView
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField">
+                  TextField
+                </label>
+              </div>
+              <div class="form-check disabled">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
+                  Button
+                </label>
+              </div>
+            </div>
+            <!--[4] js_tallRectS: 高矩形 && H < unitH -->
+            <div class="js_tallRectS" style="display:none;">
+              <label for="">小的高矩形</label>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image" checked>
+                  Image
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape">
+                  Shape
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" >
+                  Button
+                </label>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView">
+                  TextView
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField">
+                  TextField
+                </label>
+              </div>
+
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-block js_confirmType" >Confirm</button>
+          </div>
+        </div>
+
+        <!-- Shape identification -->
+        <div class="identification">
+
+        </div>
+
+
 
 
         <!-- end of INFOMATION AREA  -->
@@ -142,7 +302,7 @@
         <div class="loader"></div>
     </div>
 
-    <script type="text/javascript" src="./files/js.js"></script>
+    <script type="text/javascript" src="files/js.js"></script>
 
     <iron-a11y-announcer>
         <div class="style-scope iron-a11y-announcer" aria-live="polite"></div>
