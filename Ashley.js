@@ -1,5 +1,8 @@
 var idtagX;
 var idtagY;
+var correctness = 0;
+var shapeQty;
+var errorQty  = 0 ;
 window.Ashley = {
   responseCallback : function (responseObject){
     // Get shape information
@@ -7,7 +10,9 @@ window.Ashley = {
 
     // Get the length of segments[]
     var segmentsLength = responseObject.result.segments.length - 1 ;
-    console.log('segmentsLength =' + segmentsLength)
+    shapeQty = responseObject.result.segments.length;
+    console.log('shapeQty = ' + shapeQty)
+
     // Print basic shape information
     var shapeName = responseObject.result.segments[segmentsLength].candidates[0].label;
     var screenH = 600;
@@ -16,6 +21,8 @@ window.Ashley = {
     var pointsY = [];
 
     $(".js_shapeName").text(shapeName);
+    $(".js_ShapeQty").text(shapeQty);
+
     // 取得 PosX and PosY array
     for ( i = 0 ; i < 4; i++){
         var pointX = Math.floor(responseObject.result.segments[segmentsLength].candidates[0].primitives[i].firstPoint.x);
@@ -54,7 +61,7 @@ window.Ashley = {
       }else if (rectW < rectH && rectH < unitH)  {
         $('.js_tallRectS').css({"display" : "initial"});
       }else{
-        alert('A square.');
+        console.log('A square.');
       }
     }
     // reture and set pop posY
@@ -79,15 +86,29 @@ window.Ashley = {
 
 //====================== leave a label ==========================
 $(document).on("click",".js_confirmType",function(){
+    var padding = 5;
     // close suggestions
     $('.popover-content > div').css({"display" : "none"});
     $('.js_suggestions').css({"display":"none"});
-    idtagX += 10;
-    idtagY += 10;
+
     // add identification
-    $(".identification").append("<span style='left:" + idtagX + "px;top:"+ idtagY +"px;'>" + "Default" + "</span>");
-    console.log('idtagX = ' + idtagX + ',' + 'idtagY = ' + idtagY);
+    idtagX += padding;
+    idtagY += padding -2;
+    $(".identification").append("<span style='left:" + idtagX + "px;top:"+ idtagY +"px;'>" + $( "input:checked" ).val() + "</span>");
     idtagX = 0;
     idtagY = 0;
 
+    // count errorQty
+    if( $('input').prop( "checked" ) == false ){
+      console.log('errorQty = ' + errorQty);
+      $(".identification > span:last-child").css({"color":"red"});
+      errorQty += 1;
+    }
+
+    // clear checked attr
+    $('input:checked').prop( "checked", false );
+
+    // correctness
+    correctness = Math.floor((shapeQty - errorQty)/shapeQty*100) ;
+    $(".js_correctness").text(correctness + "%");
 });
