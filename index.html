@@ -67,7 +67,7 @@
             <a id="info-header-link" class="ooo-link-info" href="https://webdemo.myscript.com/views/shape.html#description"></a>
         </header>
         <!--========================= INFOMATION AREA =========================-->
-        <div class="showInfo2 alert alert-info" role="alert">
+        <div class="showInfo2 alert alert-info js_showCount" style="display:none" role="alert">
           <ul>
             <li>Shape: <span class="js_shapeName"></span></li>
             <li>pointsX: <span class="js_pointsX"></span></li>
@@ -78,10 +78,10 @@
               <hr>
             </li>
             <li>ShapeQty: <span class="js_ShapeQty"></span></li>
-            <li>Correctness: <span class="js_correctness"></span></li>
-
-            <li></li>
+            <li>Score: <span class="js_correctness"></span> / <span class="js_totalScore"></span>(<span class="js_percentage"></span>)</li>
+            <li><hr></li>
           </ul>
+          <ul class="score"></ul>
         </div>
         <!-- js_suggestions -->
         <div class="popover popover-right js_suggestions" style="display:none;">
@@ -92,31 +92,31 @@
             <div class="js_wildRectB"  style="display:none;">
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image">
+                  <input class="form-check-input" type="radio" name="exampleRadios" indexP="5" id="js_wildRectB-co" value="Image">
                   Image
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="4">
                   Shape
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="3">
                   TextView
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="2">
                   TextField
                 </label>
               </div>
-              <div class="form-check disabled">
+              <div class="form-check ">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" indexP="1">
                   Button
                 </label>
               </div>
@@ -125,31 +125,31 @@
             <div class="js_wildRectS"  style="display:none;">
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Button">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Button" indexP="5">
                   Button
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="4">
                   TextField
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="3">
                   Shape
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Image">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Image" indexP="2">
                   Image
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="1">
                   TextView
                 </label>
               </div>
@@ -158,31 +158,31 @@
             <div class="js_tallRectB"  style="display:none;">
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image" checked>
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image" indexP="5">
                   Image
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="4">
                   Shape
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="3">
                   TextView
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="2">
                   TextField
                 </label>
               </div>
               <div class="form-check ">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Button" indexP="1">
                   Button
                 </label>
               </div>
@@ -191,30 +191,30 @@
             <div class="js_tallRectS" style="display:none;">
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image" checked>
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image" indexP="5">
                   Image
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="4">
                   Shape
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" >
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Button" indexP="3" >
                   Button
                 </label>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="2">
                   TextView
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="1">
                   TextField
                 </label>
               </div>
@@ -227,7 +227,6 @@
 
         <!-- Shape identification -->
         <div class="identification">
-
         </div>
 
 

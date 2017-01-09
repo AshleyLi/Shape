@@ -3,6 +3,9 @@ var idtagY;
 var correctness = 0;
 var shapeQty;
 var errorQty  = 0 ;
+var suggestedlist = "none";
+var componentP = [5,4,3,2,1];
+var totalScore = 0;
 window.Ashley = {
   responseCallback : function (responseObject){
     // Get shape information
@@ -54,12 +57,16 @@ window.Ashley = {
 
       if(rectW > rectH && rectH > unitH){
         $('.js_wildRectB').css({"display" : "initial"});
+
       }else if (rectW > rectH && rectH < unitH) {
         $('.js_wildRectS').css({"display" : "initial"});
+
       }else if (rectW < rectH && rectH > unitH) {
         $('.js_tallRectB').css({"display" : "initial"});
+
       }else if (rectW < rectH && rectH < unitH)  {
         $('.js_tallRectS').css({"display" : "initial"});
+
       }else{
         console.log('A square.');
       }
@@ -84,8 +91,9 @@ window.Ashley = {
 }
 
 
-//====================== leave a label ==========================
+//====================== AFTER CONFIRM ==========================
 $(document).on("click",".js_confirmType",function(){
+    $(".js_showCount").css({"display":"initial"});
     var padding = 5;
     // close suggestions
     $('.popover-content > div').css({"display" : "none"});
@@ -98,17 +106,22 @@ $(document).on("click",".js_confirmType",function(){
     idtagX = 0;
     idtagY = 0;
 
-    // count errorQty
-    if( $('input').prop( "checked" ) == false ){
-      console.log('errorQty = ' + errorQty);
-      $(".identification > span:last-child").css({"color":"red"});
-      errorQty += 1;
-    }
+
+    console.log( $( "input:checked" ).val() + " is checked!" );
+
+    // check the index of the checked checkbox
+    var indexP = parseInt($( "input:checked" ).attr("indexP"));
+    console.log( "indexP = " + indexP  );
+    $(".score").append( "<li>#" + shapeQty + " —— " + indexP + "</li>" )
 
     // clear checked attr
-    $('input:checked').prop( "checked", false );
+    $("input:checked").prop( "checked", false );
 
     // correctness
-    correctness = Math.floor((shapeQty - errorQty)/shapeQty*100) ;
-    $(".js_correctness").text(correctness + "%");
+    correctness += indexP ;
+    $(".js_correctness").text(correctness);
+    $(".js_totalScore").text(shapeQty*5);
+    var percentage = Math.floor(correctness /(shapeQty*5)*100) ;
+    $(".js_percentage").text(percentage + "%");
+
 });
