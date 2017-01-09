@@ -1,11 +1,28 @@
 // // @import "bootstrap-compass";
 // // @import "bootstrap-variables";
 // @import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Architects+Daughter');
+$lightGrey: #79828c;
 
-$lightGrey: #bdc3c7;
+.testing{
+	position: absolute;
+	z-index: 100;
+	min-width: 100px;
+	min-height: 100px;
+	background-color: rgba(200, 200, 200, 0.5);
 
+}
+.ooo-section{position: relative;}
 /*	 Wrote by Ashley.*/
-h1{ color: #b00000;
+.write-here{font-family: 'Architects Daughter', cursive;}
+.ooo-header {
+	border: none;
+	bottom: 30px;
+	position: absolute;}
+.ooo-header h1{
+	color: $lightGrey;
+	font-family: 'Architects Daughter', cursive;
+
 	span{
 		display: block;
 		text-align: center;
@@ -30,7 +47,7 @@ h1{ color: #b00000;
 .ooo-section{
 	background-image:url('../img/iphoneWireframe.png');
 	background-position: center;
-	background-size: 389px;
+	background-size: 280px;
 	background-repeat: no-repeat;
 }
 
@@ -39,24 +56,28 @@ h1{ color: #b00000;
 // INFOMATION AREA
 .showInfo2{
 	display: block;
-	padding:20px;
+	padding:10px;
 	position: absolute;
 	z-index: 100;
-	left: 50px;
-	top:100px;
+	left: 20px;
+	top:20px;
 	min-width: 200px;
-
+	color: $lightGrey;
+	font-size: 10px;
 	ul{
 		list-style: none;
 		margin: 0px;
 		padding: 0px;
 		li{
-			margin-bottom: 10px;
-
+			margin-bottom: 5px;
 		}
-
 	}
 }
+.showInfo2.right{
+	right:20px;
+	left: auto;
+}
+
 .js_suggestions{
 	min-width: 200px;
 }

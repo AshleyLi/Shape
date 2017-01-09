@@ -62,27 +62,31 @@
             </div>
         </div>
         <header class="ooo-header">
-            <a id="index-header-link" class="ooo-link-back" href="https://webdemo.myscript.com/index.html"></a>
+            <!-- <a id="index-header-link" class="ooo-link-back" href="https://webdemo.myscript.com/index.html"></a> -->
             <h1 class="ooo-shape">Component suggestions by Ashley</h1>
             <a id="info-header-link" class="ooo-link-info" href="https://webdemo.myscript.com/views/shape.html#description"></a>
         </header>
         <!--========================= INFOMATION AREA =========================-->
-        <div class="showInfo2 alert alert-info js_showCount" style="display:none" role="alert">
+
+
+        <div class="showInfo2  js_showCount" style="display:none" role="alert">
           <ul>
             <li>Shape: <span class="js_shapeName"></span></li>
             <li>pointsX: <span class="js_pointsX"></span></li>
             <li>pointsY: <span class="js_pointsY"></span></li>
             <li>Width: <span class="js_shapeW"></span></li>
             <li>Height: <span class="js_shapeH"></span></li>
-            <li>
-              <hr>
-            </li>
+
+          </ul>
+
+        </div>
+        <div class="showInfo2  js_showCount right" style="display:none">
+          <ul>
             <li>ShapeQty: <span class="js_ShapeQty"></span></li>
-            <li>Score: <span class="js_correctness"></span> / <span class="js_totalScore"></span>(<span class="js_percentage"></span>)</li>
+            <li>You got : <span class="js_correctness"></span> / total: <span class="js_totalScore"></span> (<span class="js_percentage"></span>)</li>
             <li><hr></li>
           </ul>
-          <ul class="score"></ul>
-        </div>
+        <ul class="score"></ul></div>
         <!-- js_suggestions -->
         <div class="popover popover-right js_suggestions" style="display:none;">
           <h3 class="popover-title">I drawed a/an...</h3>
@@ -234,7 +238,9 @@
 
         <!--========================= end of INFOMATION AREA  =========================-->
         <section class="ooo-section">
-            <div class="write-here">Write here</div>
+          <!-- testing -->
+          <div class="testing" style="display:none;"></div>
+            <div class="write-here">Draw <br/>a rectangle<br/> here</div>
             <!-- Declare a SHAPE WebComponent, with typeset=true to render the recognition result on the component -->
             <myscript-common-element id="shape-input" class="ooo-canvas-full" type="SHAPE" typeset="true">
                 <div class="buttons style-scope myscript-common-element">

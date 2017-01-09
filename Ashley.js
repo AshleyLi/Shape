@@ -1,3 +1,9 @@
+var mobileCanvasW = 280;
+var mobileCanvasH = Math.floor(mobileCanvasW * 2.357);
+var MCScreenW = Math.floor(mobileCanvasW * 0.8714);
+var MCScreenH = Math.floor(MCScreenW * 1.7704);
+
+
 var idtagX;
 var idtagY;
 var correctness = 0;
@@ -6,10 +12,22 @@ var errorQty  = 0 ;
 var suggestedlist = "none";
 var componentP = [5,4,3,2,1];
 var totalScore = 0;
+
+// Basic settings
+
+$( document ).ready(function() {
+  console.log("$( window ).width() = " + $( window ).width());
+  console.log("MCScreenW = " +MCScreenW+ "，MCScreenH＝" + MCScreenH);
+
+  // $(".testing").css({"display" : "initial","width":MCScreenW+ "px","height": MCScreenH + "px","left": $( window ).width()/2 - MCScreenW/2+"px", "bottom":mobileCanvasH*0.13+"px"});
+});
+
+
 window.Ashley = {
   responseCallback : function (responseObject){
-    // Get shape information
+    // Get shape information===============DON'T TOUCH!!===============
     console.log(responseObject)
+
 
     // Get the length of segments[]
     var segmentsLength = responseObject.result.segments.length - 1 ;
@@ -18,7 +36,7 @@ window.Ashley = {
 
     // Print basic shape information
     var shapeName = responseObject.result.segments[segmentsLength].candidates[0].label;
-    var screenH = 600;
+    var screenH = MCScreenH;
     var unitH = screenH/10;
     var pointsX = [];
     var pointsY = [];
@@ -55,20 +73,18 @@ window.Ashley = {
     recognizing();
     function recognizing(){
 
-      if(rectW > rectH && rectH > unitH){
+      if(rectW >= rectH && rectH > unitH){
         $('.js_wildRectB').css({"display" : "initial"});
 
-      }else if (rectW > rectH && rectH < unitH) {
+      }else if (rectW >= rectH && rectH < unitH) {
         $('.js_wildRectS').css({"display" : "initial"});
 
       }else if (rectW < rectH && rectH > unitH) {
         $('.js_tallRectB').css({"display" : "initial"});
 
-      }else if (rectW < rectH && rectH < unitH)  {
+      }else  {
         $('.js_tallRectS').css({"display" : "initial"});
 
-      }else{
-        console.log('A square.');
       }
     }
     // reture and set pop posY
@@ -112,7 +128,7 @@ $(document).on("click",".js_confirmType",function(){
     // check the index of the checked checkbox
     var indexP = parseInt($( "input:checked" ).attr("indexP"));
     console.log( "indexP = " + indexP  );
-    $(".score").append( "<li>#" + shapeQty + " —— " + indexP + "</li>" )
+    $(".score").append( "<li>#" + shapeQty + " —— " + indexP + "p</li>" )
 
     // clear checked attr
     $("input:checked").prop( "checked", false );
