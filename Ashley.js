@@ -13,26 +13,24 @@ var suggestedlist = "none";
 var componentP = [5,4,3,2,1];
 var totalScore = 0;
 
-// Basic settings
+// Basic settings =============================================================================
 
 $( document ).ready(function() {
   console.log("$( window ).width() = " + $( window ).width());
   console.log("MCScreenW = " +MCScreenW+ "，MCScreenH＝" + MCScreenH);
-
   // $(".testing").css({"display" : "initial","width":MCScreenW+ "px","height": MCScreenH + "px","left": $( window ).width()/2 - MCScreenW/2+"px", "bottom":mobileCanvasH*0.13+"px"});
 });
 
-
+// Get shape =============================================================================
 window.Ashley = {
   responseCallback : function (responseObject){
-    // Get shape information===============DON'T TOUCH!!===============
+
+    // Print shape object ===============DON'T TOUCH!!===============
     console.log(responseObject)
 
-
-    // Get the length of segments[]
+    // Get the length of shape segments[]
     var segmentsLength = responseObject.result.segments.length - 1 ;
     shapeQty = responseObject.result.segments.length;
-    console.log('shapeQty = ' + shapeQty)
 
     // Print basic shape information
     var shapeName = responseObject.result.segments[segmentsLength].candidates[0].label;
@@ -44,50 +42,56 @@ window.Ashley = {
     $(".js_shapeName").text(shapeName);
     $(".js_ShapeQty").text(shapeQty);
 
-    // 取得 PosX and PosY array
+    // Get shape posX and posY array
     for ( i = 0 ; i < 4; i++){
         var pointX = Math.floor(responseObject.result.segments[segmentsLength].candidates[0].primitives[i].firstPoint.x);
         var pointY = Math.floor(responseObject.result.segments[segmentsLength].candidates[0].primitives[i].firstPoint.y);
         pointsX[i] = pointX;
         pointsY[i] = pointY;
-        pointsX.sort();
-        pointsY.sort();
     }
-    // remove tha same value from PosX & PosY array and update array
+
+    // Sort PosX[] & PosY[]
+    pointsX.sort(function (a, b) {return a - b});
+    pointsY.sort(function (a, b) {return a - b});
+
+    // remove tha same value from PosX & PosY array
     pointsX = pointsX.filter(function(element, index, arr){
       return arr.indexOf(element)=== index;
     });
     pointsY = pointsY.filter(function(element, index, arr){
       return arr.indexOf(element)=== index;
     });
+    console.log('pointsY after filter = ' + pointsY);
+    console.log('pointsX after filter = ' + pointsX);
 
-
-    // show suggestions
+    // Get shape size
     var rectW = pointsX[1]-pointsX[0] ;
     var rectH = pointsY[1]-pointsY[0] ;
+
+    // Set component_label position X , Y
     var popSuggestionsX = pointsX[1] + 10;
     var popSuggestionsY ;
-
 
     // Recognizing the shape
     recognizing();
     function recognizing(){
 
-      if(rectW >= rectH && rectH > unitH){
-        $('.js_wildRectB').css({"display" : "initial"});
-
-      }else if (rectW >= rectH && rectH < unitH) {
-        $('.js_wildRectS').css({"display" : "initial"});
-
-      }else if (rectW < rectH && rectH > unitH) {
-        $('.js_tallRectB').css({"display" : "initial"});
-
-      }else  {
-        $('.js_tallRectS').css({"display" : "initial"});
+      if(rectW >= rectH){
+        if(rectH > unitH){
+          $('.js_wildRectB').css({"display" : "initial"});
+        } else {
+          $('.js_wildRectS').css({"display" : "initial"});
+        }
+      }else {
+        if(rectH > unitH){
+          $('.js_tallRectB').css({"display" : "initial"});
+        } else {
+          $('.js_tallRectS').css({"display" : "initial"});
+        }
 
       }
     }
-    // reture and set pop posY
+    // reture & set suggestions pop positionX,Y
     popSuggestionsY = pointsY[1] - $(".js_suggestions").height()/2 - rectH/2;
     $(".js_suggestions").css({"display":"initial","left": popSuggestionsX + "px","top": popSuggestionsY + "px"});
 
@@ -110,12 +114,13 @@ window.Ashley = {
 //====================== AFTER CONFIRM ==========================
 $(document).on("click",".js_confirmType",function(){
     $(".js_showCount").css({"display":"initial"});
-    var padding = 5;
+
     // close suggestions
     $('.popover-content > div').css({"display" : "none"});
     $('.js_suggestions').css({"display":"none"});
 
-    // add identification
+    // Add a identification label to the shape
+    var padding = 5;
     idtagX += padding;
     idtagY += padding -2;
     $(".identification").append("<span style='left:" + idtagX + "px;top:"+ idtagY +"px;'>" + $( "input:checked" ).val() + "</span>");

@@ -1,309 +1,315 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-    <!-- saved from url=(0045)https://webdemo.myscript.com/views/shape.html -->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="manifest" href="https://webdemo.myscript.com/views/manifest-shape.json">
-    <meta name="description" content="">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="MyScript Webdemo Shape">
-    <meta name="apple-mobile-web-app-title" content="MyScript Webdemo Shape">
-    <meta name="theme-color" content="#00000">
-    <meta name="msapplication-navbutton-color" content="#00000">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="msapplication-starturl" content="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+  <!-- saved from url=(0045)https://webdemo.myscript.com/views/shape.html -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="manifest" href="https://webdemo.myscript.com/views/manifest-shape.json">
+  <meta name="description" content="">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="MyScript Webdemo Shape">
+  <meta name="apple-mobile-web-app-title" content="MyScript Webdemo Shape">
+  <meta name="theme-color" content="#00000">
+  <meta name="msapplication-navbutton-color" content="#00000">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="msapplication-starturl" content="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
 
-    <link rel="icon" type="image/png" sizes="96×96" href="https://webdemo.myscript.com/assets/img/demo/WebDemoIcon-Shape_96x96.png">
-    <link rel="apple-touch-icon" type="image/png" sizes="96×96" href="https://webdemo.myscript.com/assets/img/demo/WebDemoIcon-Shape_96x96.png">
+  <link rel="icon" type="image/png" sizes="96×96" href="https://webdemo.myscript.com/assets/img/demo/WebDemoIcon-Shape_96x96.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="96×96" href="https://webdemo.myscript.com/assets/img/demo/WebDemoIcon-Shape_96x96.png">
 
-    <title> Shape the world !!!</title>
+  <title> Shape the world !!!</title>
 
-    <link type="text/css" rel="stylesheet" href="./files/css.css">
-    <link type="text/css" rel="stylesheet" href="./files/webdemo.css">
-    <link rel="stylesheet" href="sass/styles.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+  <link type="text/css" rel="stylesheet" href="./files/css.css">
+  <link type="text/css" rel="stylesheet" href="./files/webdemo.css">
+  <link rel="stylesheet" href="sass/styles.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
 
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
-    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="semantic/dist/semantic.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script src="semantic/dist/semantic.min.js"></script>
 
-    <!--Configuration file used to store identifiers and some parameters-->
-    <script type="text/javascript" src="./files/configuration.js"></script>
-    <script type="text/javascript" src="./Ashley.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.23/webcomponents-lite.min.js"></script>
+  <!--Configuration file used to store identifiers and some parameters-->
+  <script type="text/javascript" src="./files/configuration.js"></script>
+  <script type="text/javascript" src="./Ashley.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.23/webcomponents-lite.min.js"></script>
 
-    <link rel="import" href="./bower_components/iron-image/iron-image.html">
-    <link rel="import" href="./bower_components/myscript-common-element/myscript-common-element.html">
-    <script>
-        function myFunction() {
-            window.location.reload();
-        }
-    </script>
+  <link rel="import" href="./bower_components/iron-image/iron-image.html">
+  <link rel="import" href="./bower_components/myscript-common-element/myscript-common-element.html">
+  <script>
+    function myFunction() {
+      window.location.reload();
+    }
+  </script>
 </head>
 
 <body touch-action="none" onload="load()">
-    <div id="content">
-        <div id="description" class="ooo-overlay">
-            <div class="ooo-popup">
-                <h2>Tesing <span>Rect testing</span> </h2>
-                <a class="close" href="https://webdemo.myscript.com/views/shape.html#">×</a>
-                <div class="content">
-                    Sketch lines, circles, rectangles and other shapes and get clean, vectorized shapes.
-                </div>
-                <iron-image class="shape x-scope iron-image-0" sizing="contain" preload="" fade="" alt="Shape capture">
+  <div id="content">
+    <div id="description" class="ooo-overlay">
+      <div class="ooo-popup">
+        <h2>Tesing
+          <span>Rect testing</span>
+        </h2>
+        <a class="close" href="https://webdemo.myscript.com/views/shape.html#">×</a>
+        <div class="content">
+          Sketch lines, circles, rectangles and other shapes and get clean, vectorized shapes.
+        </div>
+        <iron-image class="shape x-scope iron-image-0" sizing="contain" preload="" fade="" alt="Shape capture">
 
 
-                    <div id="sizedImgDiv" role="img" class="style-scope iron-image" aria-label="Shape capture" style="background-size: contain; background-position: center center; background-repeat: no-repeat;"></div>
-                    <img id="img" class="style-scope iron-image" alt="Shape capture" hidden="">
-                    <div id="placeholder" class="style-scope iron-image" style="background-size: contain; background-position: center center; background-repeat: no-repeat;"></div>
-                </iron-image>
+          <div id="sizedImgDiv" role="img" class="style-scope iron-image" aria-label="Shape capture" style="background-size: contain; background-position: center center; background-repeat: no-repeat;"></div>
+          <img id="img" class="style-scope iron-image" alt="Shape capture" hidden="">
+          <div id="placeholder" class="style-scope iron-image" style="background-size: contain; background-position: center center; background-repeat: no-repeat;"></div>
+        </iron-image>
+      </div>
+    </div>
+    <header class="ooo-header">
+      <!-- <a id="index-header-link" class="ooo-link-back" href="https://webdemo.myscript.com/index.html"></a> -->
+      <h1 class="ooo-shape">Component suggestions</h1>
+      <a id="info-header-link" class="ooo-link-info" href="https://webdemo.myscript.com/views/shape.html#description"></a>
+    </header>
+    <!--========================= INFOMATION AREA =========================-->
+
+
+    <div class="showInfo2  js_showCount" style="display:none" role="alert">
+      <ul>
+        <li>Shape:
+          <span class="js_shapeName"></span>
+        </li>
+        <li>pointsX:
+          <span class="js_pointsX"></span>
+        </li>
+        <li>pointsY:
+          <span class="js_pointsY"></span>
+        </li>
+        <li>Width:
+          <span class="js_shapeW"></span>
+        </li>
+        <li>Height:
+          <span class="js_shapeH"></span>
+        </li>
+
+      </ul>
+
+    </div>
+    <div class="showInfo2  js_showCount right" style="display:none">
+      <ul>
+        <li>ShapeQty:
+          <span class="js_ShapeQty"></span>
+        </li>
+        <li>You got :
+          <span class="js_correctness"></span>p / total:
+          <span class="js_totalScore"></span>p (
+          <span class="js_percentage"></span>)</li>
+        <li>
+          <hr>
+        </li>
+      </ul>
+      <ul class="score"></ul>
+    </div>
+    <!-- js_suggestions -->
+    <div class="popover popover-right js_suggestions" style="display:none;">
+      <h3 class="popover-title">I drawed a/an...</h3>
+
+      <div class="popover-content">
+        <!--[1] js_wildRectB: 寬矩形 && H > unitH -->
+        <div class="js_wildRectB" style="display:none;">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" indexP="5" id="js_wildRectB-co" value="Image"> Image
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="4"> Shape
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="3"> TextView
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="2"> TextField
+            </label>
+          </div>
+          <div class="form-check ">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" indexP="1"> Button
+            </label>
+          </div>
+        </div>
+        <!--[2] js_wildRectS: 寬矩形 && H < unitH -->
+        <div class="js_wildRectS" style="display:none;">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Button" indexP="5"> Button
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="4"> TextField
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="3"> Shape
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Image" indexP="2"> Image
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="1"> TextView
+            </label>
+          </div>
+        </div>
+        <!--[3] js_tallRectB: 高矩形 && H > unitH -->
+        <div class="js_tallRectB" style="display:none;">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image" indexP="5"> Image
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="4"> Shape
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="3"> TextView
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="2"> TextField
+            </label>
+          </div>
+          <div class="form-check ">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Button" indexP="1"> Button
+            </label>
+          </div>
+        </div>
+        <!--[4] js_tallRectS: 高矩形 && H < unitH -->
+        <div class="js_tallRectS" style="display:none;">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image" indexP="5"> Image
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="4"> Shape
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Button" indexP="3"> Button
+            </label>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="2"> TextView
+              </label>
             </div>
-        </div>
-        <header class="ooo-header">
-            <!-- <a id="index-header-link" class="ooo-link-back" href="https://webdemo.myscript.com/index.html"></a> -->
-            <h1 class="ooo-shape">Component suggestions</h1>
-            <a id="info-header-link" class="ooo-link-info" href="https://webdemo.myscript.com/views/shape.html#description"></a>
-        </header>
-        <!--========================= INFOMATION AREA =========================-->
-
-
-        <div class="showInfo2  js_showCount" style="display:none" role="alert">
-            <ul>
-                <li>Shape: <span class="js_shapeName"></span></li>
-                <li>pointsX: <span class="js_pointsX"></span></li>
-                <li>pointsY: <span class="js_pointsY"></span></li>
-                <li>Width: <span class="js_shapeW"></span></li>
-                <li>Height: <span class="js_shapeH"></span></li>
-
-            </ul>
-
-        </div>
-        <div class="showInfo2  js_showCount right" style="display:none">
-            <ul>
-                <li>ShapeQty: <span class="js_ShapeQty"></span></li>
-                <li>You got : <span class="js_correctness"></span>p / total: <span class="js_totalScore"></span>p (<span class="js_percentage"></span>)</li>
-                <li>
-                    <hr>
-                </li>
-            </ul>
-            <ul class="score"></ul>
-        </div>
-        <!-- js_suggestions -->
-        <div class="popover popover-right js_suggestions" style="display:none;">
-            <h3 class="popover-title">I drawed a/an...</h3>
-
-            <div class="popover-content">
-                <!--[1] js_wildRectB: 寬矩形 && H > unitH -->
-                <div class="js_wildRectB" style="display:none;">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" indexP="5" id="js_wildRectB-co" value="Image">
-                  Image
-                </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="4">
-                  Shape
-                </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="3">
-                  TextView
-                </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="2">
-                  TextField
-                </label>
-                    </div>
-                    <div class="form-check ">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" indexP="1">
-                  Button
-                </label>
-                    </div>
-                </div>
-                <!--[2] js_wildRectS: 寬矩形 && H < unitH -->
-                <div class="js_wildRectS" style="display:none;">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Button" indexP="5">
-                  Button
-                </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="4">
-                  TextField
-                </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="3">
-                  Shape
-                </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Image" indexP="2">
-                  Image
-                </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="1">
-                  TextView
-                </label>
-                    </div>
-                </div>
-                <!--[3] js_tallRectB: 高矩形 && H > unitH -->
-                <div class="js_tallRectB" style="display:none;">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image" indexP="5">
-                  Image
-                </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="4">
-                  Shape
-                </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="3">
-                  TextView
-                </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="2">
-                  TextField
-                </label>
-                    </div>
-                    <div class="form-check ">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Button" indexP="1">
-                  Button
-                </label>
-                    </div>
-                </div>
-                <!--[4] js_tallRectS: 高矩形 && H < unitH -->
-                <div class="js_tallRectS" style="display:none;">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image" indexP="5">
-                  Image
-                </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="4">
-                  Shape
-                </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Button" indexP="3" >
-                  Button
-                </label>
-                        <div class="form-check">
-                            <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="2">
-                  TextView
-                </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="1">
-                  TextField
-                </label>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="button" class="btn btn-primary btn-block js_confirmType">Confirm</button>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="1"> TextField
+              </label>
             </div>
+          </div>
         </div>
 
-        <!-- Shape identification -->
-        <div class="identification">
+        <button type="button" class="btn btn-primary btn-block js_confirmType">Confirm</button>
+      </div>
+    </div>
+
+    <!-- Shape identification -->
+    <div class="identification">
+    </div>
+
+
+
+
+    <!--========================= end of INFOMATION AREA  =========================-->
+    <section class="ooo-section">
+      <!-- testing -->
+      <div class="testing" style="display:none;"></div>
+      <div class="write-here">Draw a
+        <br/>rectangle
+        <span style="font-size:9px; -webkit-transform:scale(0.75); "> (only)</span>
+        <br/> here</div>
+      <!-- Declare a SHAPE WebComponent, with typeset=true to render the recognition result on the component -->
+      <myscript-common-element id="shape-input" class="ooo-canvas-full" type="SHAPE" typeset="true">
+        <div class="buttons style-scope myscript-common-element">
+          <paper-fab mini="" icon="delete" title="clear" class="style-scope myscript-common-element x-scope paper-fab-0" role="button" tabindex="-1" animated="" aria-disabled="true" elevation="0" disabled="" style="pointer-events: none;">
+            <iron-icon id="icon" class="style-scope paper-fab x-scope iron-icon-0">
+              <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="style-scope iron-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                <g class="style-scope iron-icon">
+                  <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" class="style-scope iron-icon"></path>
+                </g>
+              </svg>
+
+            </iron-icon>
+            <span class="style-scope paper-fab" hidden=""> </span>
+          </paper-fab>
+          <paper-fab mini="" icon="undo" title="undo" class="style-scope myscript-common-element x-scope paper-fab-0" role="button" tabindex="-1" animated="" aria-disabled="true" elevation="0" disabled="" style="pointer-events: none;">
+            <iron-icon id="icon" class="style-scope paper-fab x-scope iron-icon-0">
+              <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="style-scope iron-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                <g class="style-scope iron-icon">
+                  <path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" class="style-scope iron-icon"></path>
+                </g>
+              </svg>
+
+            </iron-icon>
+            <span class="style-scope paper-fab" hidden=""> </span>
+          </paper-fab>
+          <paper-fab mini="" icon="redo" title="redo" class="style-scope myscript-common-element x-scope paper-fab-0" role="button" tabindex="-1" animated="" aria-disabled="true" elevation="0" disabled="" style="pointer-events: none;">
+            <iron-icon id="icon" class="style-scope paper-fab x-scope iron-icon-0">
+              <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="style-scope iron-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                <g class="style-scope iron-icon">
+                  <path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" class="style-scope iron-icon"></path>
+                </g>
+              </svg>
+
+            </iron-icon>
+            <span class="style-scope paper-fab" hidden=""> </span>
+          </paper-fab>
+          <paper-fab mini="" icon="send" title="recognize" class="style-scope myscript-common-element x-scope paper-fab-0" role="button" tabindex="-1" animated="" aria-disabled="true" elevation="0" disabled="" hidden="" style="pointer-events: none;">
+            <iron-icon id="icon" class="style-scope paper-fab x-scope iron-icon-0">
+              <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="style-scope iron-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                <g class="style-scope iron-icon">
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" class="style-scope iron-icon"></path>
+                </g>
+              </svg>
+
+            </iron-icon>
+            <span class="style-scope paper-fab" hidden=""> </span>
+          </paper-fab>
         </div>
+        <div id="myscript-input-area" class="style-scope myscript-common-element">
+          <canvas id="ms-capture-canvas-0" width="1213" height="559" style="width: 1213px; height: 559px;"></canvas>
+          <canvas id="ms-rendering-canvas-0" width="1213" height="559" style="width: 1213px; height: 559px;"></canvas>
+        </div>
+        <paper-toast class="fit-bottom style-scope myscript-common-element x-scope paper-toast-0" aria-hidden="true" style="outline: none; display: none;">
 
 
+          <span id="label" class="style-scope paper-toast"></span>
 
-
-        <!--========================= end of INFOMATION AREA  =========================-->
-        <section class="ooo-section">
-            <!-- testing -->
-            <div class="testing" style="display:none;"></div>
-            <div class="write-here">Draw a<br/>rectangle<span style="font-size:9px; -webkit-transform:scale(0.75); "> (only)</span><br/> here</div>
-            <!-- Declare a SHAPE WebComponent, with typeset=true to render the recognition result on the component -->
-            <myscript-common-element id="shape-input" class="ooo-canvas-full" type="SHAPE" typeset="true">
-                <div class="buttons style-scope myscript-common-element">
-                    <paper-fab mini="" icon="delete" title="clear" class="style-scope myscript-common-element x-scope paper-fab-0" role="button" tabindex="-1" animated="" aria-disabled="true" elevation="0" disabled="" style="pointer-events: none;">
-                        <iron-icon id="icon" class="style-scope paper-fab x-scope iron-icon-0">
-                            <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="style-scope iron-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;">
-                                <g class="style-scope iron-icon">
-                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" class="style-scope iron-icon"></path>
-                                </g>
-                            </svg>
-
-                        </iron-icon><span class="style-scope paper-fab" hidden=""> </span></paper-fab>
-                    <paper-fab mini="" icon="undo" title="undo" class="style-scope myscript-common-element x-scope paper-fab-0" role="button" tabindex="-1" animated="" aria-disabled="true" elevation="0" disabled="" style="pointer-events: none;">
-                        <iron-icon id="icon" class="style-scope paper-fab x-scope iron-icon-0">
-                            <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="style-scope iron-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;">
-                                <g class="style-scope iron-icon">
-                                    <path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" class="style-scope iron-icon"></path>
-                                </g>
-                            </svg>
-
-                        </iron-icon><span class="style-scope paper-fab" hidden=""> </span></paper-fab>
-                    <paper-fab mini="" icon="redo" title="redo" class="style-scope myscript-common-element x-scope paper-fab-0" role="button" tabindex="-1" animated="" aria-disabled="true" elevation="0" disabled="" style="pointer-events: none;">
-                        <iron-icon id="icon" class="style-scope paper-fab x-scope iron-icon-0">
-                            <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="style-scope iron-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;">
-                                <g class="style-scope iron-icon">
-                                    <path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" class="style-scope iron-icon"></path>
-                                </g>
-                            </svg>
-
-                        </iron-icon><span class="style-scope paper-fab" hidden=""> </span></paper-fab>
-                    <paper-fab mini="" icon="send" title="recognize" class="style-scope myscript-common-element x-scope paper-fab-0" role="button" tabindex="-1" animated="" aria-disabled="true" elevation="0" disabled="" hidden="" style="pointer-events: none;">
-                        <iron-icon id="icon" class="style-scope paper-fab x-scope iron-icon-0">
-                            <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="style-scope iron-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;">
-                                <g class="style-scope iron-icon">
-                                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" class="style-scope iron-icon"></path>
-                                </g>
-                            </svg>
-
-                        </iron-icon><span class="style-scope paper-fab" hidden=""> </span></paper-fab>
-                </div>
-                <div id="myscript-input-area" class="style-scope myscript-common-element">
-                    <canvas id="ms-capture-canvas-0" width="1213" height="559" style="width: 1213px; height: 559px;"></canvas>
-                    <canvas id="ms-rendering-canvas-0" width="1213" height="559" style="width: 1213px; height: 559px;"></canvas>
-                </div>
-                <paper-toast class="fit-bottom style-scope myscript-common-element x-scope paper-toast-0" aria-hidden="true" style="outline: none; display: none;">
-
-
-                    <span id="label" class="style-scope paper-toast"></span>
-
-                </paper-toast>
-            </myscript-common-element>
-        </section>
-        <!-- <footer class="ooo-footer">
+        </paper-toast>
+      </myscript-common-element>
+    </section>
+    <!-- <footer class="ooo-footer">
             <a id="myscript-footer-link" href="http://www.myscript.com/" target="_blank" title="MyScript">
             Copyright © MyScript® All Rights Reserved
         </a>
@@ -314,16 +320,16 @@
             Try our API
         </a>
         </footer> -->
-    </div>
-    <div class="overlay" style="display: none;">
-        <div class="loader"></div>
-    </div>
+  </div>
+  <div class="overlay" style="display: none;">
+    <div class="loader"></div>
+  </div>
 
-    <script type="text/javascript" src="files/js.js"></script>
+  <script type="text/javascript" src="files/js.js"></script>
 
-    <iron-a11y-announcer>
-        <div class="style-scope iron-a11y-announcer" aria-live="polite"></div>
-    </iron-a11y-announcer>
+  <iron-a11y-announcer>
+    <div class="style-scope iron-a11y-announcer" aria-live="polite"></div>
+  </iron-a11y-announcer>
 
 </body>
 
