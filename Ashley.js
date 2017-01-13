@@ -42,6 +42,20 @@ window.Ashley = {
     $(".js_shapeName").text(shapeName);
     $(".js_ShapeQty").text(shapeQty);
 
+    // Recognizing the shape
+    // var shapeType = String(shapeName);
+    switch (shapeName) {
+      case 'rectangle':
+        console.log("This is a rectangle.");
+        break;
+
+      case 'line':
+        console.log("This is a line.");
+        break;
+      default:
+
+    }
+
     // Get shape posX and posY array
     for ( i = 0 ; i < 4; i++){
         var pointX = Math.floor(responseObject.result.segments[segmentsLength].candidates[0].primitives[i].firstPoint.x);
@@ -49,6 +63,9 @@ window.Ashley = {
         pointsX[i] = pointX;
         pointsY[i] = pointY;
     }
+
+
+
 
     // Sort PosX[] & PosY[]
     pointsX.sort(function (a, b) {return a - b});
@@ -64,6 +81,8 @@ window.Ashley = {
     console.log('pointsY after filter = ' + pointsY);
     console.log('pointsX after filter = ' + pointsX);
 
+    // Recognizing the shape
+
     // Get shape size
     var rectW = pointsX[1]-pointsX[0] ;
     var rectH = pointsY[1]-pointsY[0] ;
@@ -73,23 +92,29 @@ window.Ashley = {
     var popSuggestionsY ;
 
     // Recognizing the shape
-    recognizing();
-    function recognizing(){
-
-      if(rectW >= rectH){
-        if(rectH > unitH){
-          $('.js_wildRectB').css({"display" : "initial"});
-        } else {
-          $('.js_wildRectS').css({"display" : "initial"});
+    showSuggestions();
+    function showSuggestions(){
+      if(shapeName == 'rectangle'){
+        if(rectW >= rectH){
+          if(rectH > unitH){
+            $('.js_wildRectB').css({"display" : "initial"});
+          } else {
+            $('.js_wildRectS').css({"display" : "initial"});
+          }
+        }else {
+          if(rectH > unitH){
+            $('.js_tallRectB').css({"display" : "initial"});
+          } else {
+            $('.js_tallRectS').css({"display" : "initial"});
+          }
         }
+      }else if(shapeName == line) {
+
       }else {
-        if(rectH > unitH){
-          $('.js_tallRectB').css({"display" : "initial"});
-        } else {
-          $('.js_tallRectS').css({"display" : "initial"});
-        }
-
+        console.log("shapeName:" + shapeName);
       }
+
+
     }
     // reture & set suggestions pop positionX,Y
     popSuggestionsY = pointsY[1] - $(".js_suggestions").height()/2 - rectH/2;
