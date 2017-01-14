@@ -86,8 +86,8 @@ $lightGrey: #79828c;
 	height: 100%;
 	z-index: 0;
 	position: absolute;
-	span{
+	*{
 		position: absolute;
-		color: $lightGrey;
+		
 	}
 }
