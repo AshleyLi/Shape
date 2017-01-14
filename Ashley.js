@@ -208,30 +208,30 @@ $(document).on("click",".js_confirmType",function(){
       default:
 
     }
-
     function addImage(){
-      $(".identification").append("<img src='https://goo.gl/hSqM8y' xkId=''"+ xkId + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
+      $(".identification").append("<img src='https://goo.gl/hSqM8y' xkId='"+ xkId + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
     }
     function addButton(){
-
+      $(".identification").append("<button type='button' xkId='"+ xkId + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>button</button>");
     }
     function addShape(){
-
+      $(".identification").append("<div xkId='"+ xkId + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px; background-color:#ccc;'>");
     }
     function addTextView(){
-
+      $(".identification").append("<div xkId='"+ xkId + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px; overflow:hidden;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</div>");
     }
     function addTextField(){
-
+      $(".identification").append("<input type='text' xkId='" + xkId + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0]+"px;top:"+pointsY[0] +"px;'>");
+      console.log("addTextField");
     }
 
 
     //Add a identification label to the shape===================================
-    idtagX = pointsX[0];
-    idtagY = pointsY[0] - idPadding*2 -12;
-    $(".identification").append("<span style='left:" + idtagX + "px;top:"+ idtagY +"px;'>" + $( "input:checked" ).val() + "</span>");
-    idtagX = 0;
-    idtagY = 0;
+    // idtagX = pointsX[0];
+    // idtagY = pointsY[0] - idPadding*2 -12;
+    // $(".identification").append("<span style='left:" + idtagX + "px;top:"+ idtagY +"px;'>" + $( "input:checked" ).val() + "</span>");
+    // idtagX = 0;
+    // idtagY = 0;
 
 
     // close suggestions
