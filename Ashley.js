@@ -210,7 +210,7 @@ $(document).on("click",".js_confirmType",function(){
     }
 
     function addImage(){
-      $(".identification").append("<img src='https://goo.gl/hSqM8y' xkId="+ xkId + "style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
+      $(".identification").append("<img src='https://goo.gl/hSqM8y' xkId=''"+ xkId + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
     }
     function addButton(){
 
