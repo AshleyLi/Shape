@@ -4,6 +4,10 @@
 @import url('https://fonts.googleapis.com/css?family=Architects+Daughter');
 $lightGrey: #79828c;
 
+body{
+
+
+}
 .testing{
 	position: absolute;
 	z-index: 100;
@@ -19,15 +23,18 @@ $lightGrey: #79828c;
 	border: none;
 	bottom: 30px;
 	position: absolute;}
-.ooo-header h1{
-	color: $lightGrey;
-	font-family: 'Architects Daughter', cursive;
-
-	span{
-		display: block;
-		text-align: center;
-		color: red;
-	}
+.ooo-shape:not([style-scope]):not(.style-scope)::before{ width:0px; display: none;}
+.ooo-header{
+		h1{
+		color: $lightGrey;
+		text-indent: 0px;
+		font-family: 'Architects Daughter', cursive;
+			span{
+				display: block;
+				text-align: center;
+				color: red;
+			}
+		}
 }
 .ooo-header{
 	position: absolute;
@@ -39,7 +46,7 @@ $lightGrey: #79828c;
     margin-left: -69px;
     bottom: -50px;
     left: 50%;
-		// display: none;
+		display: none;
 }
 .ooo-footer{
 	 display: none;
