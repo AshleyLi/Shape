@@ -3,11 +3,117 @@
 // @import "bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Architects+Daughter');
 $lightGrey: #79828c;
+$xkGreen: #4CB7AD;
+$borderGrey: #DDDEE0;
+$toolBackground: #F2F2F2;
+$toolSize: 40px;
+$toolColor: #9B9B9B;
 
-body{
 
+a, a:active, a:visited{ color:$xkGreen;}
+.sysControl{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 101;
+	width: 100%;
+	.navigation{
+		height: 50px;
+		background: rgba(255, 255, 255, 0.8);
+		width: 100%;
+		border-bottom: 1px solid $borderGrey;
+		padding-right: 15px;
+		.logo{
+			background-image: url('../img/logo.png') no-repeat;
+			background-size:contain;
+			background-position: center;
+			background-color: $xkGreen;
+			width: 50px;
+			height: 50px;
+			float: left;
+			vertical-align: middle;
+			text-align: center;
+			line-height: 45px;
+			img{
+				width: 80%;
+		    display: inline-block;
+			}
+		}
+		.pageName{
+			padding: 14px;
+			float: left;
+			font-size: 20px;
+		}
+		ul{
+			float: right;
+			list-style: none;
+			display: inline-block;
+			float: right;
+			li{a{padding: 15px; display: inline-block;}}
+			li:first-child{ a{padding-right: 0px;} }
+		}
+	}
 
 }
+.toolbar{
+	position: absolute;
+	z-index: 100;
+	left: 0px;
+	top:0px;
+	padding-top: 50px;
+	width: 50px;
+	border-right: 1px solid $borderGrey;
+	background-color: $borderGrey;
+	height: 100%;
+	.func{
+		background-color:$toolBackground;
+		border-radius: 100px;
+		display: block;
+		width: $toolSize;
+		height:$toolSize;
+		text-align: center;
+		vertical-align: middle;
+		line-height: $toolSize + 2;
+		color: $toolColor;
+
+	}
+	li:hover{
+		span{
+			color:$xkGreen;
+		}
+	}
+	li:active{
+		span{
+			color: darken($xkGreen, 20);
+		}
+	}
+
+	ul{
+		list-style: none;
+		margin: 0px;
+		padding: 0px;
+		position:absolute;
+		width: 100%;
+		li{
+			width: 100%;
+			margin:10px 5px;
+
+		}
+	}
+	.top{
+		top:60px;
+		li:first-child{
+			margin-top: 0px;
+		}
+	}
+	.bottom{
+		bottom:10px;
+		li:last-child{
+			margin-bottom: 0px;
+		}
+	}
+}
+
 .testing{
 	position: absolute;
 	z-index: 100;
@@ -66,8 +172,8 @@ body{
 	padding:10px;
 	position: absolute;
 	z-index: 100;
-	left: 20px;
-	top:20px;
+	left: 60px;
+	top:60px;
 	min-width: 200px;
 	color: $lightGrey;
 	font-size: 10px;
