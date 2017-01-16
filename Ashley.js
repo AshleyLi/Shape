@@ -133,7 +133,6 @@ window.Ashley = {
 
       idtagX = pointsX[0];
       idtagY = pointsY[0];
-      console.log("pointsX[] ＝"+ pointsX);
     }
 
 
@@ -153,7 +152,6 @@ window.Ashley = {
         var calX = pointsX[1]-pointsX[0];
         var calY = pointsY[1]-pointsY[0];
         var width = Math.floor( Math.pow((calX *calX + calY * calY), 0.5));
-        console.log("width = " + width);
         return width;
       }
       var lineW = getLineWidth();
