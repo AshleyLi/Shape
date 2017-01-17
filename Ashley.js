@@ -60,6 +60,9 @@ window.Ashley = {
       case 'rectangle':
         ARectangle();
         break;
+      case 'square':
+          ARectangle();
+          break;
       case 'line':
         ALine();
         break;
