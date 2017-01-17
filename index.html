@@ -30,8 +30,6 @@
 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
-  <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <script src="semantic/dist/semantic.min.js"></script>
 
   <!--Configuration file used to store identifiers and some parameters-->
@@ -41,6 +39,15 @@
 
   <link rel="import" href="./bower_components/iron-image/iron-image.html">
   <link rel="import" href="./bower_components/myscript-common-element/myscript-common-element.html">
+  <!-- drag and drop  -->
+  <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "div.identification > *" ).draggable();
+  } );
+  </script>
+  <!-- /drag and drop  -->
   <script>
     function myFunction() {
       window.location.reload();
@@ -63,9 +70,8 @@
     </div>
     <div class="toolbar">
       <ul class="top">
-        <li class="func"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></li>
-        <li class="func"><span class="glyphicon glyphicon-list-alt
-" aria-hidden="true"></span></li>
+        <li class="func js_funcPop"><span class="glyphicon glyphicon-comment " aria-hidden="true"></span></li>
+        <li class="func"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></li>
       </ul>
       <ul class="bottom">
         <li class="func"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span></li>
@@ -278,17 +284,16 @@
     <div class="identification">
     </div>
 
-
-
-
     <!--========================= end of INFOMATION AREA  =========================-->
     <section class="ooo-section">
       <!-- testing -->
-      <div class="testing" style="display:none;"></div>
+      <div class="testing" style="display:none;">
+        <img src="img/Alert Background.png" alt="" style="width: 80%; display: block; margin-left: 27px; margin-top: 160px;">
+      </div>
       <div class="write-here">Draw a
         <br/>rectangle
-        <span style="font-size:9px; -webkit-transform:scale(0.75); "> (only)</span>
-        <br/> here</div>
+        <span style="font-size:9px; -webkit-transform:scale(0.75); ">(only)</span>
+        <br/>here</div>
       <!-- Declare a SHAPE WebComponent, with typeset=true to render the recognition result on the component -->
       <myscript-common-element id="shape-input" class="ooo-canvas-full" type="SHAPE" typeset="true" >
         <div class="buttons style-scope myscript-common-element" >

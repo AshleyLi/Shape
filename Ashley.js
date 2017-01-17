@@ -30,10 +30,9 @@ var xkID, currentID;
 $( document ).ready(function() {
   screenH = MCScreenH;
   unitH = screenH/10;
-
+  $(".identification > *").draggable();
   // console.log("$( window ).width() = " + $( window ).width());
   // console.log("MCScreenW = " +MCScreenW+ "，MCScreenH＝" + MCScreenH);
-  // $(".testing").css({"display" : "initial","width":MCScreenW+ "px","height": MCScreenH + "px","left": $( window ).width()/2 - MCScreenW/2+"px", "bottom":mobileCanvasH*0.13+"px"});
 });
 
 // Get shape =============================================================================
@@ -61,8 +60,8 @@ window.Ashley = {
         ARectangle();
         break;
       case 'square':
-          ARectangle();
-          break;
+        ARectangle();
+        break;
       case 'line':
         ALine();
         break;
@@ -180,7 +179,9 @@ window.Ashley = {
   }
 }
 
-
+$(document).on("click",".js_funcPop",function(){
+  $(".testing").css({"display" : "initial","width":MCScreenW+ "px","height": MCScreenH + "px","left": $(window).width()/2 - MCScreenW/2+"px", "bottom":mobileCanvasH*0.13+"px"});
+});
 //====================== AFTER CONFIRM =========================================
 $(document).on("click",".js_confirmType",function(){
     // Close suggestions
