@@ -19,7 +19,7 @@
   <link rel="apple-touch-icon" type="image/png" sizes="96×96" href="https://webdemo.myscript.com/assets/img/demo/WebDemoIcon-Shape_96x96.png">
 
   <title> Shape the world !!!</title>
-  <link rel="stylesheet" href="sass/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" rel="stylesheet" href="sass/bootstrap.min.css">
   <link type="text/css" rel="stylesheet" href="./files/css.css">
   <link type="text/css" rel="stylesheet" href="./files/webdemo.css">
   <link rel="stylesheet" href="sass/styles.min.css">
@@ -40,15 +40,9 @@
 
   <link rel="import" href="./bower_components/iron-image/iron-image.html">
   <link rel="import" href="./bower_components/myscript-common-element/myscript-common-element.html">
-  <!-- drag and drop  -->
-  <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    $( "div.identification > *" ).draggable();
-  } );
-  </script>
-  <!-- /drag and drop  -->
+  <!-- Framework 7: iOS UI  -->
+  <!-- <link rel="stylesheet" type="text/css" href="css/framework7.min.css"> -->
+  <!-- /Framework 7: iOS UI -->
   <script>
     function myFunction() {
       window.location.reload();
@@ -75,7 +69,29 @@
         <li class="func"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></li>
       </ul>
       <ul class="bottom">
-        <li class="func"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span></li>
+        <li class="func"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+          <div class="popupType" style="display:none;">
+            <div class="popover popover-right js_suggestions" style="display:none;">
+              <h3 class="popover-title">Pop view</h3>
+              <div class="popover-content">
+                <ul>
+                  <li>
+                    <img src="img/popview_customPopview.png" alt=""> <span>Custom pop view</span>
+                  </li>
+                  <li>
+                    <img src="img/popview_actionSheet.png" alt=""> <span>Action sheet</span>
+                  </li>
+                  <li>
+                    <img src="img/popview_alert.png" alt=""> <span>Alert</span>
+                  </li>
+                  <li>
+                    <img src="img/popview_picker.png" alt=""> <span>Picker</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
         <li class="func"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></li>
       </ul>
     </div>
@@ -97,15 +113,15 @@
         </iron-image>
       </div>
     </div> -->
-    <header class="ooo-header">
-      <!-- <a id="index-header-link" class="ooo-link-back" href="https://webdemo.myscript.com/index.html"></a> -->
+    <!-- <header class="ooo-header">
+      <a id="index-header-link" class="ooo-link-back" href="https://webdemo.myscript.com/index.html"></a>
       <h1 class="ooo-shape">Component suggestions</h1>
-      <!-- <a id="info-header-link" class="ooo-link-info" href="https://webdemo.myscript.com/views/shape.html#description"></a> -->
-    </header>
+      <a id="info-header-link" class="ooo-link-info" href="https://webdemo.myscript.com/views/shape.html#description"></a>
+    </header> -->
     <!--========================= INFOMATION AREA =========================-->
 
-
-    <div class="showInfo2  js_showCount" style="display:none" role="alert">
+    <!-- Basic shape information -->
+    <div class="showInfo2  js_showCount" role="alert">
       <ul>
         <li>Shape:
           <span class="js_shapeName"></span>
@@ -141,159 +157,170 @@
       </ul>
       <ul class="score"></ul>
     </div>
-    <!-- js_suggestions -->
-    <div class="popover popover-right js_suggestions" style="display:none;">
-      <h3 class="popover-title">I drawed a/an...</h3>
 
-      <div class="popover-content">
-        <!--[1] js_wildRectB: 寬矩形 && H > unitH -->
-        <div class="js_wildRectB" style="display:none;">
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" indexP="5" id="js_wildRectB-co" value="Image"> Image
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="4"> Shape
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="3"> TextView
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="2"> TextField
-            </label>
-          </div>
-          <div class="form-check ">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" indexP="1"> Button
-            </label>
-          </div>
-        </div>
-        <!--[2] js_wildRectS: 寬矩形 && H < unitH -->
-        <div class="js_wildRectS" style="display:none;">
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Button" indexP="5"> Button
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="4"> TextField
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="3"> Shape
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Image" indexP="2"> Image
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="1"> TextView
-            </label>
-          </div>
-        </div>
-        <!--[3] js_tallRectB: 高矩形 && H > unitH -->
-        <div class="js_tallRectB" style="display:none;">
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image" indexP="5"> Image
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="4"> Shape
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="3"> TextView
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="2"> TextField
-            </label>
-          </div>
-          <div class="form-check ">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Button" indexP="1"> Button
-            </label>
-          </div>
-        </div>
-        <!--[4] js_tallRectS: 高矩形 && H < unitH -->
-        <div class="js_tallRectS" style="display:none;">
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image" indexP="5"> Image
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="4"> Shape
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Button" indexP="3"> Button
-            </label>
+    <!-- Suggestions -->
+
+      <div class="popover popover-right js_suggestions" >
+        <h3 class="popover-title">I drawed a/an...</h3>
+        <div class="popover-content">
+          <!--[1] js_wildRectB: 寬矩形 && H > unitH -->
+          <div class="js_wildRectB" style="display:none;">
             <div class="form-check">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="2"> TextView
+                <input class="form-check-input" type="radio" name="exampleRadios" indexP="5" id="js_wildRectB-co" value="Image"> Image
               </label>
             </div>
             <div class="form-check">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="1"> TextField
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="4"> Shape
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="3"> TextView
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="2"> TextField
+              </label>
+            </div>
+            <div class="form-check ">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" indexP="1"> Button
               </label>
             </div>
           </div>
-        </div>
-        <!--[5] js_line: 線段  -->
-        <div class="js_line" style="display:none;">
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Text" indexP="5"> Text
-            </label>
+          <!--[2] js_wildRectS: 寬矩形 && H < unitH -->
+          <div class="js_wildRectS" style="display:none;">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Button" indexP="5"> Button
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="4"> TextField
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="3"> Shape
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Image" indexP="2"> Image
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="1"> TextView
+              </label>
+            </div>
           </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Line" indexP="4"> Line
-            </label>
+          <!--[3] js_tallRectB: 高矩形 && H > unitH -->
+          <div class="js_tallRectB" style="display:none;">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image" indexP="5"> Image
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="4"> Shape
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="3"> TextView
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="2"> TextField
+              </label>
+            </div>
+            <div class="form-check ">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Button" indexP="1"> Button
+              </label>
+            </div>
           </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Button" indexP="3"> Button
-            </label>
+          <!--[4] js_tallRectS: 高矩形 && H < unitH -->
+          <div class="js_tallRectS" style="display:none;">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Image" indexP="5"> Image
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="4"> Shape
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Button" indexP="3"> Button
+              </label>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextView" indexP="2"> TextView
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="1"> TextField
+                </label>
+              </div>
+            </div>
           </div>
-        </div>
+          <!--[5] js_line: 線段  -->
+          <div class="js_line" style="display:none;">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Text" indexP="5"> Text
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Line" indexP="4"> Line
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Button" indexP="3"> Button
+              </label>
+            </div>
+          </div>
 
-        <button type="button" class="btn btn-primary btn-block js_confirmType">Confirm</button>
+          <button type="button" class="btn btn-primary btn-block js_confirmType">Confirm</button>
+        </div>
       </div>
-    </div>
 
-    <!-- Shape identification -->
+
+    <!-- True elements -->
     <div class="identification">
     </div>
 
     <!--========================= end of INFOMATION AREA  =========================-->
     <section class="ooo-section">
       <!-- testing -->
-      <div class="testing" style="display:none;">
-        <img src="img/Alert Background.png" alt="" style="width: 80%; display: block; margin-left: 27px; margin-top: 160px;">
+      <div class="popup" style="display:none;">
+        <div class="modal modal-in" style="margin-top: -94px;">
+          <div class="modal-inner"><div class="modal-title">Popup Title</div>
+          <div class="modal-text">Introduction</div>
+          <input type="text" class="modal-text-input" placeholder="enter something..."></div>
+          <div class="modal-buttons">
+            <span class="modal-button">Cancel</span>
+            <span class="modal-button modal-button-bold">OK</span>
+          </div>
+        </div>
+        <!-- <img src="img/Alert Background.png" alt="" style="width: 80%; display: block; margin-left: 27px; margin-top: 160px;"> -->
       </div>
       <div class="write-here">Draw a
         <br/>rectangle
-        <span style="font-size:9px; -webkit-transform:scale(0.75); ">(only)</span>
+        <span style="font-size:9px;padding:0px; margin:0px; -webkit-transform:scale(0.75); ">(only)</span>
         <br/>here</div>
       <!-- Declare a SHAPE WebComponent, with typeset=true to render the recognition result on the component -->
       <myscript-common-element id="shape-input" class="ooo-canvas-full" type="SHAPE" typeset="true" >

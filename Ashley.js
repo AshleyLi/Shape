@@ -9,6 +9,7 @@ var shapeName;
 var pointsX = [], pointsY = []; // all x,y points of any kind of shape
 var rectW, rectH ; // w & h of rectangle
 var lineW,lineH  = 1  ; // w & h of line
+var shift = 0;
 
 var suggestedlist = "none";
 var idPadding = 5; // a value of identification labels
@@ -27,9 +28,9 @@ var xkID, currentID;
 $( document ).ready(function() {
   screenH = MCScreenH;
   unitH = screenH/10;
-  $(".identification > *").draggable();
-  // console.log("$( window ).width() = " + $( window ).width());
-  // console.log("MCScreenW = " +MCScreenW+ "，MCScreenH＝" + MCScreenH);
+  $(".ooo-section").css({"height" :$( window ).height() - 50});
+  $("div.popup").css({"width":MCScreenW+ "px","height": MCScreenH+2 + "px","left": $(window).width()/2 - MCScreenW/2+"px", "bottom":($(window).height()-50)/2 - MCScreenH/2+"px"});
+  console.log(".js_suggestions.height = " + $(".js_suggestions").height() );
 });
 
 // Get shape =============================================================================
@@ -46,10 +47,11 @@ window.Ashley = {
     // Print basic shape information
     shapeName = responseObject.result.segments[0].candidates[0].label;
 
-
     $(".js_shapeName").text(shapeName);
     $(".js_ShapeQty").text(Math.round(shapeQty));
 
+    // Give a id 2 element
+    currentID = Date.now();
 
     // Recognizing the shape====================================================
     switch (shapeName) {
@@ -97,34 +99,41 @@ window.Ashley = {
 
       showRectSuggestions();
       function showRectSuggestions(){
-        currentID = Date.now();
+
         if(rectW >= rectH){
           if(rectH > unitH){
             // add an image & set a current elementID
             $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
-            $('.js_wildRectB').css({"display" : "initial"});
+            $('.js_wildRectB').css({"display" : "block"});
           } else {
             // add a button & set a current elementID
             $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>button</button>");
-            $('.js_wildRectS').css({"display" : "initial"});
+            $('.js_wildRectS').css({"display" : "block"});
           }
         }else {
           if(rectH > unitH){
             // add an image & set a current elementID
             $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
-            $('.js_tallRectB').css({"display" : "initial"});
+            $('.js_tallRectB').css({"display" : "block"});
           } else {
             // add an image & set a current elementID
             $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
-            $('.js_tallRectS').css({"display" : "initial"});
+            $('.js_tallRectS').css({"display" : "block"});
           }
         }
       }
 
       // reture & set suggestions pop positionX,Y
-      popSuggestionsX = pointsX[1] + 10
-      popSuggestionsY = pointsY[1] - $(".js_suggestions").height()/2 - rectH/2;
-      $(".js_suggestions").css({"display":"initial","left": popSuggestionsX + "px","top": popSuggestionsY + "px"});
+      // popSuggestionsX = pointsX[1] + 10
+      // popSuggestionsY = pointsY[1] - rectH/2 - $(".js_suggestions").height()/2  ;
+
+      $(".js_suggestions").css({"display":"initial"});
+      console.log("show .js_suggestions.height = " + $(".js_suggestions").height());
+      popSuggestionsY = pointsY[1] - rectH/2 - $(".js_suggestions").height()/2  ;
+
+      // put
+      $(".js_suggestions").css({"left": pointsX[1] + 10 + "px","top": popSuggestionsY + "px"});
+      console.log("popover 高度 = " + $(".popover.popover-right").height() );
 
       //show information
       $(".js_shapeW").text(rectW);
@@ -156,9 +165,13 @@ window.Ashley = {
       lineW = getLineWidth();
       lineH = 1 ;
 
+      // add the first suggeted conponent.
+      $(".identification").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px;height:23px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
+
       // open & set suggestions pop positionX,Y
       $('.js_line').css({"display" : "initial"});
-      $(".js_suggestions").css({"display":"initial","left": pointsX[1]+10 + "px","top": pointsY[0]-$(".js_suggestions").height()/2 + "px"});
+      $(".js_suggestions").css({"display":"initial","left": pointsX[1]+10 + "px","top": pointsY[0] + shift -$(".js_suggestions").height()/2 + "px"});
+
       // show the shape basic information
       $(".js_shapeW").text(lineW);
       $(".js_shapeH").text(lineH);
@@ -176,9 +189,7 @@ window.Ashley = {
   }
 }
 
-$(document).on("click",".js_funcPop",function(){
-  $(".testing").css({"display" : "initial","width":MCScreenW+ "px","height": MCScreenH + "px","left": $(window).width()/2 - MCScreenW/2+"px", "bottom":mobileCanvasH*0.13+"px"});
-});
+
 //====================== AFTER CONFIRM =========================================
 $(document).on("click",".js_confirmType",function(){
     // Close suggestions
@@ -252,12 +263,10 @@ $(document).on("click",".js_confirmType",function(){
         $(".identification").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
       }
       function addLine(){
-        $(".identification").append("<hr xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0]+"px;top:"+pointsY[0] +"px;'>");
+        $(".identification").append("<hr xkID='" + currentID + "' style='width:"+ lineW +"px;height:" + lineH + "px;left:" + pointsX[0]+"px;top:"+pointsY[0] +"px; background-color:grey; margin:0px; padding:0px;'>");
       }
 
     }
-
-
 
     //Add a identification label to the shape===================================
     // idtagX = pointsX[0];
@@ -265,9 +274,6 @@ $(document).on("click",".js_confirmType",function(){
     // $(".identification").append("<span style='left:" + idtagX + "px;top:"+ idtagY +"px;'>" + $( "input:checked" ).val() + "</span>");
     // idtagX = 0;
     // idtagY = 0;
-
-
-
 
     // Clear checked attr
     $("input:checked").prop( "checked", false );
@@ -278,5 +284,20 @@ $(document).on("click",".js_confirmType",function(){
     $(".js_totalScore").text(shapeQty*5);
     var percentage = Math.floor(correctness /(shapeQty*5)*100) ;
     $(".js_percentage").text(percentage + "%");
+
+});
+// Popup =============================================================================
+
+
+
+
+$(document).on("click",".js_funcPop",function(){
+  // Open popup view Down the true elements layer of basic & up the myScript canvas.
+  $("div.popup").css({"display" : "initial"});
+
+  // Down the true elements layer of basic & up the myScript canvas.
+  // The z-index of layers: 1.toolbar > 2.myScript camvas > 3.popup view > 4.mask > 5.basic elements
+
+
 
 });
