@@ -23,6 +23,9 @@ var totalScore = 0;
 var popSuggestionsX, popSuggestionsY ;
 var xkID, currentID;
 
+
+
+
 // Basic settings =============================================================================
 
 $( document ).ready(function() {
