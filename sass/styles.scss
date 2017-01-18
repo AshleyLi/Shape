@@ -162,6 +162,8 @@ a, a:active, a:visited{ color:$xkGreen;}
 	background-position: center;
 	background-size: 280px;
 	background-repeat: no-repeat;
+	position: relative;
+	top: 50px;
 }
 
 // END of BASIC UI
@@ -199,6 +201,7 @@ a, a:active, a:visited{ color:$xkGreen;}
 	height:1px;
 	z-index: 1000;
 	position: absolute;
+	top:50px;
 	*{
 		position: absolute;
 		border:1px solid rgba(80, 227, 149, 0);

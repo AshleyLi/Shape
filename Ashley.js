@@ -10,6 +10,7 @@ var pointsX = [], pointsY = []; // all x,y points of any kind of shape
 var rectW, rectH ; // w & h of rectangle
 var lineW,lineH  = 1  ; // w & h of line
 
+
 var suggestedlist = "none";
 var idPadding = 5; // a value of identification labels
 var idtagX, idtagY;
@@ -158,10 +159,11 @@ window.Ashley = {
       }
       lineW = getLineWidth();
       lineH = 1 ;
+      console.log("lineW = " + lineW);
 
       // Greate the first component
       $(".identification").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
-    
+
       // open & set suggestions pop positionX,Y
       $('.js_line').css({"display" : "initial"});
       $(".js_suggestions").css({"display":"initial","left": pointsX[1]+10 + "px","top": pointsY[0]-$(".js_suggestions").height()/2 + "px"});
@@ -207,6 +209,7 @@ $(document).on("click",".js_confirmType",function(){
       $("[xkID='"+ currentID +"']").remove();
       // add a new selected element
       var elementType = $( "input:checked" ).val();
+      console.log("elementType=" + elementType );
       switch (elementType) {
           case 'Image':
             addImage();
@@ -237,9 +240,10 @@ $(document).on("click",".js_confirmType",function(){
         $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
       }
       function addButton(){
-        if( elementType == 'Button' && rectH >= 23  ){
+        if( shapeName == 'rectangle' && rectH >= 23  ){
+
           $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>button</button>");
-        }else if( elementType == 'Button' && rectH < 23){
+        }else if( shapeName == 'rectangle' && rectH < 23){
           $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height: 23px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>button</button>");
         }else{
           $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ lineW +"px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>button</button>");
@@ -252,7 +256,13 @@ $(document).on("click",".js_confirmType",function(){
         $(".identification").append("<div xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px; overflow:hidden;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</div>");
       }
       function addTextField(){
-        $(".identification").append("<input type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0]+"px;top:"+pointsY[0] +"px;'>");
+        if(rectH <= 40){
+          $(".identification").append("<input type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0]+"px;top:"+pointsY[0] +"px; border:1px solid lightgrey;' placeholder='Type somthing...'>");
+        }else {
+          var rows = Math.round(rectH/20) ;
+          console.log("rows = " + rows);
+          $(".identification").append("<textarea type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0]+"px;top:"+pointsY[0] +"px; border:1px solid lightgrey;' placeholder='Type somthing...'></textarea>");
+        }
       }
       function addText(){
         $(".identification").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");

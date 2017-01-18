@@ -19,14 +19,19 @@
   <link rel="apple-touch-icon" type="image/png" sizes="96×96" href="https://webdemo.myscript.com/assets/img/demo/WebDemoIcon-Shape_96x96.png">
 
   <title> Shape the world !!!</title>
-  <link rel="stylesheet" href="sass/bootstrap.min.css">
+
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="css/bootstrap-iso/bootstrap-iso.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous"> -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+  <!-- /bootstrap -->
+
+
   <link type="text/css" rel="stylesheet" href="./files/css.css">
   <link type="text/css" rel="stylesheet" href="./files/webdemo.css">
   <link rel="stylesheet" href="sass/styles.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
@@ -40,15 +45,6 @@
 
   <link rel="import" href="./bower_components/iron-image/iron-image.html">
   <link rel="import" href="./bower_components/myscript-common-element/myscript-common-element.html">
-  <!-- drag and drop  -->
-  <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    $( "div.identification > *" ).draggable();
-  } );
-  </script>
-  <!-- /drag and drop  -->
   <script>
     function myFunction() {
       window.location.reload();
@@ -59,17 +55,17 @@
 
 <body touch-action="none" onload="load()">
   <div id="content">
-    <div class="sysControl">
+    <div class="bootstrap-iso sysControl">
       <div class="navigation">
         <div class="logo"><img src="img/logo.png" alt="Xketch"></div>
         <span class="pageName">Components suggestions </span>
         <ul>
-          <li><a href="">Testing</a></li>
+          <!-- <li><a href="">Testing</a></li> -->
         </ul>
       </div>
 
     </div>
-    <div class="toolbar">
+    <div class="bootstrap-iso toolbar ">
       <ul class="top">
         <li class="func js_funcPop"><span class="glyphicon glyphicon-comment " aria-hidden="true"></span></li>
         <li class="func"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></li>
@@ -97,11 +93,11 @@
         </iron-image>
       </div>
     </div> -->
-    <header class="ooo-header">
-      <!-- <a id="index-header-link" class="ooo-link-back" href="https://webdemo.myscript.com/index.html"></a> -->
+    <!-- <header class="ooo-header">
+      <a id="index-header-link" class="ooo-link-back" href="https://webdemo.myscript.com/index.html"></a>
       <h1 class="ooo-shape">Component suggestions</h1>
-      <!-- <a id="info-header-link" class="ooo-link-info" href="https://webdemo.myscript.com/views/shape.html#description"></a> -->
-    </header>
+      <a id="info-header-link" class="ooo-link-info" href="https://webdemo.myscript.com/views/shape.html#description"></a>
+    </header> -->
     <!--========================= INFOMATION AREA =========================-->
 
 
@@ -142,7 +138,9 @@
       <ul class="score"></ul>
     </div>
     <!-- js_suggestions -->
-    <div class="popover popover-right js_suggestions" style="display:none;">
+    <div class="bootstrap-iso" style="position:absolute; top:50px; width:100%;">
+      <div class=" popover right js_suggestions" style="display:none;">
+        <div class="arrow"></div>
       <h3 class="popover-title">I drawed a/an...</h3>
 
       <div class="popover-content">
@@ -170,7 +168,7 @@
           </div>
           <div class="form-check ">
             <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" indexP="1"> Button
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Button" indexP="1"> Button
             </label>
           </div>
         </div>
@@ -279,6 +277,7 @@
 
         <button type="button" class="btn btn-primary btn-block js_confirmType">Confirm</button>
       </div>
+    </div>
     </div>
 
     <!-- Shape identification -->
