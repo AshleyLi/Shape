@@ -26,6 +26,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
   <!-- /bootstrap -->
 
+  <!-- framework7 -->
+  <link rel="stylesheet" href="css/framework7.min.css">
+  <!-- /framework7 -->
+
 
   <link type="text/css" rel="stylesheet" href="./files/css.css">
   <link type="text/css" rel="stylesheet" href="./files/webdemo.css">
@@ -286,10 +290,21 @@
 
     <!--========================= end of INFOMATION AREA  =========================-->
     <section class="ooo-section">
-      <!-- testing -->
-      <div class="testing" style="display:none;">
-        <img src="img/Alert Background.png" alt="" style="width: 80%; display: block; margin-left: 27px; margin-top: 160px;">
+      <!-- popview -->
+      <div class="popview" style="display:none;">
+        <div class="modal modal-in" style="margin-top: -94px;">
+          <div class="modal-inner">
+            <div class="modal-title">Chattr Login</div>
+            <div class="modal-text">What is your name (or gravatar email)?</div>
+            <input type="text" class="modal-text-input">
+          </div>
+          <div class="modal-buttons"><span class="modal-button">Cancel</span>
+              <span class="modal-button modal-button-bold">OK</span>
+          </div>
+        </div>
+        <!-- <img src="img/Alert Background.png" alt="" style="width: 80%; display: block; margin-left: 27px; margin-top: 160px;"> -->
       </div>
+      <!-- /popview -->
       <div class="write-here">Draw a
         <br/>rectangle
         <span style="font-size:9px; -webkit-transform:scale(0.75); ">(only)</span>

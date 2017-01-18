@@ -28,9 +28,13 @@ var xkID, currentID;
 $( document ).ready(function() {
   screenH = MCScreenH;
   unitH = screenH/10;
-  $(".identification > *").draggable();
+  $(".ooo-section").css({"height":$(window).height()-50});
   // console.log("$( window ).width() = " + $( window ).width());
   // console.log("MCScreenW = " +MCScreenW+ "，MCScreenH＝" + MCScreenH);
+});
+
+$(document).on("click",".js_funcPop",function(){
+  $(".popview").css({"display" : "initial","width":MCScreenW+ "px","height": MCScreenH + 2 +"px","left": $(window).width()/2 - MCScreenW/2+"px", "top": $(".ooo-section").height()/2 - MCScreenH/2 -2 +"px"});
 });
 
 // Get shape =============================================================================
@@ -184,9 +188,7 @@ window.Ashley = {
   }
 }
 
-$(document).on("click",".js_funcPop",function(){
-  $(".testing").css({"display" : "initial","width":MCScreenW+ "px","height": MCScreenH + "px","left": $(window).width()/2 - MCScreenW/2+"px", "bottom":mobileCanvasH*0.13+"px"});
-});
+
 //====================== AFTER CONFIRM =========================================
 $(document).on("click",".js_confirmType",function(){
     // Close suggestions
@@ -256,6 +258,7 @@ $(document).on("click",".js_confirmType",function(){
         $(".identification").append("<div xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px; overflow:hidden;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</div>");
       }
       function addTextField(){
+        // 判斷高度以區別是否為多行。一行的高度單位為20px
         if(rectH <= 40){
           $(".identification").append("<input type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0]+"px;top:"+pointsY[0] +"px; border:1px solid lightgrey;' placeholder='Type somthing...'>");
         }else {

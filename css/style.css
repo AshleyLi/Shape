@@ -1,0 +1,37 @@
+.view-left {
+    float: left;
+    width: 320px;
+    border-right: 1px solid #b2b2b2;
+}
+.view-main {
+    width: -webkit-calc(100% - 321px);
+    width: -moz-calc(100% - 321px);
+    width: -ms-calc(100% - 321px);
+    width: calc(100% - 321px);
+}
+.message-received.message-pic .message-text {
+    background: #e5e5ea;
+}
+.message-sent.message-pic .message-text {
+    background: #e5e5ea;
+}
+
+@media (max-width: 768px) {
+    .view-left {
+        width: 160px;
+    }
+    .view-main {
+        width: -webkit-calc(100% - 161px);
+        width: -moz-calc(100% - 161px);
+        width: -ms-calc(100% - 161px);
+        width: calc(100% - 161px);
+    }
+}
+@media (max-width: 480px) {
+    .view-left {
+        display: none;
+    }
+    .view-main {
+        width: 100%;
+    }
+}
