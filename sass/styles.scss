@@ -114,15 +114,8 @@ a, a:active, a:visited{ color:$xkGreen;}
 	}
 }
 
-.popview{
-	position: absolute;
-	z-index: 100;
-	min-width: 100px;
-	min-height: 100px;
-	background-color: rgba(0, 0, 0, 0.5);
 
-}
-.ooo-section{position: relative;}
+
 /*	 Wrote by Ashley.*/
 .write-here{font-family: 'Architects Daughter', cursive;}
 .ooo-header {
@@ -162,8 +155,9 @@ a, a:active, a:visited{ color:$xkGreen;}
 	background-position: center;
 	background-size: 280px;
 	background-repeat: no-repeat;
-	position: relative;
+	position: absolute;
 	top: 50px;
+	width: 100%;
 }
 
 // END of BASIC UI
@@ -210,4 +204,21 @@ a, a:active, a:visited{ color:$xkGreen;}
 		border:1px solid rgba(80, 227, 149, 1);
 
 	}
+}
+
+.popview{
+	position: absolute;
+	z-index: 100;
+	min-width: 100px;
+	min-height: 100px;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+// <!-- framework7 -->
+.popover{
+	opacity: 1;
+	width: auto;
+}
+.modal{
+	width: 200px;
+	margin-left: -100px;
 }

@@ -33,9 +33,9 @@ $( document ).ready(function() {
   // console.log("MCScreenW = " +MCScreenW+ "，MCScreenH＝" + MCScreenH);
 });
 
-$(document).on("click",".js_funcPop",function(){
-  $(".popview").css({"display" : "initial","width":MCScreenW+ "px","height": MCScreenH + 2 +"px","left": $(window).width()/2 - MCScreenW/2+"px", "top": $(".ooo-section").height()/2 - MCScreenH/2 -2 +"px"});
-});
+// $(document).on("click",".js_funcPop ",function(){
+//   $(".popview").css({"display" : "initial","width":MCScreenW+ "px","height": MCScreenH + 1+"px","left": $(window).width()/2 - MCScreenW/2+"px", "top": $(".ooo-section").height()/2 - MCScreenH/2 -2 +"px" });
+// });
 
 // Get shape =============================================================================
 window.Ashley = {
@@ -58,7 +58,6 @@ window.Ashley = {
     // Give a id to the following element
     currentID = Date.now();
 
-
     // Recognizing the shape====================================================
     switch (shapeName) {
       case 'rectangle':
@@ -74,6 +73,7 @@ window.Ashley = {
         removeWrongShape();
 
     }
+
     // Remove the wrong shape ==================================================
     function removeWrongShape(){
       $("paper-fab[icon='delete']").trigger("click");
@@ -110,7 +110,8 @@ window.Ashley = {
           if(rectH > unitH){
             // add an image & set a current elementID
             $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
-            $('.js_wildRectB').css({"display" : "initial"});
+            $(".js_wildRectB").css({"display" : "initial"});
+
           } else {
             // add a button & set a current elementID
             $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>button</button>");
