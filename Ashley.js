@@ -139,23 +139,18 @@ window.Ashley = {
       }
 
       // reture & set suggestions pop positionX,Y
-      // popSuggestionsX = pointsX[1] + 10
-      // popSuggestionsY = pointsY[1] - rectH/2 - $(".js_suggestions").height()/2  ;
+      popSuggestionsX = pointsX[1] + 10
+      popSuggestionsY = pointsY[1] - rectH/2 - $(".js_suggestions").height()/2  ;
 
-      $('.js_suggestions').css({"display":"initial"});
-      console.log("show .js_suggestions.height = " + $('.js_suggestions').height());
-      popSuggestionsY = pointsY[1] - rectH/2 - $('.js_suggestions').height()/2  ;
-
-      // put
       $('.js_suggestions').css({
-        "left": pointsX[1] + 10 + "px",
-        "top": pointsY[1] + "px",
+        "display":"initial",
+        "left": popSuggestionsX ,
+        "top": popSuggestionsY ,
         "height": "auto"
       });
-      console.log("popover-content.height = " + $(".popover-content").height() );
+
 
       //show information
-      $('.js_sudkj').text($('.js_suggestions').height());
       $(".js_shapeW").text(rectW);
       $(".js_shapeH").text(rectH);
 
