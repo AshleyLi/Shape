@@ -2,25 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Draggable - Default functionality</title>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    $( "div.identification > *" ).draggable();
-  } );
-  </script>
+  <title>toggle demo</title>
   <style>
-  .identification > * { background-color:lightpink ;padding: 0.5em; display: inline-block;}
+  p {
+    background: #dad;
+    font-weight: bold;
+    font-size: 16px;
+  }
   </style>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
-<div class="identification">
-  <p>pa</p>
-  <p>fdf</p>
-  <p>dfsdf</p>
-</div>
+
+<button>Toggle 'em</button>
+<p>Hiya</p>
+<p>Such interesting text, eh?</p>
+
+<script>
+$( "button" ).click(function() {
+  $( "p" ).toggle( "slow" );
+});
+</script>
 
 </body>
 </html>

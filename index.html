@@ -19,6 +19,7 @@
   <link rel="apple-touch-icon" type="image/png" sizes="96×96" href="https://webdemo.myscript.com/assets/img/demo/WebDemoIcon-Shape_96x96.png">
 
   <title> Shape the world !!!</title>
+<<<<<<< HEAD
 
   <!-- bootstrap -->
   <link rel="stylesheet" href="css/bootstrap-iso/bootstrap-iso.css">
@@ -29,6 +30,9 @@
   <link rel="stylesheet" href="css/framework7.min.css">
   <!-- /framework7 -->
 
+=======
+  <link rel="stylesheet" type="text/css" rel="stylesheet" href="sass/bootstrap.min.css">
+>>>>>>> origin/gh-pages
   <link type="text/css" rel="stylesheet" href="./files/css.css">
   <link type="text/css" rel="stylesheet" href="./files/webdemo.css">
   <link rel="stylesheet" href="sass/styles.min.css">
@@ -42,11 +46,20 @@
   <!--Configuration file used to store identifiers and some parameters-->
   <script type="text/javascript" src="./files/configuration.js"></script>
   <script type="text/javascript" src="./Ashley.js"></script>
+<<<<<<< HEAD
   <script type="text/javascript" src="./popview.js"></script>
+=======
+>>>>>>> origin/gh-pages
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.23/webcomponents-lite.min.js"></script>
 
   <link rel="import" href="./bower_components/iron-image/iron-image.html">
   <link rel="import" href="./bower_components/myscript-common-element/myscript-common-element.html">
+<<<<<<< HEAD
+=======
+  <!-- Framework 7: iOS UI  -->
+  <!-- <link rel="stylesheet" type="text/css" href="css/framework7.min.css"> -->
+  <!-- /Framework 7: iOS UI -->
+>>>>>>> origin/gh-pages
   <script>
     function myFunction() {
       window.location.reload();
@@ -95,7 +108,29 @@
         <li class="func"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></li>
       </ul>
       <ul class="bottom">
-        <li class="func"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span></li>
+        <li class="func"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+          <div class="popupType" style="display:none;">
+            <div class="popover popover-right js_suggestions" style="display:none;">
+              <h3 class="popover-title">Pop view</h3>
+              <div class="popover-content">
+                <ul>
+                  <li>
+                    <img src="img/popview_customPopview.png" alt=""> <span>Custom pop view</span>
+                  </li>
+                  <li>
+                    <img src="img/popview_actionSheet.png" alt=""> <span>Action sheet</span>
+                  </li>
+                  <li>
+                    <img src="img/popview_alert.png" alt=""> <span>Alert</span>
+                  </li>
+                  <li>
+                    <img src="img/popview_picker.png" alt=""> <span>Picker</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
         <li class="func"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></li>
       </ul>
     </div>
@@ -124,8 +159,8 @@
     </header> -->
     <!--========================= INFOMATION AREA =========================-->
 
-
-    <div class="showInfo2  js_showCount" style="display:none" role="alert">
+    <!-- Basic shape information -->
+    <div class="showInfo2  js_showCount" role="alert">
       <ul>
         <li>Shape:
           <span class="js_shapeName"></span>
@@ -161,10 +196,17 @@
       </ul>
       <ul class="score"></ul>
     </div>
+<<<<<<< HEAD
     <!-- js_suggestions -->
     <div class="bootstrap-iso" style="position:absolute; top:50px; width:100%;">
       <div class=" popover right js_suggestions" style="display:none;">
         <div class="arrow"></div>
+=======
+
+    <!-- Suggestions -->
+
+      <div class="popover popover-right js_suggestions" >
+>>>>>>> origin/gh-pages
         <h3 class="popover-title">I drawed a/an...</h3>
         <div class="popover-content">
           <!--[1] js_wildRectB: 寬矩形 && H > unitH -->
@@ -191,12 +233,17 @@
             </div>
             <div class="form-check ">
               <label class="form-check-label">
+<<<<<<< HEAD
                 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Button" indexP="1"> Button
+=======
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" indexP="1"> Button
+>>>>>>> origin/gh-pages
               </label>
             </div>
           </div>
           <!--[2] js_wildRectS: 寬矩形 && H < unitH -->
           <div class="js_wildRectS" style="display:none;">
+<<<<<<< HEAD
             <div class="form-check">
               <label class="form-check-label">
                 <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Button" indexP="5"> Button
@@ -205,10 +252,23 @@
             <div class="form-check">
               <label class="form-check-label">
                 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="4"> TextField
+=======
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Button" indexP="5"> Button
+>>>>>>> origin/gh-pages
               </label>
             </div>
             <div class="form-check">
               <label class="form-check-label">
+<<<<<<< HEAD
+=======
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="4"> TextField
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+>>>>>>> origin/gh-pages
                 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="3"> Shape
               </label>
             </div>
@@ -301,15 +361,16 @@
           <button type="button" class="btn btn-primary btn-block js_confirmType">Confirm</button>
         </div>
       </div>
-    </div>
 
-    <!-- Shape identification -->
+
+    <!-- True elements -->
     <div class="identification">
     </div>
 
     <!--========================= end of INFOMATION AREA  =========================-->
     <section class="ooo-section">
       <!-- testing -->
+<<<<<<< HEAD
       <div class="popview" style="display:none;">
         <!-- 1:pop-alert -->
         <div id="pop-alert" class="modal modal-in">
@@ -318,11 +379,19 @@
             <div class="modal-text">A message should be a short, complete sentence.</div>
             <input type="text" class="modal-text-input">
           </div>
+=======
+      <div class="popup" style="display:none;">
+        <div class="modal modal-in" style="margin-top: -94px;">
+          <div class="modal-inner"><div class="modal-title">Popup Title</div>
+          <div class="modal-text">Introduction</div>
+          <input type="text" class="modal-text-input" placeholder="enter something..."></div>
+>>>>>>> origin/gh-pages
           <div class="modal-buttons">
             <span class="modal-button">Cancel</span>
             <span class="modal-button modal-button-bold">OK</span>
           </div>
         </div>
+<<<<<<< HEAD
         <!-- /pop-alert -->
         <!-- 2:pop-actionSheet -->
         <div id="pop-actionSheet" class="modal modal-in">
@@ -345,10 +414,13 @@
           </div>
         </div>
         <!-- /pop-picker -->
+=======
+        <!-- <img src="img/Alert Background.png" alt="" style="width: 80%; display: block; margin-left: 27px; margin-top: 160px;"> -->
+>>>>>>> origin/gh-pages
       </div>
       <div class="write-here">Draw a
         <br/>rectangle
-        <span style="font-size:9px; -webkit-transform:scale(0.75); ">(only)</span>
+        <span style="font-size:9px;padding:0px; margin:0px; -webkit-transform:scale(0.75); ">(only)</span>
         <br/>here</div>
       <!-- Declare a SHAPE WebComponent, with typeset=true to render the recognition result on the component -->
       <myscript-common-element id="shape-input" class="ooo-canvas-full" type="SHAPE" typeset="true" >
