@@ -20,7 +20,6 @@
 
   <title> Shape the world !!!</title>
 
-
   <!-- bootstrap -->
   <link rel="stylesheet" href="css/bootstrap-iso/bootstrap-iso.css">
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous"> -->
@@ -29,7 +28,6 @@
   <!-- framework7 -->
   <link rel="stylesheet" href="css/framework7.min.css">
   <!-- /framework7 -->
-
 
   <link type="text/css" rel="stylesheet" href="./files/css.css">
   <link type="text/css" rel="stylesheet" href="./files/webdemo.css">
@@ -99,7 +97,8 @@
         <li class="func"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></li>
       </ul>
       <ul class="bottom">
-        <li class="func"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+        <li class="func">
+          <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
           <div class="popupType" style="display:none;">
             <div class="popover popover-right js_suggestions" style="display:none;">
               <h3 class="popover-title">Pop view</h3>
@@ -168,9 +167,10 @@
         <li>Height:
           <span class="js_shapeH"></span>
         </li>
-
+        <li>js_suggestions.height:
+          <span class="js_sudkj"></span>
+        </li>
       </ul>
-
     </div>
     <div class="showInfo2  js_showCount right" style="display:none">
       <ul>
@@ -192,9 +192,8 @@
     <div class="bootstrap-iso" style="position:absolute; top:50px; width:100%;">
       <div class=" popover right js_suggestions" style="display:none;">
         <div class="arrow"></div>
-
         <h3 class="popover-title">I drawed a/an...</h3>
-        <div class="popover-content">
+        <div class="popover-content" style="display:block;">
           <!--[1] js_wildRectB: 寬矩形 && H > unitH -->
           <div class="js_wildRectB" style="display:none;">
             <div class="form-check">
@@ -219,17 +218,12 @@
             </div>
             <div class="form-check ">
               <label class="form-check-label">
-<<<<<<< HEAD
                 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="Button" indexP="1"> Button
-=======
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" indexP="1"> Button
->>>>>>> origin/gh-pages
               </label>
             </div>
           </div>
           <!--[2] js_wildRectS: 寬矩形 && H < unitH -->
           <div class="js_wildRectS" style="display:none;">
-<<<<<<< HEAD
             <div class="form-check">
               <label class="form-check-label">
                 <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Button" indexP="5"> Button
@@ -238,23 +232,10 @@
             <div class="form-check">
               <label class="form-check-label">
                 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="4"> TextField
-=======
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="js_wildRectB-co" value="Button" indexP="5"> Button
->>>>>>> origin/gh-pages
               </label>
             </div>
             <div class="form-check">
               <label class="form-check-label">
-<<<<<<< HEAD
-=======
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="TextField" indexP="4"> TextField
-              </label>
-            </div>
-            <div class="form-check">
-              <label class="form-check-label">
->>>>>>> origin/gh-pages
                 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Shape" indexP="3"> Shape
               </label>
             </div>
@@ -343,11 +324,10 @@
               </label>
             </div>
           </div>
-
           <button type="button" class="btn btn-primary btn-block js_confirmType">Confirm</button>
         </div>
       </div>
-
+    </div>
 
     <!-- True elements -->
     <div class="identification">
@@ -355,8 +335,7 @@
 
     <!--========================= end of INFOMATION AREA  =========================-->
     <section class="ooo-section">
-      <!-- testing -->
-
+      <!-- popview -->
       <div class="popview" style="display:none;">
         <!-- 1:pop-alert -->
         <div id="pop-alert" class="modal modal-in">
@@ -365,13 +344,11 @@
             <div class="modal-text">A message should be a short, complete sentence.</div>
             <input type="text" class="modal-text-input">
           </div>
-
           <div class="modal-buttons">
             <span class="modal-button">Cancel</span>
             <span class="modal-button modal-button-bold">OK</span>
           </div>
         </div>
-
         <!-- /pop-alert -->
         <!-- 2:pop-actionSheet -->
         <div id="pop-actionSheet" class="modal modal-in">
@@ -394,8 +371,8 @@
           </div>
         </div>
         <!-- /pop-picker -->
-
       </div>
+      <!-- /popview -->
       <div class="write-here">Draw a
         <br/>rectangle
         <span style="font-size:9px;padding:0px; margin:0px; -webkit-transform:scale(0.75); ">(only)</span>

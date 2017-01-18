@@ -32,15 +32,11 @@ var xkID, currentID;
 $( document ).ready(function() {
   screenH = MCScreenH;
   unitH = screenH/10;
-<<<<<<< HEAD
+
   $(".ooo-section").css({"height":$(window).height()-50});
-  // console.log("$( window ).width() = " + $( window ).width());
+  console.log("$( window ).height() = " + $( window ).height());
   // console.log("MCScreenW = " +MCScreenW+ "，MCScreenH＝" + MCScreenH);
-=======
-  $(".ooo-section").css({"height" :$( window ).height() - 50});
-  $("div.popup").css({"width":MCScreenW+ "px","height": MCScreenH+2 + "px","left": $(window).width()/2 - MCScreenW/2+"px", "bottom":($(window).height()-50)/2 - MCScreenH/2+"px"});
-  console.log(".js_suggestions.height = " + $(".js_suggestions").height() );
->>>>>>> origin/gh-pages
+
 });
 
 // $(document).on("click",".js_funcPop ",function(){
@@ -64,11 +60,8 @@ window.Ashley = {
     $(".js_shapeName").text(shapeName);
     $(".js_ShapeQty").text(Math.round(shapeQty));
 
-<<<<<<< HEAD
+
     // Give a id to the following element
-=======
-    // Give a id 2 element
->>>>>>> origin/gh-pages
     currentID = Date.now();
 
     // Recognizing the shape====================================================
@@ -123,12 +116,10 @@ window.Ashley = {
           if(rectH > unitH){
             // add an image & set a current elementID
             $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
-<<<<<<< HEAD
+
             $(".js_wildRectB").css({"display" : "initial"});
 
-=======
-            $('.js_wildRectB').css({"display" : "block"});
->>>>>>> origin/gh-pages
+
           } else {
             // add a button & set a current elementID
             $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>button</button>");
@@ -151,15 +142,20 @@ window.Ashley = {
       // popSuggestionsX = pointsX[1] + 10
       // popSuggestionsY = pointsY[1] - rectH/2 - $(".js_suggestions").height()/2  ;
 
-      $(".js_suggestions").css({"display":"initial"});
-      console.log("show .js_suggestions.height = " + $(".js_suggestions").height());
-      popSuggestionsY = pointsY[1] - rectH/2 - $(".js_suggestions").height()/2  ;
+      $('.js_suggestions').css({"display":"initial"});
+      console.log("show .js_suggestions.height = " + $('.js_suggestions').height());
+      popSuggestionsY = pointsY[1] - rectH/2 - $('.js_suggestions').height()/2  ;
 
       // put
-      $(".js_suggestions").css({"left": pointsX[1] + 10 + "px","top": popSuggestionsY + "px"});
-      console.log("popover 高度 = " + $(".popover.popover-right").height() );
+      $('.js_suggestions').css({
+        "left": pointsX[1] + 10 + "px",
+        "top": pointsY[1] + "px",
+        "height": "auto"
+      });
+      console.log("popover-content.height = " + $(".popover-content").height() );
 
       //show information
+      $('.js_sudkj').text($('.js_suggestions').height());
       $(".js_shapeW").text(rectW);
       $(".js_shapeH").text(rectH);
 
@@ -188,8 +184,6 @@ window.Ashley = {
       }
       lineW = getLineWidth();
       lineH = 1 ;
-      console.log("lineW = " + lineW);
-
       // Greate the first component
       $(".identification").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
 
@@ -300,11 +294,8 @@ $(document).on("click",".js_confirmType",function(){
         $(".identification").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
       }
       function addLine(){
-<<<<<<< HEAD
         $(".identification").append("<hr xkID='" + currentID + "' style='width:"+ lineW +"px;height:" + lineH + "px;left:" + pointsX[0]+"px;top:"+pointsY[0] +"px; background-color:lightgrey; margin:0px; padding:0px;'>");
-=======
-        $(".identification").append("<hr xkID='" + currentID + "' style='width:"+ lineW +"px;height:" + lineH + "px;left:" + pointsX[0]+"px;top:"+pointsY[0] +"px; background-color:grey; margin:0px; padding:0px;'>");
->>>>>>> origin/gh-pages
+
       }
 
     }
