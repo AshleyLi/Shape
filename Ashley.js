@@ -48,7 +48,7 @@ window.Ashley = {
   responseCallback : function (responseObject){
 
     // Print shape object ===============DON'T TOUCH!!===============
-    console.log(responseObject)
+    // console.log(responseObject)
 
     // Get the length of shape segments[]
     segmentsLength = responseObject.result.segments.length;
@@ -65,19 +65,82 @@ window.Ashley = {
     currentID = Date.now();
 
     // Recognizing the shape====================================================
-    switch (shapeName) {
-      case 'rectangle':
-        ARectangle();
-        break;
-      case 'square':
-        ARectangle();
-        break;
-      case 'line':
-        ALine();
-        break;
-      default:
-        removeWrongShape();
+    if( popEditor == false){
+      switch (shapeName) {
+        case 'rectangle':
+          ARectangle();
+          break;
+        case 'square':
+          ARectangle();
+          break;
+        case 'line':
+          ALine();
+          break;
+        default:
+          removeWrongShape();
+      }
+    }else{
+      switch (shapeName) {
+        case 'rectangle':
+          APopRectangle();
+          break;
+        case 'line':
+          APopLine();
+          break;
+        default:
+          removeWrongShape();
+      }
+    }
 
+    // Get shape information
+    function getShapeInfo(){
+
+      if(shapeName == "rectangle" || shapeName == "square"){
+        // rectangle:  Get shape posX and posY array
+        for ( i = 0 ; i < 4; i++){
+            var pointX = Math.floor(responseObject.result.segments[0].candidates[0].primitives[i].firstPoint.x);
+            var pointY = Math.floor(responseObject.result.segments[0].candidates[0].primitives[i].firstPoint.y);
+            pointsX[i] = pointX;
+            pointsY[i] = pointY;
+        }
+        // remove tha same value from PosX & PosY array
+        pointsX = pointsX.filter(function(element, index, arr){
+          return arr.indexOf(element)=== index;
+        });
+        pointsY = pointsY.filter(function(element, index, arr){
+          return arr.indexOf(element)=== index;
+        });
+        // Sort PosX[] & PosY[]
+        pointsX.sort(function (a, b) {return a - b});
+        pointsY.sort(function (a, b) {return a - b});
+        // rectangle: Get shape size for rectangle
+        rectW = pointsX[1]-pointsX[0] ;
+        rectH = pointsY[1]-pointsY[0] ;
+      }else if (shapeName == "line"){
+        // Get PosX[] & PosY[]
+        pointsX[0] = Math.floor(responseObject.result.segments[0].candidates[0].primitives[0].firstPoint.x);
+        pointsY[0] = Math.floor(responseObject.result.segments[0].candidates[0].primitives[0].firstPoint.y);
+        pointsX[1] = Math.floor(responseObject.result.segments[0].candidates[0].primitives[0].lastPoint.x);
+        pointsY[1] = Math.floor(responseObject.result.segments[0].candidates[0].primitives[0].lastPoint.y);
+        // Sort PosX[] & PosY[]
+        pointsX.sort(function (a, b) {return a - b});
+        pointsY.sort(function (a, b) {return a - b});
+
+        // Get line width
+        function getLineWidth(){
+          var calX = pointsX[1]-pointsX[0];
+          var calY = pointsY[1]-pointsY[0];
+          var width = Math.floor( Math.pow((calX *calX + calY * calY), 0.5));
+          return width;
+        }
+        lineW = getLineWidth();
+        lineH = 1 ;
+      }else {
+        removeWrongShape();
+      }
+      // Show shape information ====================================================================
+      $(".js_pointsX").text(pointsX);
+      $(".js_pointsY").text(pointsY);
     }
 
     // Remove the wrong shape ==================================================
@@ -86,55 +149,29 @@ window.Ashley = {
       shapeQty--;
       $(".js_ShapeQty").text(Math.round(shapeQty));
     }
-    // Rectangle ===============================================================
+
+    // Show rectangle suggestion ===============================================================
     function ARectangle() {
-      // rectangle:  Get shape posX and posY array
-      for ( i = 0 ; i < 4; i++){
-          var pointX = Math.floor(responseObject.result.segments[0].candidates[0].primitives[i].firstPoint.x);
-          var pointY = Math.floor(responseObject.result.segments[0].candidates[0].primitives[i].firstPoint.y);
-          pointsX[i] = pointX;
-          pointsY[i] = pointY;
-      }
-      // remove tha same value from PosX & PosY array
-      pointsX = pointsX.filter(function(element, index, arr){
-        return arr.indexOf(element)=== index;
-      });
-      pointsY = pointsY.filter(function(element, index, arr){
-        return arr.indexOf(element)=== index;
-      });
-      // Sort PosX[] & PosY[]
-      pointsX.sort(function (a, b) {return a - b});
-      pointsY.sort(function (a, b) {return a - b});
-      // rectangle: Get shape size for rectangle
-      rectW = pointsX[1]-pointsX[0] ;
-      rectH = pointsY[1]-pointsY[0] ;
-
-      showRectSuggestions();
-      function showRectSuggestions(){
-
-        if(rectW >= rectH){
-          if(rectH > unitH){
-            // add an image & set a current elementID
-            $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
-
-            $(".js_wildRectB").css({"display" : "initial"});
-
-
-          } else {
-            // add a button & set a current elementID
-            $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>button</button>");
-            $('.js_wildRectS').css({"display" : "block"});
-          }
-        }else {
-          if(rectH > unitH){
-            // add an image & set a current elementID
-            $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
-            $('.js_tallRectB').css({"display" : "block"});
-          } else {
-            // add an image & set a current elementID
-            $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
-            $('.js_tallRectS').css({"display" : "block"});
-          }
+      getShapeInfo();
+      if(rectW >= rectH){
+        if(rectH > unitH){
+          // add an image & set a current elementID
+          $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
+          $(".js_wildRectB").css({"display" : "initial"});
+        } else {
+          // add a button & set a current elementID
+          $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>button</button>");
+          $('.js_wildRectS').css({"display" : "block"});
+        }
+      }else {
+        if(rectH > unitH){
+          // add an image & set a current elementID
+          $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
+          $('.js_tallRectB').css({"display" : "block"});
+        } else {
+          // add an image & set a current elementID
+          $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
+          $('.js_tallRectS').css({"display" : "block"});
         }
       }
 
@@ -149,7 +186,6 @@ window.Ashley = {
         "height": "auto"
       });
 
-
       //show information
       $(".js_shapeW").text(rectW);
       $(".js_shapeH").text(rectH);
@@ -158,27 +194,10 @@ window.Ashley = {
       idtagY = pointsY[0];
     }
 
-
-    // Line ====================================================================
+    // Show Line suggestion ====================================================================
     function ALine() {
-      // Get PosX[] & PosY[]
-      pointsX[0] = Math.floor(responseObject.result.segments[0].candidates[0].primitives[0].firstPoint.x);
-      pointsY[0] = Math.floor(responseObject.result.segments[0].candidates[0].primitives[0].firstPoint.y);
-      pointsX[1] = Math.floor(responseObject.result.segments[0].candidates[0].primitives[0].lastPoint.x);
-      pointsY[1] = Math.floor(responseObject.result.segments[0].candidates[0].primitives[0].lastPoint.y);
-      // Sort PosX[] & PosY[]
-      pointsX.sort(function (a, b) {return a - b});
-      pointsY.sort(function (a, b) {return a - b});
+      getShapeInfo();
 
-      // Get line width
-      function getLineWidth(){
-        var calX = pointsX[1]-pointsX[0];
-        var calY = pointsY[1]-pointsY[0];
-        var width = Math.floor( Math.pow((calX *calX + calY * calY), 0.5));
-        return width;
-      }
-      lineW = getLineWidth();
-      lineH = 1 ;
       // Greate the first component
       $(".identification").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
 
@@ -195,14 +214,34 @@ window.Ashley = {
 
     }
 
-    $(".js_pointsX").text(pointsX);
-    $(".js_pointsY").text(pointsY);
+    // Draw popview editor elements  ====================================================================
+    function APopRectangle(){
+      console.log("APopRectangle, selectedType =" + selectedType);
+    }
+    function APopLine(){
+      console.log("APopLine, selectedType =" + selectedType);
+      switch (selectedType) {
+        case "Custom pop view":
+          createElements_popCustom();
+          break;
+        case "Action sheet":
+          createElements_popAS();
+          break;
+        case "Alert":
+          createElements_popA();
+          break;
+        case "Picker":
+          createElements_popP();
+          break;
+        default:
+      }
+    }
 
 
 
   },
   requestCallback : function (requestObject){
-    console.log(requestObject)
+    // console.log(requestObject)
   }
 }
 
@@ -227,9 +266,10 @@ $(document).on("click",".js_confirmType",function(){
     if( indexP != 5 ){
       // remove the old element
       $("[xkID='"+ currentID +"']").remove();
+
       // add a new selected element
       var elementType = $( "input:checked" ).val();
-      console.log("elementType=" + elementType );
+
       switch (elementType) {
           case 'Image':
             addImage();
@@ -314,9 +354,6 @@ $(document).on("click",".js_confirmType",function(){
 
 });
 // Popup =============================================================================
-
-
-
 
 $(document).on("click",".js_funcPop",function(){
   // Open popup view Down the true elements layer of basic & up the myScript canvas.

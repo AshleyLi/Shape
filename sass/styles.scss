@@ -243,6 +243,7 @@ a, a:active, a:visited{ color:$xkGreen;}
 		display: block;
 		padding: 0px;
 		li{
+			cursor: pointer;
 			border: 2px solid white;
 			padding: 7px;
 			color:$lightGrey;
@@ -273,6 +274,15 @@ a, a:active, a:visited{ color:$xkGreen;}
 }
 .modal{
 	width: 200px;
-	margin-left: -100px;
+	margin: 0px;
+	left: auto;
+	top: auto;
 
 }
+.modal-title{
+	font-size: 16px;
+
+}
+.modal-title+.modal-text{ font-size: 12px;}
+.modal-buttons{ height: 36px;}
+.modal-button{font-size: 12px;height: 36px; line-height: 36px;}

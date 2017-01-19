@@ -1,6 +1,7 @@
+var popEditor = false;
+var selectedType;
+
 $( document ).ready(function() {
-
-
   //1-1. Show and close popview type list
   $( ".js_funcPop" ).mouseover(function() {
     // show a popview type list
@@ -20,10 +21,12 @@ $( document ).ready(function() {
 
   // 2-1. Get the selected popview type.
   $(".popviewTypeList > li").mousedown(function(){
+    popEditor = true ;
+    console.log("popEditor = " + popEditor);
     $(".popview > div.modal.modal-in").css( "display", "none" );
-    var selectedType = $(this).children("img").attr("alt");
+    selectedType = $(this).children("img").attr("alt");
 
-  // 2-2. Open the popview.
+    // 2-2. Open the popview.
     switch (selectedType) {
       case "Custom pop view":
         popCustomPopview();
@@ -40,34 +43,47 @@ $( document ).ready(function() {
       default:
     }
     openPopview();
-  // 3. Open the popview.
-  function openPopview(){
-    $(".popview").css({
-      "display" : "initial",
-      "width":MCScreenW+ "px",
-      "height": MCScreenH + 2 +"px",
-      "left": $(window).width()/2 - MCScreenW/2+"px",
-      "top": $(".ooo-section").height()/2 - MCScreenH/2 -2 +"px"});
-    $(".closePopviewEdior").css("display","initial");
-    $("#shape-input").css("z-index",400);
-  }
-  function popCustomPopview(){
-    $("#pop-customPopView").css("display", "block");
-  }
-  function popActionSheet(){
-    $("#pop-actionSheet").css("display", "block");
-  }
-  function popAlert(){
-    $("#pop-alert").css("display", "block");
-  }
-  function popPicker(){
-    $("#pop-picker").css("display", "block");
-  }
+
+    // 3. Open the popview. +
+    // 4. Bring the myScript canvas to top.
+    function openPopview(){
+      $(".popview").css({
+        "display" : "initial",
+        "width":MCScreenW+ "px",
+        "height": MCScreenH + 2 +"px",
+        "left": $(window).width()/2 - MCScreenW/2+"px",
+        "top": $(".ooo-section").height()/2 - MCScreenH/2 -2 +"px"});
+      $(".closePopviewEdior").css("display","initial");
+
+
+      $("#shape-input").css("z-index",400);
+    }
+    function popCustomPopview(){
+      $("#pop-customPopView").css("display", "block");
+    }
+    function popActionSheet(){
+      $("#pop-actionSheet").css("display", "block");
+    }
+    function popAlert(){
+      $("#pop-alert").css("display", "block");
+      console.log("shapeName = " + shapeName);
+    }
+    function popPicker(){
+      $("#pop-picker").css("display", "block");
+    }
   });
 
-
-  // 4. Bring the myScript canvas to top.
   // 5. Recognizing a strok and convert to a real element.
+  // see the Ashley.js Popview editor
+  // Draw popview editor elements  ====================================================================
+  function APopRectangle(){
+    console.log("APopRectangle, selectedType =" + selectedType);
+  }
+  function APopLine(){
+    console.log("APopLine, selectedType =" + selectedType);
+  }
+
+
   // 6. Add a element to popview.
   // 7-1. Close the popview editor.
 
@@ -76,33 +92,10 @@ $( document ).ready(function() {
   $(".closePopviewEdior").mousedown(function() {
     $(".popview").css("display","none");
     $(this).css("display","none");
+    popEditor = false;
   });
 
 
 
 // end of this file
-});
-
-
-$(document).on("click",".js_funcPop",function(){
-
-  // show the popview background
-
-
-    // Recognizing the popview type ====================================================
-
-    // switch (shapeName) {
-    //   case 'rectangle':
-    //     ARectangle();
-    //     break;
-    //   case 'square':
-    //     ARectangle();
-    //     break;
-    //   case 'line':
-    //     ALine();
-    //     break;
-    //   default:
-    //     removeWrongShape();
-    //
-    // }
 });
