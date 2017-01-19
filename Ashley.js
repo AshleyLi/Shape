@@ -34,7 +34,7 @@ $( document ).ready(function() {
   unitH = screenH/10;
 
   $(".ooo-section").css({"height":$(window).height()-50});
-  console.log("$( window ).height() = " + $( window ).height());
+  // console.log("$( window ).height() = " + $( window ).height());
   // console.log("MCScreenW = " +MCScreenW+ "，MCScreenH＝" + MCScreenH);
 
 });

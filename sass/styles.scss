@@ -8,6 +8,12 @@ $borderGrey: #DDDEE0;
 $toolBackground: #F2F2F2;
 $toolSize: 40px;
 $toolColor: #9B9B9B;
+$xkDeepGrey: #53585F;
+$sysUIUnit: 50px;
+$z-sysControl:500;
+$z-toolBar:499;
+$z-element:300;
+$z-popview:400;
 
 .mgt50{ margin-top: 50px; overflow: visible;}
 a, a:active, a:visited{ color:$xkGreen;}
@@ -15,10 +21,10 @@ a, a:active, a:visited{ color:$xkGreen;}
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	z-index: 101;
+	z-index: $z-sysControl;
 	width: 100%;
 	.navigation{
-		height: 50px;
+		height: $sysUIUnit ;
 		background: rgba(255, 255, 255, 0.8);
 		width: 100%;
 		border-bottom: 1px solid $borderGrey;
@@ -28,8 +34,8 @@ a, a:active, a:visited{ color:$xkGreen;}
 			background-size:contain;
 			background-position: center;
 			background-color: $xkGreen;
-			width: 50px;
-			height: 50px;
+			width: $sysUIUnit;
+			height:$sysUIUnit;
 			float: left;
 			vertical-align: middle;
 			text-align: center;
@@ -57,11 +63,11 @@ a, a:active, a:visited{ color:$xkGreen;}
 }
 .toolbar{
 	position: absolute;
-	z-index: 100;
+	z-index: $z-toolBar;
 	left: 0px;
 	top:0px;
-	padding-top: 50px;
-	width: 50px;
+	padding-top: $sysUIUnit;
+	width: $sysUIUnit;
 	border-right: 1px solid $borderGrey;
 	background-color: $borderGrey;
 	height: 100%;
@@ -75,26 +81,29 @@ a, a:active, a:visited{ color:$xkGreen;}
 		vertical-align: middle;
 		line-height: $toolSize + 2;
 		color: $toolColor;
+	}
+	.focus{
+		> span{color:$xkGreen;}
 
 	}
-	li:hover{
-		span{
-			color:$xkGreen;
-		}
+	> li:hover{
+		// span{
+		// 	color:$xkGreen;
+		// }
 	}
-	li:active{
+	> li:active{
 		span{
 			color: darken($xkGreen, 20);
 		}
 	}
 
-	ul{
+	> ul{
 		list-style: none;
 		margin: 0px;
 		padding: 0px;
 		position:absolute;
 		width: 100%;
-		li{
+		> li{
 			width: 100%;
 			margin:10px 5px;
 
@@ -102,7 +111,7 @@ a, a:active, a:visited{ color:$xkGreen;}
 	}
 	.top{
 		top:60px;
-		li:first-child{
+		> li:first-child{
 			margin-top: 0px;
 		}
 	}
@@ -113,10 +122,6 @@ a, a:active, a:visited{ color:$xkGreen;}
 		}
 	}
 }
-
-
-
-
 /*	 Wrote by Ashley.*/
 .write-here{font-family: 'Architects Daughter', cursive;}
 .ooo-header {
@@ -157,18 +162,16 @@ a, a:active, a:visited{ color:$xkGreen;}
 	background-size: 280px;
 	background-repeat: no-repeat;
 	position: absolute;
-	top: 50px;
+	top: $sysUIUnit;
 	width: 100%;
 }
-
 // END of BASIC UI
-
 // INFOMATION AREA
 .showInfo2{
 	display: block;
 	padding:10px;
 	position: absolute;
-	z-index: 100;
+	z-index: 0;
 	left: 60px;
 	top:60px;
 	min-width: 200px;
@@ -187,14 +190,13 @@ a, a:active, a:visited{ color:$xkGreen;}
 	right:20px;
 	left: auto;
 }
-
 .js_suggestions{
 	min-width: 200px;
 }
 .identification{
 	width: 100%;
 	height:1px;
-	z-index: 1000;
+	z-index: $z-element;
 	position: absolute;
 
 	top:50px;
@@ -207,18 +209,67 @@ a, a:active, a:visited{ color:$xkGreen;}
 		border:1px solid rgba(80, 227, 149, 1);
 	}
 }
-
 .popview{
 	position: absolute;
-	z-index: 100;
+	z-index: $z-popview;
 	min-width: 100px;
 	min-height: 100px;
 	background-color: rgba(0, 0, 0, 0.5);
 }
+.bootstrap-iso .closePopviewEdior{
+	color:white;
+	background-color: $xkDeepGrey;
+	position: absolute;
+	left: 0px;
+	top:0px;
+	z-index: $z-sysControl;
+	width: $sysUIUnit ;
+	height: $sysUIUnit ;
+	> span{
+		line-height: 50px;
+		display: block;
+		text-align: center;
+	}
+}
+.bootstrap-iso .popover{max-width:none;}
+#js_popviewType{
+	left: 45px;
+	top:-6px;
+	z-index: $z-popview;
+	overflow: hidden;
+	opacity: 1;
+	ul.popviewTypeList{
+		float: left;
+		display: block;
+		padding: 0px;
+		li{
+			border: 2px solid white;
+			padding: 7px;
+			color:$lightGrey;
+			display: inline-block;
+			float: left;
+			width: auto;
+			height: 160px;
+			margin-bottom: 10px;
+			img{ width: 150px;}
+			span{width: 150px;  margin: 8px 0 20px; text-align: center; display: block;}
+		}
+		li:hover{
+			border: 2px solid$xkGreen;
+			span{
+				color: $xkGreen
+			}
+		}
+		li.focus{ border: 1px solid $xkGreen; }
+		li:active{ background-color: #FFFDE1;}
+	}
+}
+
 // <!-- framework7 -->
 .popover{
 	opacity: 1;
 	width: auto;
+	max-width:none;
 }
 .modal{
 	width: 200px;
