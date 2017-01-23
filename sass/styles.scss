@@ -286,3 +286,15 @@ a, a:active, a:visited{ color:$xkGreen;}
 .modal-title+.modal-text{ font-size: 12px;}
 .modal-buttons{ height: 36px;}
 .modal-button{font-size: 12px;height: 36px; line-height: 36px;}
+
+.modal-buttons{
+	border-bottom: 1px solid #b5b5b5;
+	.modal-button:first-child:last-child {border-radius: 0px;}
+
+}
+.modal-buttons:last-child {
+	border-bottom:none;
+	.modal-button:first-child:last-child{
+		border-radius: 0 0 7px 7px;
+	}
+}

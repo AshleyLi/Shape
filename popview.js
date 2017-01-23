@@ -1,5 +1,4 @@
-var popEditor = false;
-var selectedType;
+
 
 $( document ).ready(function() {
   //1-1. Show and close popview type list
@@ -22,26 +21,11 @@ $( document ).ready(function() {
   // 2-1. Get the selected popview type.
   $(".popviewTypeList > li").mousedown(function(){
     popEditor = true ;
-    console.log("popEditor = " + popEditor);
     $(".popview > div.modal.modal-in").css( "display", "none" );
     selectedType = $(this).children("img").attr("alt");
-
+    console.log("popEditor =  " + popEditor + ", selectedType = " + selectedType);
     // 2-2. Open the popview.
-    switch (selectedType) {
-      case "Custom pop view":
-        popCustomPopview();
-        break;
-      case "Action sheet":
-        popActionSheet();
-        break;
-      case "Alert":
-        popAlert();
-        break;
-      case "Picker":
-        popPicker();
-        break;
-      default:
-    }
+
     openPopview();
 
     // 3. Open the popview. +
@@ -57,31 +41,22 @@ $( document ).ready(function() {
 
 
       $("#shape-input").css("z-index",400);
+      
+      // Set popCanvas position
+      if(selectedType == "Alert"){
+        $("#pop-alert").css({
+          "display":"block",
+          "left": $(".popview").width()/2 - $("#pop-alert").width()/2 ,
+          "top": $(".popview").height()/2 - $("#pop-alert").height()/2
+        });
+      }
     }
-    function popCustomPopview(){
-      $("#pop-customPopView").css("display", "block");
-    }
-    function popActionSheet(){
-      $("#pop-actionSheet").css("display", "block");
-    }
-    function popAlert(){
-      $("#pop-alert").css("display", "block");
-      console.log("shapeName = " + shapeName);
-    }
-    function popPicker(){
-      $("#pop-picker").css("display", "block");
-    }
+
   });
 
   // 5. Recognizing a strok and convert to a real element.
   // see the Ashley.js Popview editor
-  // Draw popview editor elements  ====================================================================
-  function APopRectangle(){
-    console.log("APopRectangle, selectedType =" + selectedType);
-  }
-  function APopLine(){
-    console.log("APopLine, selectedType =" + selectedType);
-  }
+
 
 
   // 6. Add a element to popview.

@@ -24,11 +24,13 @@ var totalScore = 0;
 var popSuggestionsX, popSuggestionsY ;
 var xkID, currentID;
 
+var popEditor = false;
+var selectedType;
+
 
 
 
 // Basic settings =============================================================================
-
 $( document ).ready(function() {
   screenH = MCScreenH;
   unitH = screenH/10;
@@ -39,16 +41,13 @@ $( document ).ready(function() {
 
 });
 
-// $(document).on("click",".js_funcPop ",function(){
-//   $(".popview").css({"display" : "initial","width":MCScreenW+ "px","height": MCScreenH + 1+"px","left": $(window).width()/2 - MCScreenW/2+"px", "top": $(".ooo-section").height()/2 - MCScreenH/2 -2 +"px" });
-// });
 
 // Get shape =============================================================================
 window.Ashley = {
   responseCallback : function (responseObject){
 
     // Print shape object ===============DON'T TOUCH!!===============
-    // console.log(responseObject)
+    console.log(responseObject)
 
     // Get the length of shape segments[]
     segmentsLength = responseObject.result.segments.length;
@@ -64,32 +63,9 @@ window.Ashley = {
     // Give a id to the following element
     currentID = Date.now();
 
-    // Recognizing the shape====================================================
-    if( popEditor == false){
-      switch (shapeName) {
-        case 'rectangle':
-          ARectangle();
-          break;
-        case 'square':
-          ARectangle();
-          break;
-        case 'line':
-          ALine();
-          break;
-        default:
-          removeWrongShape();
-      }
-    }else{
-      switch (shapeName) {
-        case 'rectangle':
-          APopRectangle();
-          break;
-        case 'line':
-          APopLine();
-          break;
-        default:
-          removeWrongShape();
-      }
+    // Clear canvas.
+    function clearCanvas(){
+      $("paper-fab[icon='delete']").trigger("click");
     }
 
     // Get shape information
@@ -135,12 +111,49 @@ window.Ashley = {
         }
         lineW = getLineWidth();
         lineH = 1 ;
+        $(".js_shapeW").text(lineW);
+        $(".js_shapeH").text(lineH);
       }else {
         removeWrongShape();
       }
       // Show shape information ====================================================================
       $(".js_pointsX").text(pointsX);
       $(".js_pointsY").text(pointsY);
+
+    }
+    // Recognizing the shape====================================================
+    getShapeInfo();
+    if(popEditor == false){
+      switch (shapeName) {
+        case 'rectangle':
+          ARectangle();
+          break;
+        case 'square':
+          ARectangle();
+          break;
+        case 'line':
+          ALine();
+          break;
+        default:
+          removeWrongShape();
+      }
+    }else{
+      var popviewCanvas = $(".popview").position();
+      switch (selectedType) {
+        case "Custom pop view":
+          popCustomPopview();
+          break;
+        case "Action sheet":
+          popActionSheet();
+          break;
+        case "Alert":
+          popAlert();
+          break;
+        case "Picker":
+          popPicker();
+          break;
+        default:
+      }
     }
 
     // Remove the wrong shape ==================================================
@@ -152,7 +165,7 @@ window.Ashley = {
 
     // Show rectangle suggestion ===============================================================
     function ARectangle() {
-      getShapeInfo();
+
       if(rectW >= rectH){
         if(rectH > unitH){
           // add an image & set a current elementID
@@ -196,7 +209,6 @@ window.Ashley = {
 
     // Show Line suggestion ====================================================================
     function ALine() {
-      getShapeInfo();
 
       // Greate the first component
       $(".identification").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
@@ -209,39 +221,80 @@ window.Ashley = {
       $(".js_suggestions").css({"display":"initial","left": pointsX[1]+10 + "px","top": pointsY[0] + shift -$(".js_suggestions").height()/2 + "px"});
 
       // show the shape basic information
-      $(".js_shapeW").text(lineW);
-      $(".js_shapeH").text(lineH);
+
 
     }
 
     // Draw popview editor elements  ====================================================================
-    function APopRectangle(){
-      console.log("APopRectangle, selectedType =" + selectedType);
+    function popCustomPopview(){
+      $("#pop-customPopView").css("display", "block");
     }
-    function APopLine(){
-      console.log("APopLine, selectedType =" + selectedType);
-      switch (selectedType) {
-        case "Custom pop view":
-          createElements_popCustom();
-          break;
-        case "Action sheet":
-          createElements_popAS();
-          break;
-        case "Alert":
-          createElements_popA();
-          break;
-        case "Picker":
-          createElements_popP();
-          break;
-        default:
+    function popActionSheet(){
+      $("#pop-actionSheet").css("display", "block");
+    }
+    function popAlert(){
+      var popElement = $("#pop-alert").position();
+      var middleLine = $(".modal-buttons").position();
+      // 1.Sperate main areas
+      if( pointsY[0] >= popviewCanvas.top + popElement.top + middleLine.top){
+        // Bottom area ==========================
+        var bottomPopElement = popviewCanvas.top + popElement.top + $("#pop-alert").height();
+
+        if (pointsY[0] >= bottomPopElement ){
+          // 筆畫在.modal-buttons之下方
+          $("#pop-alert").append("<div class='modal-buttons'><span class='modal-button'>Button</span></div>");
+        }else {
+          // 筆畫在.modal-buttons之中
+          var buttonQty = $(".modal-buttons > .modal-button").length;
+          if( buttonQty == 1){
+            // 只有一個btn則在其旁增加btn
+            $(".modal-buttons").append("<span class='modal-button'>Button</span>");
+            console.log("在左邊新增");
+          }else if (buttonQty == 2) {
+            $(".modal-buttons").remove();
+            for( i=0 ; i < buttonQty+1 ; i++ ){
+              $("#pop-alert").append("<div class='modal-buttons'><span class='modal-button'>Button</span></div>");
+            }
+          }else {
+            $("#pop-alert").append("<div class='modal-buttons'><span class='modal-button'>Button</span></div>");
+          }
+        }
+
+
+        // 如果筆畫位置 > middleLine.top + $(".modal-buttons").height()
+
+      }else {
+        // Top area ==========================
+        if(shapeName == "line"){
+          // Opne the modal sub title
+          $(".modal-text").css("display","initial");
+          console.log(" (Top area && line) = text");
+        }else if (shapeName == "rectangle" || shapeName == "square" ){
+          // Opne the modal text input
+          $(".modal-text-input").css("display","initial");
+          console.log("(Top area && rectangle or square) = textInput");
+        }else{
+          console.log("No shape.");
+        }
       }
+      // Resize alert after func add a new element.
+       $("#pop-alert").css({
+        "display":"block",
+        "left": $(".popview").width()/2 - $("#pop-alert").width()/2 ,
+        "top": $(".popview").height()/2 - $("#pop-alert").height()/2
+      });
+      clearCanvas();
     }
+    function popPicker(){
+      $("#pop-picker").css("display", "block");
+    }
+
 
 
 
   },
   requestCallback : function (requestObject){
-    // console.log(requestObject)
+    console.log(requestObject)
   }
 }
 
@@ -256,7 +309,7 @@ $(document).on("click",".js_confirmType",function(){
     $("paper-fab[icon='delete']").trigger("click");
 
     // Show the counting result
-    $(".js_showCount").css({"display":"initial"});
+    $(".js_showCount").css("display","initial");
 
     // Get and show the selected value and show
     var indexP = parseInt($( "input:checked" ).attr("indexP"));
@@ -361,7 +414,5 @@ $(document).on("click",".js_funcPop",function(){
 
   // Down the true elements layer of basic & up the myScript canvas.
   // The z-index of layers: 1.toolbar > 2.myScript camvas > 3.popup view > 4.mask > 5.basic elements
-
-
 
 });
