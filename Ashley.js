@@ -63,7 +63,7 @@ window.Ashley = {
     // Give a id to the following element
     currentID = Date.now();
 
-    // Clear canvas.
+    // Clear the myScript canvas.
     function clearCanvas(){
       $("paper-fab[icon='delete']").trigger("click");
     }
@@ -158,7 +158,7 @@ window.Ashley = {
 
     // Remove the wrong shape ==================================================
     function removeWrongShape(){
-      $("paper-fab[icon='delete']").trigger("click");
+      clearCanvas();
       shapeQty--;
       $(".js_ShapeQty").text(Math.round(shapeQty));
     }
@@ -225,12 +225,14 @@ window.Ashley = {
 
     }
 
-    // Draw popview editor elements  ====================================================================
+    // Draw popview elements  ====================================================================
     function popCustomPopview(){
       $("#pop-customPopView").css("display", "block");
     }
     function popActionSheet(){
-      $("#pop-actionSheet").css("display", "block");
+      $("div#pop-actionSheet").css("display", "block");
+      var popElement = $("#pop-actionSheet").position();
+      var middleLine = $(".modal-buttons").position();
     }
     function popAlert(){
       var popElement = $("#pop-alert").position();

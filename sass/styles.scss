@@ -271,30 +271,52 @@ a, a:active, a:visited{ color:$xkGreen;}
 	opacity: 1;
 	width: auto;
 	max-width:none;
-}
-.modal{
-	width: 200px;
-	margin: 0px;
-	left: auto;
-	top: auto;
-
-}
-.modal-title{
-	font-size: 16px;
-
-}
-.modal-title+.modal-text{ font-size: 12px;}
-.modal-buttons{ height: 36px;}
-.modal-button{font-size: 12px;height: 36px; line-height: 36px;}
-
-.modal-buttons{
-	border-bottom: 1px solid #b5b5b5;
-	.modal-button:first-child:last-child {border-radius: 0px;}
-
-}
-.modal-buttons:last-child {
-	border-bottom:none;
-	.modal-button:first-child:last-child{
-		border-radius: 0 0 7px 7px;
+	.modal{
+		left: auto;
+		top: auto;
+		font-size: 12px;
 	}
+	.modal-button{font-size: 12px;height: 36px; line-height: 36px;}
+}
+
+
+#pop-alert{
+	.modal{
+		width: 200px;
+		margin: 0px;
+	}
+	.modal-title{
+		font-size: 16px;
+
+	}
+	.modal-title+.modal-text{ font-size: 12px;}
+	.modal-buttons{ height: 36px;}
+
+
+	.modal-buttons{
+		border-bottom: 1px solid #b5b5b5;
+		.modal-button:first-child:last-child {border-radius: 0px;}
+
+	}
+	.modal-buttons:last-child {
+		border-bottom:none;
+		.modal-button:first-child:last-child{
+			border-radius: 0 0 7px 7px;
+		}
+	}
+}
+#pop-actionSheet{
+	&.modal{
+		width:100%;
+		left: auto;
+		margin-left: auto;
+		bottom: 0px;
+	}
+	.actions-modal-button{font-size: 14px;}
+}
+#pop-customPopView{
+		border-radius: 4px;
+		background-color: white;
+		min-height: 100px;
+		position: absolute;
 }

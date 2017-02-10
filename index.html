@@ -26,6 +26,8 @@
   <!-- /bootstrap -->
   <!-- framework7 -->
   <link rel="stylesheet" href="css/framework7.min.css">
+  <link rel="stylesheet" href="css/framework7.ios.min.css">
+  <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
   <!-- /framework7 -->
 
   <link type="text/css" rel="stylesheet" href="./files/css.css">
@@ -107,29 +109,7 @@
         <li class="func"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></li>
       </ul>
     </div>
-    <!-- <div id="description" class="ooo-overlay">
-      <div class="ooo-popup">
-        <h2>Tesing
-          <span>Rect testing</span>
-        </h2>
-        <a class="close" href="https://webdemo.myscript.com/views/shape.html#">×</a>
-        <div class="content">
-          Sketch lines, circles, rectangles and other shapes and get clean, vectorized shapes.
-        </div>
-        <iron-image class="shape x-scope iron-image-0" sizing="contain" preload="" fade="" alt="Shape capture">
 
-
-          <div id="sizedImgDiv" role="img" class="style-scope iron-image" aria-label="Shape capture" style="background-size: contain; background-position: center center; background-repeat: no-repeat;"></div>
-          <img id="img" class="style-scope iron-image" alt="Shape capture" hidden="">
-          <div id="placeholder" class="style-scope iron-image" style="background-size: contain; background-position: center center; background-repeat: no-repeat;"></div>
-        </iron-image>
-      </div>
-    </div> -->
-    <!-- <header class="ooo-header">
-      <a id="index-header-link" class="ooo-link-back" href="https://webdemo.myscript.com/index.html"></a>
-      <h1 class="ooo-shape">Component suggestions</h1>
-      <a id="info-header-link" class="ooo-link-info" href="https://webdemo.myscript.com/views/shape.html#description"></a>
-    </header> -->
     <!--========================= INFOMATION AREA =========================-->
 
     <!-- Basic shape information -->
@@ -332,26 +312,60 @@
             <span class="modal-button">Button</span>
           </div>
         </div>
-        <!-- /pop-alert -->
+
         <!-- 2:pop-actionSheet -->
         <div id="pop-actionSheet" class="modal modal-in" style="display:none;">
-          <div class="modal-inner">
-            <div class="modal-title">actionSheet</div>
+          <div class="actions-modal modal-in">
+            <div class="actions-modal-group">
+              <div class="actions-modal-label">Do something</div>
+              <div class="actions-modal-button">Button</div>
+              <div class="actions-modal-button">Button</div>
+            </div>
+            <div class="actions-modal-group">
+              <div class="actions-modal-button color-red">Cancel</div>
+            </div>
           </div>
         </div>
-        <!-- /pop-actionSheet -->
+
         <!-- 3:pop-customPopView -->
-        <div id="pop-customPopView" class="modal modal-in" style="display:none;">
-          <div class="modal-inner">
-            <div class="modal-title">Custom Pop View</div>
-          </div>
+        <div id="pop-customPopView" style="display:none;">
+            <span>Draw somthing to add a element to this view.</span>
         </div>
-        <!-- /pop-customPopView -->
+
         <!-- 4:pop-picker -->
-        <div id="pop-picker" class="modal modal-in" style="display:none;">
-          <div class="modal-inner">
-            <div class="modal-title">Picker</div>
+        <div id="pop-picker" style="display:none;">
+          <!-- Views:framework7.picker-->
+          <div class="views">
+            <!-- Your main view, should have "view-main" class-->
+            <div class="view view-main">
+              <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+              <div class="pages navbar-through toolbar-through">
+                <!-- Page, data-page contains page name-->
+                <div data-page="index" class="page">
+                  <!-- Scrollable page content-->
+                  <div class="page-content">
+                    <!-- PICKER ================================================================================ -->
+                    <div class="content-block-title">Custom toolbar</div>
+                    <div class="list-block">
+                     <ul>
+                       <li>
+                         <div class="item-content">
+                           <div class="item-inner">
+                             <div class="item-input">
+                               <input type="text" placeholder="Describe yourself" readonly id="picker-custom-toolbar">
+                             </div>
+                           </div>
+                         </div>
+                       </li>
+                     </ul>
+                    </div>
+                    <!-- /PICKER ================================================================================ -->
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          <!-- /Views:framework7.picker-->
         </div>
         <!-- /pop-picker -->
       </div>
@@ -420,17 +434,7 @@
         </paper-toast>
       </myscript-common-element>
     </section>
-    <!-- <footer class="ooo-footer">
-            <a id="myscript-footer-link" href="http://www.myscript.com/" target="_blank" title="MyScript">
-            Copyright © MyScript® All Rights Reserved
-        </a>
-            <a id="legal-footer-link" href="http://www.myscript.com/legal-notice/" target="_blank" title="Legal notice">
-            Legal notice
-        </a>
-            <a id="dev-portal-link" href="http://dev.myscript.com/" target="_blank" title="Developer portal">
-            Try our API
-        </a>
-        </footer> -->
+
   </div>
   <div class="overlay" style="display: none;">
     <div class="loader"></div>
@@ -442,6 +446,11 @@
     <div class="style-scope iron-a11y-announcer" aria-live="polite"></div>
   </iron-a11y-announcer>
 
+
+  <!-- Path to Framework7 Library JS-->
+  <script type="text/javascript" src="javascripts/js/framework7.min.js"></script>
+  <!-- Path to your app js-->
+  <script type="text/javascript" src="javascripts/js/my-app.js"></script>
 </body>
 
 </html>

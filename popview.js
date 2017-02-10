@@ -23,7 +23,7 @@ $( document ).ready(function() {
     popEditor = true ;
     $(".popview > div.modal.modal-in").css( "display", "none" );
     selectedType = $(this).children("img").attr("alt");
-    console.log("popEditor =  " + popEditor + ", selectedType = " + selectedType);
+    console.log("popEditor = open, " + "you choosed [" + selectedType+ "]");
     // 2-2. Open the popview.
 
     openPopview();
@@ -40,8 +40,8 @@ $( document ).ready(function() {
       $(".closePopviewEdior").css("display","initial");
 
 
-      $("#shape-input").css("z-index",400);
-      
+      // $("#shape-input").css("z-index",400);
+
       // Set popCanvas position
       if(selectedType == "Alert"){
         $("#pop-alert").css({
@@ -50,6 +50,29 @@ $( document ).ready(function() {
           "top": $(".popview").height()/2 - $("#pop-alert").height()/2
         });
       }
+      else if (selectedType == "Action sheet") {
+        $("#pop-actionSheet").css({
+          "display":"block",
+          "bottom":0
+        })
+      }
+      else if (selectedType == "Custom pop view") {
+        $("#pop-customPopView").css( "width", $(".popview").width()*0.8);
+        $("#pop-customPopView").css({
+          "padding" : 8,
+          "display":"block",
+          "left": $(".popview").width()/2 - $("#pop-customPopView").width()/2 ,
+          "top": $(".popview").height()/2 - $("#pop-customPopView").height()/2
+        })
+      }
+      else {
+        // Picker
+        $("#pop-picker").css({
+          "display":"block",
+          "height": MCScreenH
+        })
+      }
+
     }
 
   });
@@ -69,6 +92,8 @@ $( document ).ready(function() {
     $(this).css("display","none");
     popEditor = false;
   });
+
+  // Reset the position of CustomPopview
 
 
 
