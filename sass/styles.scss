@@ -320,3 +320,19 @@ a, a:active, a:visited{ color:$xkGreen;}
 		min-height: 100px;
 		position: absolute;
 }
+#pop-picker{
+	.pages{
+		background-color: transparent;
+		.page{
+			background-color: transparent;
+		}
+	}
+}
+.picker-modal{
+	.toolbar{
+		height: auto;
+	}
+	.picker-item{
+		font-size: 16px;
+	}
+}

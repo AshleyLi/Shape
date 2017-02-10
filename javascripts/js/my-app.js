@@ -9,7 +9,7 @@ var mainView = myApp.addView('.view-main', {
     // Because we use fixed-through navbar we can enable dynamic navbar
     dynamicNavbar: true
 });
-// 
+//
 // // Callbacks to run specific code for specific pages, for example for About page:
 // myApp.onPageInit('about', function (page) {
 //     // run createContentPage func after link was clicked
@@ -58,7 +58,7 @@ var pickerCustomToolbar = myApp.picker({
                     '<a href="#" class="link toolbar-randomize-link">Randomize</a>' +
                 '</div>' +
                 '<div class="right">' +
-                    '<a href="#" class="link close-picker">That\'s me</a>' +
+                    '<a href="#" class="link close-picker">OK</a>' +
                 '</div>' +
             '</div>' +
         '</div>',
