@@ -39,7 +39,7 @@ $( document ).ready(function() {
         "top": $(".ooo-section").height()/2 - MCScreenH/2 -2 +"px"});
       $(".closePopviewEdior").css("display","initial");
 
-
+      // Bring the drawing canvas to top layer.
       // $("#shape-input").css("z-index",400);
 
       // Set popCanvas position
