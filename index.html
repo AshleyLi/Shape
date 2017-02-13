@@ -317,7 +317,7 @@
         <div id="pop-actionSheet" class="modal modal-in" style="display:none;">
           <div class="actions-modal modal-in">
             <div class="actions-modal-group">
-              <div class="actions-modal-label">Do something</div>
+              <!-- <div class="actions-modal-label">Do something</div> -->
               <div class="actions-modal-button">Button</div>
               <div class="actions-modal-button">Button</div>
             </div>
@@ -329,7 +329,7 @@
 
         <!-- 3:pop-customPopView -->
         <div id="pop-customPopView" style="display:none;">
-            <span>Draw somthing to add a element to this view.</span>
+            <span class="drawinPopview">Draw somthing to add a element to this view.</span>
         </div>
 
         <!-- 4:pop-picker -->
@@ -355,9 +355,12 @@
         <!-- /pop-picker -->
       </div>
       <!-- /popview -->
-      <div class="write-here">Draw a
-        <br/>rectangle
-        <span style="font-size:9px;padding:0px; margin:0px; -webkit-transform:scale(0.75); ">(only)</span>
+      <div class="write-here" >
+        Draw a
+        <br/>
+        <span>▢ </span>
+        or
+        <span>―</span>
         <br/>here</div>
       <!-- Declare a SHAPE WebComponent, with typeset=true to render the recognition result on the component -->
       <myscript-common-element id="shape-input" class="ooo-canvas-full" type="SHAPE" typeset="true" >

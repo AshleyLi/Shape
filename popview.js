@@ -31,6 +31,8 @@ $( document ).ready(function() {
     // 3. Open the popview. +
     // 4. Bring the myScript canvas to top.
     function openPopview(){
+      $(".write-here").css("display","none");
+      $(".popview > div").css("display","none");
       $(".popview").css({
         "display" : "initial",
         "width":MCScreenW+ "px",
@@ -40,7 +42,7 @@ $( document ).ready(function() {
       $(".closePopviewEdior").css("display","initial");
 
       // Bring the drawing canvas to top layer.
-      // $("#shape-input").css("z-index",400);
+      $("#shape-input").css("z-index",400);
 
       // Set popCanvas position
       if(selectedType == "Alert"){
@@ -53,15 +55,16 @@ $( document ).ready(function() {
       else if (selectedType == "Action sheet") {
         $("#pop-actionSheet").css({
           "display":"block",
-          "bottom":0
+          "top":0,
+          "width":MCScreenW+ "px",
+          "height": MCScreenH+"px",
         })
       }
       else if (selectedType == "Custom pop view") {
         $("#pop-customPopView").css( "width", $(".popview").width()*0.8);
         $("#pop-customPopView").css({
-          "padding" : 8,
           "display":"block",
-          "left": $(".popview").width()/2 - $("#pop-customPopView").width()/2 ,
+          "left": ($(".popview").width()- $("#pop-customPopView").width() )/2 ,
           "top": $(".popview").height()/2 - $("#pop-customPopView").height()/2
         })
       }

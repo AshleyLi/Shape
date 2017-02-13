@@ -123,7 +123,15 @@ a, a:active, a:visited{ color:$xkGreen;}
 	}
 }
 /*	 Wrote by Ashley.*/
-.write-here{font-family: 'Architects Daughter', cursive;}
+.write-here{
+	font-family: 'Architects Daughter', cursive;
+	line-height: 70px;
+	font-size: 26px;
+	margin: 55vh auto 0;
+	span{
+		font-size: 40px;
+	}
+}
 .ooo-header {
 	border: none;
 	bottom: 30px;
@@ -321,6 +329,12 @@ a, a:active, a:visited{ color:$xkGreen;}
 		background-color: white;
 		min-height: 100px;
 		position: absolute;
+		.drawinPopview{
+			margin:8px;
+			display:block;
+			color:grey;
+			font-family: 'Architects Daughter', cursive;
+		}
 }
 
 #pop-picker{
