@@ -33,7 +33,7 @@ var xShift, yShift;
 
 
 
-// Basic settings =============================================================================
+// Basic settings ==============================================================
 $( document ).ready(function() {
   screenH = MCScreenH;
   unitH = screenH/10;
@@ -45,7 +45,7 @@ $( document ).ready(function() {
 });
 
 
-// Get shape =============================================================================
+// Get shape ===================================================================
 window.Ashley = {
   responseCallback : function (responseObject){
 
@@ -56,8 +56,39 @@ window.Ashley = {
     segmentsLength = responseObject.result.segments.length;
     shapeQty++;
 
-    // Print basic shape information
-    shapeName = responseObject.result.segments[0].candidates[0].label;
+    // Tableview
+    console.log("length = " + responseObject.result.segments.length);
+    if(responseObject.result.segments.length >= 2 ){
+      var tableX = [], tableY = [];
+
+      for ( i = 0 ; i < 2; i++){
+          var x = Math.floor(responseObject.result.segments[i].candidates[0].primitives[0].firstPoint.x);
+          var y = Math.floor(responseObject.result.segments[i].candidates[0].primitives[0].firstPoint.y);
+          var xx = Math.floor(responseObject.result.segments[i].candidates[0].primitives[0].lastPoint.x);
+          var yy = Math.floor(responseObject.result.segments[i].candidates[0].primitives[0].lastPoint.y);
+          if( i >= 1){
+            tableX[i+1] = x;
+            tableX[i+2] = xx;
+            tableY[i+1] = y;
+            tableY[i+2] = yy;
+          }else{
+            tableX[i] = x;
+            tableX[i+1] = xx;
+            tableY[i] = y;
+            tableY[i+1] = yy;
+          }
+      }
+
+      console.log("tableX[]=" + tableX + ", tableY[]=" + tableY);
+      shapeName = "table" ;
+    }else{
+      // Print basic shape information
+      shapeName = responseObject.result.segments[0].candidates[0].label;
+    }
+
+
+
+
 
     $(".js_shapeName").text(shapeName);
     $(".js_ShapeQty").text(Math.round(shapeQty));
@@ -166,7 +197,7 @@ window.Ashley = {
       $(".js_ShapeQty").text(Math.round(shapeQty));
     }
 
-    // Show rectangle suggestion ===============================================================
+    // Show rectangle suggestion ===============================================
     function ARectangle() {
 
       if(rectW >= rectH){
@@ -210,7 +241,7 @@ window.Ashley = {
       idtagY = pointsY[0];
     }
 
-    // Show Line suggestion ====================================================================
+    // Show Line suggestion ====================================================
     function ALine() {
 
       // Greate the first component
@@ -228,8 +259,7 @@ window.Ashley = {
 
     }
 
-    // Draw popview elements  ====================================================================
-
+    // Draw popview elements  ==================================================
     function popCustomPopview(){
       // var pgggg = $("#pop-customPopView");
       var popCustomPopView = $("#pop-customPopView").position();
@@ -385,6 +415,8 @@ window.Ashley = {
     function popPicker(){
       $("#pop-picker").css("display", "block");
     }
+
+
   },
   requestCallback : function (requestObject){
     console.log(requestObject)
@@ -392,7 +424,7 @@ window.Ashley = {
 }
 
 
-//====================== AFTER CONFIRM =========================================
+// AFTER CONFIRM ===============================================================
 $(document).on("click",".js_confirmType",function(){
     // Close suggestions
     $('.popover-content > div').css({"display" : "none"});
@@ -409,7 +441,7 @@ $(document).on("click",".js_confirmType",function(){
     $(".score").append( "<li>#" + shapeQty + " —— " + indexP + "p</li>" )
 
     // 若選擇的項目!=推薦的第一項，則重新產生element取代
-    if( indexP != 5 ){
+    if( indexP != 5 && selectedType != "Custom pop view" ){
       // remove the old element
       $("[xkID='"+ currentID +"']").remove();
 
@@ -479,6 +511,75 @@ $(document).on("click",".js_confirmType",function(){
 
       }
 
+    }else if (indexP != 5 && selectedType == "Custom pop view") {
+      // remove the old element
+      $("[xkID='"+ currentID +"']").remove();
+
+      // add a new selected element
+      var elementType = $( "input:checked" ).val();
+
+      switch (elementType) {
+          case 'Image':
+            addImage();
+            break;
+          case 'Button':
+            addButton();
+            break;
+          case 'Shape':
+            addShape();
+            break;
+          case 'TextView':
+            addTextView();
+            break;
+          case 'TextField':
+            addTextField();
+            break;
+          case 'Text':
+            addText();
+            break;
+          case 'Line':
+            addLine();
+            break;
+
+        default:
+
+      }
+      function addImage(){
+        $("#pop-customPopView").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; '>");
+      }
+      function addButton(){
+        if( shapeName == 'rectangle' && rectH >= 23  ){
+          $("#pop-customPopView").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:"+ xShift +"px;top:"+ yShift + "px;'>button</button>");
+        }else if( shapeName == 'rectangle' && rectH < 23){
+          $("#pop-customPopView").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height: 23px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute;'>button</button>");
+        }else{
+          $("#pop-customPopView").append("<button type='button' xkID='"+ currentID + "' style='width:"+ lineW +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute;'>button</button>");
+        }
+      }
+      function addShape(){
+        $("#pop-customPopView").append("<div xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; background-color:#ccc;'>");
+      }
+      function addTextView(){
+        $("#pop-customPopView").append("<div xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute;overflow:hidden;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</div>");
+      }
+      function addTextField(){
+        // 判斷高度以區別是否為多行。一行的高度單位為20px
+        if(rectH <= 40){
+          $("#pop-customPopView").append("<input type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; border:1px solid lightgrey;' placeholder='Type somthing...'>");
+        }else {
+          var rows = Math.round(rectH/20) ;
+          console.log("rows = " + rows);
+          $("#pop-customPopView").append("<textarea type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; border:1px solid lightgrey;' placeholder='Type somthing...'></textarea>");
+        }
+      }
+      function addText(){
+        $("#pop-customPopView").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
+      }
+      function addLine(){
+        $("#pop-customPopView").append("<hr xkID='" + currentID + "' style='width:"+ lineW +"px;height:" + lineH + "px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; background-color:lightgrey; margin:0px; padding:0px;'>");
+      }
+    }else {
+
     }
 
     //Add a identification label to the shape===================================
@@ -499,7 +600,9 @@ $(document).on("click",".js_confirmType",function(){
     $(".js_percentage").text(percentage + "%");
 
 });
-// Popup =============================================================================
+
+
+// Popup =======================================================================
 
 $(document).on("click",".js_funcPop",function(){
   // Open popup view Down the true elements layer of basic & up the myScript canvas.
