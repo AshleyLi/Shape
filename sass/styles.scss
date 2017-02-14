@@ -360,3 +360,9 @@ a, a:active, a:visited{ color:$xkGreen;}
 	}
 	.picker-item{font-size: 17px;}
 }
+#tableview{
+	position: absolute;
+	background-color: $borderGrey;
+	border: 1px solid #c8c7cc;
+
+}

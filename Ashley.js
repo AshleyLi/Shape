@@ -30,6 +30,8 @@ var selectedType;
 var ASTitle = false;
 var xShift, yShift;
 
+var tableviewMode = false, repeatCellMode = false;
+
 
 
 
@@ -56,11 +58,10 @@ window.Ashley = {
     segmentsLength = responseObject.result.segments.length;
     shapeQty++;
 
-    // Tableview
-    console.log("length = " + responseObject.result.segments.length);
+    // if the shape == Tableview or not
     if(responseObject.result.segments.length >= 2 ){
       var tableX = [], tableY = [];
-
+      var tolerance = 50;
       for ( i = 0 ; i < 2; i++){
           var x = Math.floor(responseObject.result.segments[i].candidates[0].primitives[0].firstPoint.x);
           var y = Math.floor(responseObject.result.segments[i].candidates[0].primitives[0].firstPoint.y);
@@ -78,16 +79,16 @@ window.Ashley = {
             tableY[i+1] = yy;
           }
       }
-
-      console.log("tableX[]=" + tableX + ", tableY[]=" + tableY);
-      shapeName = "table" ;
+      if (tableX[0] < tableX[2] < tableX[1] && tableX[0] < tableX[3] < tableX[1] && (tableY[0]+tableY[1])/2-tolerance < tableY[2] < (tableY[0]+tableY[1])/2+tolerance) {
+        // Set the Tableview properties
+        pointsX = tableX;
+        pointsY = tableY;
+        shapeName = "table" ;
+        console.log("shapeName = " + shapeName);
+      }
     }else{
-      // Print basic shape information
       shapeName = responseObject.result.segments[0].candidates[0].label;
     }
-
-
-
 
 
     $(".js_shapeName").text(shapeName);
@@ -168,6 +169,9 @@ window.Ashley = {
         case 'line':
           ALine();
           break;
+        case 'table':
+          ATableview();
+          break;
         default:
           removeWrongShape();
       }
@@ -195,6 +199,21 @@ window.Ashley = {
       clearCanvas();
       shapeQty--;
       $(".js_ShapeQty").text(Math.round(shapeQty));
+    }
+
+    // Tableview ===============================================================
+    // Create a tableview.
+    function ATableview(){
+      $("#tableview").css({
+        "display" : "initial",
+        "width":MCScreenW+ "px",
+        "height": MCScreenH + 2 +"px",
+        "left": $(window).width()/2 - MCScreenW/2+"px",
+        "top": $(".ooo-section").height()/2 - MCScreenH/2 -1+"px"});
+    }
+    // Add elements into cells.
+    function DrawingCell(){
+
     }
 
     // Show rectangle suggestion ===============================================
