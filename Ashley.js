@@ -79,12 +79,14 @@ window.Ashley = {
             tableY[i+1] = yy;
           }
       }
-      if (tableX[0] < tableX[2] < tableX[1] && tableX[0] < tableX[3] < tableX[1] && (tableY[0]+tableY[1])/2-tolerance < tableY[2] < (tableY[0]+tableY[1])/2+tolerance) {
+      if (tableX[0] < tableX[2] < tableX[1] && tableX[0] < tableX[3] < tableX[1] ) {
         // Set the Tableview properties
         pointsX = tableX;
         pointsY = tableY;
         shapeName = "table" ;
-        console.log("shapeName = " + shapeName);
+        console.log("線斷在裡面");
+      }else{
+        console.log("非內");
       }
     }else{
       shapeName = responseObject.result.segments[0].candidates[0].label;
