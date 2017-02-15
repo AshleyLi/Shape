@@ -90,6 +90,7 @@ window.Ashley = {
         basic - tolerance < tableY[2] &&
         tableY[2] < basic + tolerance
         ) {
+
         // Set the Tableview properties
         pointsX = tableX;
         pointsY = tableY;
