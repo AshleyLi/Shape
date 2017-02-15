@@ -25,12 +25,17 @@ var popSuggestionsX, popSuggestionsY ;
 var xkID, currentID;
 
 var popEditor = false;
+var popPosX , popPosY ;
 var selectedType;
 
 var ASTitle = false;
 var xShift, yShift;
 
+var tableiQty = 0;
 var tableviewMode = false, repeatCellMode = false;
+var tablePos;
+var tableX = [], tableY = []; // 形成t字兩線斷的 x and y
+var tolerance = 50; // T字判斷 線段偏離容許值
 
 
 
@@ -39,11 +44,9 @@ var tableviewMode = false, repeatCellMode = false;
 $( document ).ready(function() {
   screenH = MCScreenH;
   unitH = screenH/10;
-
   $(".ooo-section").css({"height":$(window).height()-50});
-  // console.log("$( window ).height() = " + $( window ).height());
-  //  console.log("MCScreenW = " +MCScreenW+ "，MCScreenH＝" + MCScreenH);
-
+  popPosX = $(window).width()/2 - MCScreenW/2;
+  popPosY = $(".ooo-section").height()/2 - MCScreenH/2 -2;
 });
 
 
@@ -55,13 +58,12 @@ window.Ashley = {
     console.log(responseObject)
 
     // Get the length of shape segments[]
-    segmentsLength = responseObject.result.segments.length;
+    var arrayShape = responseObject.result.segments;
+    segmentsLength = arrayShape.length;
     shapeQty++;
 
     // if the shape == Tableview or not
-    if(responseObject.result.segments.length >= 2 ){
-      var tableX = [], tableY = [];
-      var tolerance = 50;
+    if(segmentsLength >= 2 ){
       for ( i = 0 ; i < 2; i++){
           var x = Math.floor(responseObject.result.segments[i].candidates[0].primitives[0].firstPoint.x);
           var y = Math.floor(responseObject.result.segments[i].candidates[0].primitives[0].firstPoint.y);
@@ -79,14 +81,22 @@ window.Ashley = {
             tableY[i+1] = yy;
           }
       }
-      if (tableX[0] < tableX[2] < tableX[1] && tableX[0] < tableX[3] < tableX[1] ) {
+      var basic = (tableY[0]+tableY[1])/2;
+      if (
+        // 確定 line2.x 位於 line1.x 內
+        tableX[0] < tableX[2] && tableX[2] < tableX[1] &&
+        tableX[0] < tableX[3] && tableX[3] < tableX[1] &&
+        // 確定line2.top 位於 line1.y 的平均值內
+        basic - tolerance < tableY[2] &&
+        tableY[2] < basic + tolerance
+        ) {
         // Set the Tableview properties
         pointsX = tableX;
         pointsY = tableY;
+
         shapeName = "table" ;
-        console.log("線斷在裡面");
       }else{
-        console.log("非內");
+        clearCanvas();
       }
     }else{
       shapeName = responseObject.result.segments[0].candidates[0].label;
@@ -160,24 +170,29 @@ window.Ashley = {
     }
     // Recognizing the shape====================================================
     getShapeInfo();
-    if(popEditor == false){
+    if(
+      tableviewMode == true &&
+      popPosX < pointsX[0] &&
+      pointsX[0] < (popPosX + MCScreenW) && // 圖形在table.x範圍內
+      popPosY < pointsY[0] &&
+      pointsY[0] < $(".js_tableUl").height()
+    ){
+      console.log("Drawing on a tableview");
       switch (shapeName) {
         case 'rectangle':
-          ARectangle();
+          ACellRectangle();
           break;
         case 'square':
-          ARectangle();
+          ACellRectangle();
           break;
         case 'line':
-          ALine();
-          break;
-        case 'table':
-          ATableview();
+          ACellLine();
           break;
         default:
           removeWrongShape();
       }
-    }else{
+
+    }else if( popEditor == true){
       var popviewCanvas = $(".popview").position();
       switch (selectedType) {
         case "Custom pop view":
@@ -194,6 +209,23 @@ window.Ashley = {
           break;
         default:
       }
+    }else {
+      switch (shapeName) {
+        case 'rectangle':
+          ARectangle();
+          break;
+        case 'square':
+          ARectangle();
+          break;
+        case 'line':
+          ALine();
+          break;
+        case 'table':
+          ATableview();
+          break;
+        default:
+          removeWrongShape();
+      }
     }
 
     // Remove the wrong shape ==================================================
@@ -206,16 +238,36 @@ window.Ashley = {
     // Tableview ===============================================================
     // Create a tableview.
     function ATableview(){
-      $("#tableview").css({
-        "display" : "initial",
-        "width":MCScreenW+ "px",
-        "height": MCScreenH + 2 +"px",
-        "left": $(window).width()/2 - MCScreenW/2+"px",
-        "top": $(".ooo-section").height()/2 - MCScreenH/2 -1+"px"});
-    }
-    // Add elements into cells.
-    function DrawingCell(){
+      if(tableiQty != 1){
+        $("#tableview").css({
+          "display" : "initial",
+          "width":MCScreenW+ "px",
+          // "height": MCScreenH + 2 +"px",
+          "left": popPosX +"px"});
 
+        // 判斷tableview 是否會超出 iphone 螢幕範圍，若超過則放置於邊界處
+        if( tableY[0] < popPosY){
+          $("#tableview").css("top", popPosY);
+        }else if( tableY[0] > popPosY + MCScreenH){
+          $("#tableview").css("top", popPosY+MCScreenH- $(".js_tableUl").height() );
+        }else{
+          $("#tableview").css("top",tableY[0]);
+        }
+        // set #tableview position
+        tablePos = $("#tableview").position();
+        // 於tableview加入cell
+        for (var i = 0; i < 5; i++) {
+          $(".js_tableUl").append("<li class='item-content'><div class='item-inner'><div class='item-title'></div><div class='item-after'></div></div></li>");
+        }
+        tableiQty = 1;
+        tableviewMode = true;
+      }else{
+        console.log("表格已存在。");
+      }
+    }
+    // drawing a rect on a cell.
+    function ACellRectangle(){
+      console.log("列表上的矩形");
     }
 
     // Show rectangle suggestion ===============================================

@@ -31,14 +31,15 @@ $( document ).ready(function() {
     // 3. Open the popview. +
     // 4. Bring the myScript canvas to top.
     function openPopview(){
+
       $(".write-here").css("display","none");
       $(".popview > div").css("display","none");
       $(".popview").css({
         "display" : "initial",
         "width":MCScreenW+ "px",
         "height": MCScreenH + 2 +"px",
-        "left": $(window).width()/2 - MCScreenW/2+"px",
-        "top": $(".ooo-section").height()/2 - MCScreenH/2 -2 +"px"});
+        "left": popPosX +"px",
+        "top":  popPosY +"px"});
       $(".closePopviewEdior").css("display","initial");
 
       // Bring the drawing canvas to top layer.

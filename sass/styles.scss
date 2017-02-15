@@ -361,8 +361,14 @@ a, a:active, a:visited{ color:$xkGreen;}
 	.picker-item{font-size: 17px;}
 }
 #tableview{
+	.list-block{
+		margin: 0px;
+	}
+	.list-block ul{
+		border:none;
+	}
 	position: absolute;
-	background-color: $borderGrey;
+	// background-color: $borderGrey;
 	border: 1px solid #c8c7cc;
 	i.icon.icon-f7{
 		background-image: url("https://goo.gl/hSqM8y");
