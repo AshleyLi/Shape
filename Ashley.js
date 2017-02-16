@@ -36,6 +36,7 @@ var tableviewMode = false, repeatCellMode = false;
 var tablePos;
 var tableX = [], tableY = []; // 形成t字兩線斷的 x and y
 var tolerance = 50; // T字判斷 線段偏離容許值
+var cellMidline; // cell的中線x位置
 
 
 
@@ -45,8 +46,9 @@ $( document ).ready(function() {
   screenH = MCScreenH;
   unitH = screenH/10;
   $(".ooo-section").css({"height":$(window).height()-50});
-  popPosX = $(window).width()/2 - MCScreenW/2;
-  popPosY = $(".ooo-section").height()/2 - MCScreenH/2 -2;
+  popPosX = Math.floor($(window).width()/2 - MCScreenW/2);
+  popPosY = Math.floor($(".ooo-section").height()/2 - MCScreenH/2 -2);
+  cellMidline = popPosX + Math.floor(MCScreenW/2);
 });
 
 
@@ -83,22 +85,17 @@ window.Ashley = {
       }
       var basic = (tableY[0]+tableY[1])/2;
       if (
-        // 確定 line2.x 位於 line1.x 內
-        tableX[0] < tableX[2] && tableX[2] < tableX[1] &&
-        tableX[0] < tableX[3] && tableX[3] < tableX[1] &&
-        // 確定line2.top 位於 line1.y 的平均值內
-        basic - tolerance < tableY[2] &&
-        tableY[2] < basic + tolerance
+          // 確定 line2.x 位於 line1.x 內
+          tableX[0] < tableX[2] && tableX[2] < tableX[1] &&
+          tableX[0] < tableX[3] && tableX[3] < tableX[1] &&
+          // 確定line2.top 位於 line1.y 的平均值內
+          basic - tolerance < tableY[2] &&
+          tableY[2] < basic + tolerance
         ) {
-
-        // Set the Tableview properties
-        pointsX = tableX;
-        pointsY = tableY;
-
-        shapeName = "table" ;
-      }else{
-        clearCanvas();
-      }
+          shapeName = "table" ;
+        }else{
+          clearCanvas();
+        }
     }else{
       shapeName = responseObject.result.segments[0].candidates[0].label;
     }
@@ -171,13 +168,14 @@ window.Ashley = {
     }
     // Recognizing the shape====================================================
     getShapeInfo();
-    if(
-      tableviewMode == true &&
-      popPosX < pointsX[0] &&
-      pointsX[0] < (popPosX + MCScreenW) && // 圖形在table.x範圍內
-      popPosY < pointsY[0] &&
-      pointsY[0] < $(".js_tableUl").height()
+
+    if(tableviewMode == true &&
+      pointsY[0] > tablePos.top &&
+      pointsY[0] < tablePos.top + $("#tableview").height() &&
+      pointsX[0] > tablePos.left  &&
+      pointsX[0] < tablePos.left + $("#tableview").width()
     ){
+      // && tableY[0] < pointsY[0] && pointsY[0] < (tableY[0] + MCScreenH)
       console.log("Drawing on a tableview");
       switch (shapeName) {
         case 'rectangle':
@@ -192,8 +190,7 @@ window.Ashley = {
         default:
           removeWrongShape();
       }
-
-    }else if( popEditor == true){
+    }else if( popEditor == true ){
       var popviewCanvas = $(".popview").position();
       switch (selectedType) {
         case "Custom pop view":
@@ -258,7 +255,7 @@ window.Ashley = {
         tablePos = $("#tableview").position();
         // 於tableview加入cell
         for (var i = 0; i < 5; i++) {
-          $(".js_tableUl").append("<li class='item-content'><div class='item-inner'><div class='item-title'></div><div class='item-after'></div></div></li>");
+          $(".js_tableUl").append("<li class='item-content'><div class='item-inner'></div></li>");
         }
         tableiQty = 1;
         tableviewMode = true;
@@ -268,7 +265,34 @@ window.Ashley = {
     }
     // drawing a rect on a cell.
     function ACellRectangle(){
-      console.log("列表上的矩形");
+      if (pointsX[0] < cellMidline) {
+        // console.log("列表 左側的矩形");
+        if( $(".icon.icon-f7").length == 0 ){
+          $(".js_tableUl > .item-content").prepend("<div class='item-media'><i class='icon icon-f7'></i></div>");
+        }
+        clearCanvas();
+      } else {
+        console.log("列表 右側的矩形");
+        clearCanvas();
+      }
+
+    }
+    function ACellLine(){
+      if (pointsX[0] < cellMidline) {
+        console.log("列表 左側的線段");
+        if( $(".item-title").length == 0 ){
+          $(".js_tableUl > .item-content > .item-inner").append("<div class='item-title'>Item title</div>");
+        }else{
+          $(".js_tableUl > .item-content > .item-inner").append("<div class='item-title sub'>subtitle</div>");
+        }
+        clearCanvas();
+      } else {
+        // console.log("列表 右側的線段");
+        if( $(".item-after").length == 0 ){
+          $(".js_tableUl > .item-content > .item-inner").append("<div class='item-after'>Label</div>");
+        }
+        clearCanvas();
+      }
     }
 
     // Show rectangle suggestion ===============================================
