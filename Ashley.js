@@ -255,7 +255,7 @@ window.Ashley = {
         tablePos = $("#tableview").position();
         // 於tableview加入cell
         for (var i = 0; i < 5; i++) {
-          $(".js_tableUl").append("<li class='item-content'><div class='item-inner'></div></li>");
+          $(".js_tableUl").append("<li class='item-content'><div class='item-inner'><div class='item-title'></div></div></li>");
         }
         tableiQty = 1;
         tableviewMode = true;
@@ -272,18 +272,20 @@ window.Ashley = {
         }
         clearCanvas();
       } else {
-        console.log("列表 右側的矩形");
-        clearCanvas();
+        // console.log("列表 右側的矩形"); = 加上「 > 」
+        $(".item-content").addClass("item-link");
       }
-
+      clearCanvas();
     }
     function ACellLine(){
       if (pointsX[0] < cellMidline) {
-        console.log("列表 左側的線段");
-        if( $(".item-title").length == 0 ){
-          $(".js_tableUl > .item-content > .item-inner").append("<div class='item-title'>Item title</div>");
+        // console.log("列表 左側的線段");
+        if( $(".item-title").is(':empty') && $(".subforCell").length == 0 ){
+          $(".js_tableUl > .item-content > .item-inner > .item-title").append("Item title");
+        }else if( $(".item-title").length > 0 && $(".subforCell").length == 0){
+          $(".js_tableUl > .item-content > .item-inner > .item-title").append("<div class='subforCell'>subtitle</div>");
         }else{
-          $(".js_tableUl > .item-content > .item-inner").append("<div class='item-title sub'>subtitle</div>");
+          // Nothing 2 happen.
         }
         clearCanvas();
       } else {
