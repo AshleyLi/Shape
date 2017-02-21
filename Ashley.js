@@ -287,12 +287,18 @@ window.Ashley = {
         }else{
           // Nothing 2 happen.
         }
+
         clearCanvas();
       } else {
         // console.log("列表 右側的線段");
         if( $(".item-after").length == 0 ){
           $(".js_tableUl > .item-content > .item-inner").append("<div class='item-after'>Label</div>");
         }
+        $(".cell").css({
+          "display":"block",
+          "left": pointsX[1],
+          "top": pointsY[1]
+        });
         clearCanvas();
       }
     }

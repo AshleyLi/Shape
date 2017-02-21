@@ -376,5 +376,11 @@ a, a:active, a:visited{ color:$xkGreen;}
 	.subforCell{display: block; width: 100%;font-size: 12px;color: #bbb;}
 	.list-block .item-content{ padding-left: 10px;}
 	.list-block .item-media+.item-inner{margin-left: 5px;}
+	.list-block .item-link .item-inner{
+		padding-right: 35px;
+		background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2060%20120'%20xm…29.25-28.5-29.25-28.5%209.75-9.75z'%20fill%3D'%23c7c7cc'%2F%3E%3C%2Fsvg%3E);
+		background-size: 10px 20px;
+		background-repeat: no-repeat;
+	}
 
 }
