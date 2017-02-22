@@ -291,12 +291,15 @@ window.Ashley = {
         clearCanvas();
       } else {
         // console.log("列表 右側的線段");
-        if( $(".item-after").length == 0 ){
+        if( $(".item-after").length == 0 && $(".subforCell").length == 0 ){
           $(".js_tableUl > .item-content > .item-inner").append("<div class='item-after'>Label</div>");
+        }else if ( $(".item-after").length == 0 && $(".subforCell").length > 0 ) {
+          $(".js_tableUl > .item-content > .item-inner").append("<div class='item-after'>Label</div>");
+          $(".cell_left_controller").hide();
         }
         $(".cell").css({
           "display":"block",
-          "left": pointsX[1],
+          "left": tablePos.left + ,
           "top": pointsY[1]
         });
         clearCanvas();
