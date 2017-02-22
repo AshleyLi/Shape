@@ -7,8 +7,7 @@ $( document ).ready(function() {
     $(".func.js_funcPop").addClass("focus");
     $("#js_popviewType").css({
       "display": "block",
-      "width" : 375,
-      "height": 400
+      "width" : 370
       });
   });
 

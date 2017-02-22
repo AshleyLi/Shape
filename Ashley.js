@@ -260,7 +260,7 @@ window.Ashley = {
         tableiQty = 1;
         tableviewMode = true;
       }else{
-        console.log("表格已存在。");
+        alert("表格已存在。");
       }
     }
     // drawing a rect on a cell.
@@ -278,6 +278,8 @@ window.Ashley = {
       clearCanvas();
     }
     function ACellLine(){
+
+      // 線段＠列表左側 及 右側
       if (pointsX[0] < cellMidline) {
         // console.log("列表 左側的線段");
         if( $(".item-title").is(':empty') && $(".subforCell").length == 0 ){
@@ -285,49 +287,63 @@ window.Ashley = {
         }else if( $(".item-title").length > 0 && $(".subforCell").length == 0){
           $(".js_tableUl > .item-content > .item-inner > .item-title").append("<div class='subforCell'>subtitle</div>");
         }else{
-          // Nothing 2 happen.
+          alert("已存在元件故無法新增。");
         }
-
         clearCanvas();
       } else {
-        // console.log("列表 右側的線段");
-        if( $(".item-after").length == 0 && $(".subforCell").length == 0 ){
+        // 確認左側尚無元件存在
+        if( $(".item-after").length == 0){
+          // 於表格中增加左側元件
           $(".js_tableUl > .item-content > .item-inner").append("<div class='item-after'>Label</div>");
-        }else if ( $(".item-after").length == 0 && $(".subforCell").length > 0 ) {
-          $(".js_tableUl > .item-content > .item-inner").append("<div class='item-after'>Label</div>");
-          $(".cell_left_controller").hide();
+          // 開啟建議元件列表
+          $(".cell").css({
+            "display":"block",
+            "left": tablePos.left + MCScreenW - 5 +"px",
+            "top": tablePos.top
+          });
+          // 依據有無使用 subforCell 關閉建議元件列表中的 控制項類別元件(cell_left_controller)
+          if($(".subforCell").length == 0){
+            $(".cell_left_controller").show();
+          }
+
+        }else {
+          alert("已存在元件故無法新增。");
         }
-        $(".cell").css({
-          "display":"block",
-          "left": tablePos.left + ,
-          "top": pointsY[1]
-        });
+
         clearCanvas();
       }
     }
 
     // Show rectangle suggestion ===============================================
+    function checkedElement(e){
+      var target = e;
+      $(target+".form-check:first-child input").attr("checked");
+    }
     function ARectangle() {
-
+      checkedElement(".popover-title");
       if(rectW >= rectH){
         if(rectH > unitH){
           // add an image & set a current elementID
           $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
           $(".js_wildRectB").css({"display" : "initial"});
+          checkedElement(".js_wildRectB");
         } else {
           // add a button & set a current elementID
-          $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>button</button>");
+          $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>按鈕</button>");
           $('.js_wildRectS').css({"display" : "block"});
+          checkedElement(".js_wildRectS");
         }
       }else {
         if(rectH > unitH){
           // add an image & set a current elementID
           $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
           $('.js_tallRectB').css({"display" : "block"});
+          checkedElement(".js_tallRectB");
         } else {
           // add an image & set a current elementID
           $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
           $('.js_tallRectS').css({"display" : "block"});
+          checkedElement(".js_tallRectS");
         }
       }
 
@@ -335,7 +351,7 @@ window.Ashley = {
       popSuggestionsX = pointsX[1] + 10
       popSuggestionsY = pointsY[1] - rectH/2 - $(".js_suggestions").height()/2  ;
 
-      $('.js_suggestions').css({
+      $('.js_suggestions.regular').css({
         "display":"initial",
         "left": popSuggestionsX ,
         "top": popSuggestionsY ,
@@ -354,14 +370,14 @@ window.Ashley = {
     function ALine() {
 
       // Greate the first component
-      $(".identification").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
+      $(".identification").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>今、明兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今、明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。</span>");
 
       // add the first suggeted conponent.
-      $(".identification").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px;height:23px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
+      $(".identification").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px;height:23px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>今、明兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今、明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。</span>");
 
       // open & set suggestions pop positionX,Y
       $('.js_line').css({"display" : "initial"});
-      $(".js_suggestions").css({"display":"initial","left": pointsX[1]+10 + "px","top": pointsY[0] + shift -$(".js_suggestions").height()/2 + "px"});
+      $(".js_suggestions.regular").css({"display":"initial","left": pointsX[1]+10 + "px","top": pointsY[0] + shift -$(".js_suggestions").height()/2 + "px"});
 
       // show the shape basic information
 
@@ -589,31 +605,31 @@ $(document).on("click",".js_confirmType",function(){
       function addButton(){
         if( shapeName == 'rectangle' && rectH >= 23  ){
 
-          $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>button</button>");
+          $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>按鈕</button>");
         }else if( shapeName == 'rectangle' && rectH < 23){
-          $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height: 23px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>button</button>");
+          $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height: 23px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>按鈕</button>");
         }else{
-          $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ lineW +"px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>button</button>");
+          $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ lineW +"px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>按鈕</button>");
         }
       }
       function addShape(){
         $(".identification").append("<div xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px; background-color:#ccc;'>");
       }
       function addTextView(){
-        $(".identification").append("<div xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px; overflow:hidden;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</div>");
+        $(".identification").append("<div xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px; overflow:hidden;'>今、明兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今、明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。</div>");
       }
       function addTextField(){
         // 判斷高度以區別是否為多行。一行的高度單位為20px
         if(rectH <= 40){
-          $(".identification").append("<input type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0]+"px;top:"+pointsY[0] +"px; border:1px solid lightgrey;' placeholder='Type somthing...'>");
+          $(".identification").append("<input type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0]+"px;top:"+pointsY[0] +"px; border:1px solid lightgrey;' placeholder='請輸入文字...'>");
         }else {
           var rows = Math.round(rectH/20) ;
           console.log("rows = " + rows);
-          $(".identification").append("<textarea type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0]+"px;top:"+pointsY[0] +"px; border:1px solid lightgrey;' placeholder='Type somthing...'></textarea>");
+          $(".identification").append("<textarea type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0]+"px;top:"+pointsY[0] +"px; border:1px solid lightgrey;' placeholder='請輸入文字...'></textarea>");
         }
       }
       function addText(){
-        $(".identification").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
+        $(".identification").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>今、明兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今、明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。");
       }
       function addLine(){
         $(".identification").append("<hr xkID='" + currentID + "' style='width:"+ lineW +"px;height:" + lineH + "px;left:" + pointsX[0]+"px;top:"+pointsY[0] +"px; background-color:lightgrey; margin:0px; padding:0px;'>");
@@ -658,31 +674,31 @@ $(document).on("click",".js_confirmType",function(){
       }
       function addButton(){
         if( shapeName == 'rectangle' && rectH >= 23  ){
-          $("#pop-customPopView").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:"+ xShift +"px;top:"+ yShift + "px;'>button</button>");
+          $("#pop-customPopView").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:"+ xShift +"px;top:"+ yShift + "px;'>按鈕</button>");
         }else if( shapeName == 'rectangle' && rectH < 23){
-          $("#pop-customPopView").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height: 23px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute;'>button</button>");
+          $("#pop-customPopView").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height: 23px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute;'>按鈕</button>");
         }else{
-          $("#pop-customPopView").append("<button type='button' xkID='"+ currentID + "' style='width:"+ lineW +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute;'>button</button>");
+          $("#pop-customPopView").append("<button type='button' xkID='"+ currentID + "' style='width:"+ lineW +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute;'>按鈕</button>");
         }
       }
       function addShape(){
         $("#pop-customPopView").append("<div xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; background-color:#ccc;'>");
       }
       function addTextView(){
-        $("#pop-customPopView").append("<div xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute;overflow:hidden;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</div>");
+        $("#pop-customPopView").append("<div xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute;overflow:hidden;'>今、明兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今、明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。</div>");
       }
       function addTextField(){
         // 判斷高度以區別是否為多行。一行的高度單位為20px
         if(rectH <= 40){
-          $("#pop-customPopView").append("<input type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; border:1px solid lightgrey;' placeholder='Type somthing...'>");
+          $("#pop-customPopView").append("<input type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; border:1px solid lightgrey;' placeholder='輸入文字...'>");
         }else {
           var rows = Math.round(rectH/20) ;
           console.log("rows = " + rows);
-          $("#pop-customPopView").append("<textarea type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; border:1px solid lightgrey;' placeholder='Type somthing...'></textarea>");
+          $("#pop-customPopView").append("<textarea type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; border:1px solid lightgrey;' placeholder='輸入文字...'></textarea>");
         }
       }
       function addText(){
-        $("#pop-customPopView").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
+        $("#pop-customPopView").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>今、明（２２日、２３日）兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今、明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。</span>");
       }
       function addLine(){
         $("#pop-customPopView").append("<hr xkID='" + currentID + "' style='width:"+ lineW +"px;height:" + lineH + "px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; background-color:lightgrey; margin:0px; padding:0px;'>");
