@@ -22,7 +22,7 @@ var errorQty  = 0 ;
 var componentP = [5,4,3,2,1];
 var totalScore = 0;
 var popSuggestionsX, popSuggestionsY ;
-var xkID, currentID;
+var xkID, currentID = 0;
 
 var popEditor = false;
 var popPosX , popPosY ;
@@ -37,6 +37,7 @@ var tablePos;
 var tableX = [], tableY = []; // 形成t字兩線斷的 x and y
 var tolerance = 50; // T字判斷 線段偏離容許值
 var cellMidline; // cell的中線x位置
+
 
 
 
@@ -104,9 +105,6 @@ window.Ashley = {
     $(".js_shapeName").text(shapeName);
     $(".js_ShapeQty").text(Math.round(shapeQty));
 
-
-    // Give a id to the following element
-    currentID = Date.now();
 
     // Clear the myScript canvas.
     function clearCanvas(){
@@ -233,6 +231,20 @@ window.Ashley = {
       $(".js_ShapeQty").text(Math.round(shapeQty));
     }
 
+
+    // Suggestions checked =====================================================
+    function checkedElement(e){
+      var target = e;
+      $(target+".form-check:first-child input").attr("checked");
+    }
+    // Attr xkID  ==============================================================
+    function addXkID(e){
+      var targetComponent = e;
+
+      $(targetComponent).attr("xkID",currentID);
+      currentID++;
+    }
+
     // Tableview ===============================================================
     // Create a tableview.
     function ATableview(){
@@ -242,6 +254,7 @@ window.Ashley = {
           "width":MCScreenW+ "px",
           // "height": MCScreenH + 2 +"px",
           "left": popPosX +"px"});
+        addXkID("#tableview");
 
         // 判斷tableview 是否會超出 iphone 螢幕範圍，若超過則放置於邊界處
         if( tableY[0] < popPosY){
@@ -315,10 +328,7 @@ window.Ashley = {
     }
 
     // Show rectangle suggestion ===============================================
-    function checkedElement(e){
-      var target = e;
-      $(target+".form-check:first-child input").attr("checked");
-    }
+
     function ARectangle() {
       checkedElement(".popover-title");
       if(rectW >= rectH){
