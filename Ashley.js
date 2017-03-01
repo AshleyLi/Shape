@@ -38,6 +38,8 @@ var tableX = [], tableY = []; // 形成t字兩線斷的 x and y
 var tolerance = 50; // T字判斷 線段偏離容許值
 var cellMidline; // cell的中線x位置
 
+var undoString = []; // 紀錄undo時要執行的：eventType類型、target目標、action動作、task執行項目
+
 
 
 
@@ -113,7 +115,6 @@ window.Ashley = {
 
     // Get shape information
     function getShapeInfo(){
-
       if(shapeName == "rectangle" || shapeName == "square"){
         // rectangle:  Get shape posX and posY array
         for ( i = 0 ; i < 4; i++){
@@ -167,6 +168,8 @@ window.Ashley = {
     // Recognizing the shape====================================================
     getShapeInfo();
 
+
+    // 判斷筆畫是否繪製於 talbeview or popover，皆否則為一般圖形
     if(tableviewMode == true &&
       pointsY[0] > tablePos.top &&
       pointsY[0] < tablePos.top + $("#tableview").height() &&
@@ -240,9 +243,18 @@ window.Ashley = {
     // Attr xkID  ==============================================================
     function addXkID(e){
       var targetComponent = e;
-
       $(targetComponent).attr("xkID",currentID);
       currentID++;
+    }
+    // Set undo function =======================================================
+    // 紀錄undo時要執行的：eventType類型、target目標、action動作、task執行項目
+    function setUndoEvent (e, t0 ,a ,t1){
+      var eventType = e;
+      var target = t0;
+      var action = a;
+      var task = t1;
+      console.log(eventType+","+target+","+action+","+task);
+
     }
 
     // Tableview ===============================================================
@@ -330,6 +342,7 @@ window.Ashley = {
     // Show rectangle suggestion ===============================================
 
     function ARectangle() {
+      setUndoEvent("eventType類型","target目標","action動作","task執行項目");
       checkedElement(".popover-title");
       if(rectW >= rectH){
         if(rectH > unitH){
