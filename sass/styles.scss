@@ -329,6 +329,7 @@ a, a:active, a:visited{ color:$xkGreen;}
 		background-color: white;
 		min-height: 100px;
 		position: absolute;
+		overflow: hidden;
 		.drawinPopview{
 			margin:8px;
 			display:block;
@@ -338,6 +339,13 @@ a, a:active, a:visited{ color:$xkGreen;}
 }
 
 #pop-picker{
+	.picker-columns{
+		height: 200px;
+	}
+	.picker-center-highlight{margin-top: -11px;}
+	.picker-modal .toolbar+.picker-modal-inner{
+		height: calc(100% - 0px);
+	}
 	.views{
 		position: absolute;
 		bottom: 0px;
@@ -349,7 +357,12 @@ a, a:active, a:visited{ color:$xkGreen;}
 		}
 	}
 	.toolbar{
-		height: 36px;
+		height: 0px;
+		.toolbar-inner{
+			height: 36px;
+			background-color: white;
+			top: -35px;
+		}
 		a{
 			height: 36px;
 			font-size: 12px;
@@ -378,7 +391,7 @@ a, a:active, a:visited{ color:$xkGreen;}
 	.list-block .item-media+.item-inner{margin-left: 5px;}
 	.list-block .item-link .item-inner{
 		padding-right: 35px;
-		background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2060%20120'%20xm…29.25-28.5-29.25-28.5%209.75-9.75z'%20fill%3D'%23c7c7cc'%2F%3E%3C%2Fsvg%3E);
+		background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2060%20120'%20xm…29.25-28.5-29.25-28.5%209.75-9.75z'%20fill%3D'%23c7c7cc'%2F%3E%3C%2Fsvg%3E");
 		background-size: 10px 20px;
 		background-repeat: no-repeat;
 	}

@@ -22,7 +22,6 @@ $( document ).ready(function() {
     popEditor = true ;
     $(".popview > div.modal.modal-in").css( "display", "none" );
     selectedType = $(this).children("img").attr("alt");
-    console.log("popEditor = open, " + "you choosed [" + selectedType+ "]");
     // 2-2. Open the popview.
 
     openPopview();

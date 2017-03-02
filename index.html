@@ -78,7 +78,7 @@
     </div>
     <div class="bootstrap-iso toolbar ">
       <ul class="top">
-        <li class="func" >
+        <li class="func js_funcPop" >
           <span class="glyphicon glyphicon-comment " aria-hidden="true"></span>
           <div id="js_popviewType" class="popover right" style="display:none;" >
             <div class="arrow"></div>
@@ -159,7 +159,7 @@
       <ul class="score"></ul>
     </div>
 
-    <!-- js_suggestions -->
+    <!-- regular js_suggestions -->
     <div class="bootstrap-iso" style="position:absolute; top:50px; width:100%;">
       <div class=" popover right js_suggestions regular" style="display:none;">
         <div class="arrow"></div>
@@ -341,7 +341,7 @@
           </div>
         </div>
       </div>
-      <!-- js_suggestions -->
+      <!-- js_suggestions for cell -->
       <div class="bootstrap-iso" style="position:absolute;  width:100%;">
         <div class=" popover right js_suggestions cell" style="display:none;">
           <div class="arrow"></div>
@@ -386,7 +386,6 @@
 
       <!-- popview -->
       <div class="popview" style="display:none;">
-
         <!-- 1:pop-alert -->
         <div id="pop-alert" class="modal modal-in" style="display:none;">
           <div class="modal-inner">
@@ -398,7 +397,6 @@
             <span class="modal-button">按鈕</span>
           </div>
         </div>
-
         <!-- 2:pop-actionSheet -->
         <div id="pop-actionSheet" class="modal modal-in" style="display:none;">
           <div class="actions-modal modal-in">
@@ -412,12 +410,9 @@
             </div>
           </div>
         </div>
-
         <!-- 3:pop-customPopView -->
         <div id="pop-customPopView" style="display:none;">
-            <span class="drawinPopview">Draw somthing to add a element to this view.</span>
         </div>
-
         <!-- 4:pop-picker -->
         <div id="pop-picker" style="display:none;">
           <!-- Views:framework7.picker-->
@@ -430,7 +425,50 @@
                 <div data-page="index" class="page">
                   <!-- Scrollable page content-->
                   <div class="page-content">
-                    <div class="picker-modal picker-columns  picker-3d remove-on-close modal-in" style="display: block;"><div class="toolbar"><div class="toolbar-inner"><div class="left"><a href="#" class="link toolbar-randomize-link">Randomize</a></div><div class="right"><a href="#" class="link close-picker">OK</a></div></div></div><div class="picker-modal-inner picker-items"><div class="picker-items-col picker-items-col-absolute" style="width: 44px;"><div class="picker-items-col-wrapper" style="transform: translate3d(0px, 90px, 0px); transition-duration: 0ms;"><div class="picker-item picker-selected" data-picker-value="Mr" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(0deg);">Mr</div><div class="picker-item" data-picker-value="Ms" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-18deg);">Ms</div></div></div><div class="picker-items-col picker-items-col-left picker-items-col-absolute" style="width: 98px;"><div class="picker-items-col-wrapper" style="transform: translate3d(0px, 90px, 0px); transition-duration: 0ms;"><div class="picker-item picker-selected" data-picker-value="Super" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(0deg);">Super</div><div class="picker-item" data-picker-value="Lex" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-18deg);">Lex</div><div class="picker-item" data-picker-value="Amazing" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-36deg);">Amazing</div><div class="picker-item" data-picker-value="Bat" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-54deg);">Bat</div><div class="picker-item" data-picker-value="Iron" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-72deg);">Iron</div><div class="picker-item" data-picker-value="Rocket" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-90deg);">Rocket</div><div class="picker-item" data-picker-value="Lex" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-108deg);">Lex</div><div class="picker-item" data-picker-value="Cool" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-126deg);">Cool</div><div class="picker-item" data-picker-value="Beautiful" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-144deg);">Beautiful</div><div class="picker-item" data-picker-value="Wonderful" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-162deg);">Wonderful</div><div class="picker-item" data-picker-value="Raining" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Raining</div><div class="picker-item" data-picker-value="Happy" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Happy</div><div class="picker-item" data-picker-value="Amazing" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Amazing</div><div class="picker-item" data-picker-value="Funny" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Funny</div><div class="picker-item" data-picker-value="Cool" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Cool</div><div class="picker-item" data-picker-value="Hot" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Hot</div></div></div><div class="picker-items-col picker-items-col-absolute" style="width: 82px;"><div class="picker-items-col-wrapper" style="transform: translate3d(0px, -18px, 0px); transition-duration: 0ms;"><div class="picker-item" data-picker-value="Man" style="transform: translate3d(0px, 108px, 0px) rotateX(54deg); transition-duration: 0ms;">Man</div><div class="picker-item" data-picker-value="Luthor" style="transform: translate3d(0px, 108px, 0px) rotateX(36deg); transition-duration: 0ms;">Luthor</div><div class="picker-item" data-picker-value="Woman" style="transform: translate3d(0px, 108px, 0px) rotateX(18deg); transition-duration: 0ms;">Woman</div><div class="picker-item picker-selected" data-picker-value="Boy" style="transition-duration: 0ms; transform: translate3d(0px, 108px, 0px) rotateX(0deg);">Boy</div><div class="picker-item" data-picker-value="Girl" style="transform: translate3d(0px, 108px, 0px) rotateX(-18deg); transition-duration: 0ms;">Girl</div><div class="picker-item" data-picker-value="Person" style="transform: translate3d(0px, 108px, 0px) rotateX(-36deg); transition-duration: 0ms;">Person</div><div class="picker-item" data-picker-value="Cutie" style="transform: translate3d(0px, 108px, 0px) rotateX(-54deg); transition-duration: 0ms;">Cutie</div><div class="picker-item" data-picker-value="Babe" style="transform: translate3d(0px, 108px, 0px) rotateX(-72deg); transition-duration: 0ms;">Babe</div><div class="picker-item" data-picker-value="Raccoon" style="transform: translate3d(0px, 108px, 0px) rotateX(-90deg); transition-duration: 0ms;">Raccoon</div></div></div><div class="picker-center-highlight"></div></div></div>
+                    <div class="picker-modal picker-columns  picker-3d remove-on-close modal-in" style="display: block;">
+                      <div class="picker-modal-inner picker-items">
+                          <!-- <div class="picker-items-col picker-items-col-absolute js_leftPickerCol" style="width: 44px;display:none;">
+                              <div class="picker-items-col-wrapper" style="transform: translate3d(0px, 90px, 0px); transition-duration: 0ms;">
+                                  <div class="picker-item picker-selected" data-picker-value="Mr" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(0deg);">Mr</div>
+                                  <div class="picker-item" data-picker-value="Ms" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-18deg);">Ms</div>
+                              </div>
+                          </div> -->
+                          <div class="picker-items-col picker-items-col-left picker-items-col-absolute js_pickerBase" style="width: 98px;">
+                              <div class="picker-items-col-wrapper" style="transform: translate3d(0px, 90px, 0px); transition-duration: 0ms;">
+                                  <div class="picker-item picker-selected" data-picker-value="Super" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(0deg);">Super</div>
+                                  <div class="picker-item" data-picker-value="Lex" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-18deg);">Lex</div>
+                                  <div class="picker-item" data-picker-value="Amazing" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-36deg);">Amazing</div>
+                                  <div class="picker-item" data-picker-value="Bat" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-54deg);">Bat</div>
+                                  <div class="picker-item" data-picker-value="Iron" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-72deg);">Iron</div>
+                                  <div class="picker-item" data-picker-value="Rocket" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-90deg);">Rocket</div>
+                                  <div class="picker-item" data-picker-value="Lex" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-108deg);">Lex</div>
+                                  <div class="picker-item" data-picker-value="Cool" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-126deg);">Cool</div>
+                                  <div class="picker-item" data-picker-value="Beautiful" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-144deg);">Beautiful</div>
+                                  <div class="picker-item" data-picker-value="Wonderful" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-162deg);">Wonderful</div>
+                                  <div class="picker-item" data-picker-value="Raining" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Raining</div>
+                                  <div class="picker-item" data-picker-value="Happy" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Happy</div>
+                                  <div class="picker-item" data-picker-value="Amazing" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Amazing</div>
+                                  <div class="picker-item" data-picker-value="Funny" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Funny</div>
+                                  <div class="picker-item" data-picker-value="Cool" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Cool</div>
+                                  <div class="picker-item" data-picker-value="Hot" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Hot</div>
+                              </div>
+                          </div>
+                          <!-- <div class="picker-items-col picker-items-col-absolute js_rightPickerCol" style="width: 82px; display:none;">
+                              <div class="picker-items-col-wrapper" style="transform: translate3d(0px, -18px, 0px); transition-duration: 0ms;">
+                                  <div class="picker-item" data-picker-value="Man" style="transform: translate3d(0px, 108px, 0px) rotateX(54deg); transition-duration: 0ms;">Man</div>
+                                  <div class="picker-item" data-picker-value="Luthor" style="transform: translate3d(0px, 108px, 0px) rotateX(36deg); transition-duration: 0ms;">Luthor</div>
+                                  <div class="picker-item" data-picker-value="Woman" style="transform: translate3d(0px, 108px, 0px) rotateX(18deg); transition-duration: 0ms;">Woman</div>
+                                  <div class="picker-item picker-selected" data-picker-value="Boy" style="transition-duration: 0ms; transform: translate3d(0px, 108px, 0px) rotateX(0deg);">Boy</div>
+                                  <div class="picker-item" data-picker-value="Girl" style="transform: translate3d(0px, 108px, 0px) rotateX(-18deg); transition-duration: 0ms;">Girl</div>
+                                  <div class="picker-item" data-picker-value="Person" style="transform: translate3d(0px, 108px, 0px) rotateX(-36deg); transition-duration: 0ms;">Person</div>
+                                  <div class="picker-item" data-picker-value="Cutie" style="transform: translate3d(0px, 108px, 0px) rotateX(-54deg); transition-duration: 0ms;">Cutie</div>
+                                  <div class="picker-item" data-picker-value="Babe" style="transform: translate3d(0px, 108px, 0px) rotateX(-72deg); transition-duration: 0ms;">Babe</div>
+                                  <div class="picker-item" data-picker-value="Raccoon" style="transform: translate3d(0px, 108px, 0px) rotateX(-90deg); transition-duration: 0ms;">Raccoon</div>
+                              </div>
+                          </div> -->
+                          <div class="picker-center-highlight"></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
