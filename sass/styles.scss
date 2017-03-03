@@ -12,11 +12,12 @@ $xkDeepGrey: #53585F;
 $sysUIUnit: 50px;
 $z-sysControl:500;
 $z-toolBar:499;
-$z-element:300;
+$z-element:0;
 $z-popview:400;
 
 .mgt50{ margin-top: 50px; overflow: visible;}
 a, a:active, a:visited{ color:$xkGreen;}
+button{ background-color:lighten($xkGreen,15%);}
 .sysControl{
 	position: absolute;
 	top: 0px;
@@ -206,7 +207,6 @@ a, a:active, a:visited{ color:$xkGreen;}
 	height:1px;
 	z-index: $z-element;
 	position: absolute;
-
 	top:50px;
 
 	*{
