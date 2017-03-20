@@ -328,7 +328,7 @@ window.Ashley = {
       if(rectW >= rectH){
         if(rectH > unitH){
           // add an image & set a current elementID
-          $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
+          $(".identification").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
           $(".js_wildRectB").css({"display" : "initial"});
           checkedElement(".js_wildRectB");
         } else {
@@ -340,12 +340,12 @@ window.Ashley = {
       }else {
         if(rectH > unitH){
           // add an image & set a current elementID
-          $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
+          $(".identification").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
           $('.js_tallRectB').css({"display" : "block"});
           checkedElement(".js_tallRectB");
         } else {
           // add an image & set a current elementID
-          $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
+          $(".identification").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
           $('.js_tallRectS').css({"display" : "block"});
           checkedElement(".js_tallRectS");
         }
@@ -407,7 +407,7 @@ window.Ashley = {
         if(rectW >= rectH){
           if(rectH > unitH){
             // add an image & set a current elementID
-            $("#pop-customPopView").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift+ "px;position:absolute;'>");
+            $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift+ "px;position:absolute;'>");
             $(".js_wildRectB").css({"display" : "initial"});
           } else {
             // add a button & set a current elementID
@@ -417,11 +417,11 @@ window.Ashley = {
         }else {
           if(rectH > unitH){
             // add an image & set a current elementID
-            $("#pop-customPopView").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px;position:absolute;'>");
+            $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px;position:absolute;'>");
             $('.js_tallRectB').css({"display" : "block"});
           } else {
             // add an image & set a current elementID
-            $("#pop-customPopView").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px;position:absolute;'>");
+            $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px;position:absolute;'>");
             $('.js_tallRectS').css({"display" : "block"});
           }
         }
@@ -628,7 +628,7 @@ $(document).on("click",".js_confirmType",function(){
       var elementType = $( "input:checked" ).val();
       switch (elementType) {
           case 'Image':
-            $(".identification").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
+            $(".identification").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
             break;
           case 'Button':
             if( shapeName == 'rectangle' && rectH >= 23  ){
@@ -674,7 +674,7 @@ $(document).on("click",".js_confirmType",function(){
       var elementType = $( "input:checked" ).val();
       switch (elementType) {
           case 'Image':
-          $("#pop-customPopView").append("<img src='https://goo.gl/hSqM8y' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; '>");
+          $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; '>");
             break;
           case 'Button':
             if( shapeName == 'rectangle' && rectH >= 23  ){

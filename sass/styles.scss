@@ -15,6 +15,9 @@ $z-toolBar:499;
 $z-element:0;
 $z-popview:400;
 
+
+
+
 .mgt50{ margin-top: 50px; overflow: visible;}
 a, a:active, a:visited{ color:$xkGreen;}
 button{ background-color:lighten($xkGreen,15%);}
@@ -58,6 +61,21 @@ button{ background-color:lighten($xkGreen,15%);}
 			float: right;
 			li{a{padding: 15px; display: inline-block;}}
 			li:first-child{ a{padding-right: 0px;} }
+		}
+	}
+	.gotoNextTask{
+		top: 0px;
+		position: absolute;
+		background-color: $xkGreen;
+		background-image: none;
+		border: 0px;
+		border-radius: 0px;
+		height: 50px;
+		right: 0px;
+		padding-left: 17px;
+		padding-right: 17px;
+		&:hover{
+			background-color: darken($xkGreen,10%);
 		}
 	}
 
