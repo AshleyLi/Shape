@@ -283,23 +283,24 @@ window.Ashley = {
       currentID++;
 
       // 線段＠列表左側 及 右側
-      if (pointsX[0] < cellMidline) {
+      if (pointsX[0]+(pointsX[1]-pointsX[0])/2 <= cellMidline) {
         // console.log("列表 左側的線段");
         if( $(".item-title").is(':empty') && $(".subforCell").length == 0 ){
           $(".js_tableUl > .item-content > .item-inner > .item-title").append("Item title");
-          undoString("$('.js_tableUl > .item-content > .item-inner > .item-title .Item title').remove();");
-
+          undoString = "$('.js_tableUl > .item-content > .item-inner > .item-title').empty();"; // (((undo)))
         }else if( $(".item-title").length > 0 && $(".subforCell").length == 0){
-          $(".js_tableUl > .item-content > .item-inner > .item-title").append("<div class='subforCell'>subtitle</div>");
+          $(".js_tableUl > .item-content > .item-inner > .item-title").append("<div class='subforCell' xkID='"+currentID+"'>subtitle</div>");
+          undoString = "$('[xkID="+ currentID +"]').remove();"; // (((undo)))
         }else{
           alert("已存在元件故無法新增。");
         }
         clearCanvas();
       } else {
         // 確認左側尚無元件存在
-        if( $(".item-after").length == 0){
+        if( $(".item-after").is(':empty')){
           // 於表格中增加左側元件
-          $(".js_tableUl > .item-content > .item-inner").append("<div class='item-after'>Label</div>");
+          $(".js_tableUl > .item-content > .item-inner").append("<div class='item-after' xkID='"+currentID+"'>Label</div>");
+          undoString = "$('[xkID="+ currentID +"]').remove();"; // (((undo)))
           // 開啟建議元件列表
           $(".cell").css({
             "display":"block",
@@ -307,7 +308,7 @@ window.Ashley = {
             "top": tablePos.top
           });
           // 依據有無使用 subforCell 關閉建議元件列表中的 控制項類別元件(cell_left_controller)
-          if($(".subforCell").length == 0){
+          if($(".subforCell").is(':empty')){
             $(".cell_left_controller").show();
           }
 
@@ -747,19 +748,19 @@ $(document).on("click",".js_confirmCell",function(){
 
   switch (elementType) {
       case 'Text':
-        $(".item-after").append(elementType);
+        $(".item-after").append("<span xkID='"+currentID+"'>Text</span>");
         break;
       case 'Text >':
-        $(".item-after").append(elementType);
+        $(".item-after").append("<span xkID='"+currentID+"'>Text ></span>");
         break;
       case 'Text input':
-        $(".item-after").append(elementType);
+        $(".item-after").append("<span class='cellInput' xkID='"+currentID+"'>Text input</span>");
         break;
       case 'Check icon':
-        $(".item-after").append(elementType);
+        $(".item-after").append("<img xkID='"+currentID+"' src='img/icon_checkmark.png' alt='' style='height:12px;'>");
         break;
       case 'Switch':
-        $(".item-after").append(elementType);
+        $(".item-after").append("<img xkID='"+currentID+"' src='img/icon_switchInactive.png' alt='' style='height:12px;'>");
         break;
     default:
 
