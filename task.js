@@ -1,16 +1,15 @@
 var currentTask = 1; // 目前任務的順序
-var task1 = "<img src='/img/img_default.jpg' xkid='default' style='width:171px;height:91px;left:553px;top:142px;'>";
-var task2 = "<img src='/img/img_default.jpg' xkid='default' style='width:171px;height:91px;left:553px;top:242px;'>";
-var task3 = "<img src='/img/img_default.jpg' xkid='default' style='width:171px;height:91px;left:553px;top:342px;'>";
+var comletedTaskQty = 0; // 目前完成的任務數量  
 //TaskController================================================================
 $(document).on("click",".gotoNextTask",function(){
   var r = confirm("是否進入下一任務？");
   if (r == true) {
-      $(".identification").trigger("click");
+    $(".identification").empty();
+    currentTask++;
+    addTaskElements(currentTask);
   }
   // 確認
-  currentTask++;
-  addTaskElements("task"+currentTask);
+
 });
 
 
@@ -28,13 +27,11 @@ $( document ).ready(function() {
     res[i] = arr[j];
     arr.splice(j, 1);
   }
-  var t = "task" + currentTask;
-  addTaskElements(t);
+  addTaskElements(currentTask);
 });
 
 
 //Add task elements==========================================================
 function addTaskElements(e) {
-  console.log(e);
-  $(".identification").append(e);
+  $("#task" + e).appendTo(".identification");
 }
