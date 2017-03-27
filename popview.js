@@ -38,6 +38,7 @@ $( document ).ready(function() {
         "height": MCScreenH + 2 +"px",
         "left": popPosX +"px",
         "top":  popPosY +"px"});
+
       $(".closePopviewEdior").css("display","initial");
 
       // Bring the drawing canvas to top layer.
@@ -45,6 +46,7 @@ $( document ).ready(function() {
 
       // Set popCanvas position
       if(selectedType == "Alert"){
+        arrData.push(timeIndex()+"CreatePOPView:"+"Alert" );
         $("#pop-alert").css({
           "display":"block",
           "left": $(".popview").width()/2 - $("#pop-alert").width()/2 ,
@@ -52,6 +54,7 @@ $( document ).ready(function() {
         });
       }
       else if (selectedType == "Action sheet") {
+        arrData.push(timeIndex()+"CreatePOPView:"+"ActionSheet" );
         $("#pop-actionSheet").css({
           "display":"block",
           "top":0,
@@ -60,6 +63,7 @@ $( document ).ready(function() {
         })
       }
       else if (selectedType == "Custom pop view") {
+        arrData.push(timeIndex()+"CreatePOPView:"+"CustomPopview" );
         $("#pop-customPopView").css( "width", $(".popview").width()*0.8);
         $("#pop-customPopView").css({
           "display":"block",
@@ -69,6 +73,7 @@ $( document ).ready(function() {
       }
       else {
         // Picker
+        arrData.push(timeIndex()+"CreatePOPView:"+"Picker" );
         $("#pop-picker").css({
           "display":"block",
           "height": MCScreenH

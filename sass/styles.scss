@@ -12,14 +12,16 @@ $xkDeepGrey: #53585F;
 $sysUIUnit: 50px;
 $z-sysControl:500;
 $z-toolBar:499;
-$z-element:0;
+$z-element:1;
 $z-popview:400;
 
 
 
 
 .mgt50{ margin-top: 50px; overflow: visible;}
-a, a:active, a:visited{ color:$xkGreen;}
+a, a:active, a:visited{ color:$xkGreen; }
+a:focus{ box-shadow: none;}
+
 button{ background-color:lighten($xkGreen,15%);}
 .sysControl{
 	position: absolute;

@@ -1,16 +1,31 @@
-var currentTask = 0; // 目前任務的順序
+var currentTask = 0; // 任務順序
 var comletedTaskQty = 0; // 目前完成的任務數量
 var taskIndex = []; //
+var totalTask = 5;
 //TaskController================================================================
 $(document).on("click",".gotoNextTask",function(){
-  var r = confirm("是否進入下一任務？");
-  if (r == true) {
-    $(".identification").empty();
-    currentTask++;
-    addTaskElements(taskIndex[currentTask]);
-    $(".js_taskNum").text(currentTask+1);
+  // 任務已經全部完成，則開始儲存.csv
+  if(currentTask+1 == totalTask){
+    alert("儲存測試資料");
+    var csvContent = "data:text/csv;charset=utf-8,";
+    arrData.forEach(function(infoArray, index){
+       dataString = infoArray.join(",");
+       csvContent += index < data.length ? dataString+ "\n" : dataString;
+    });
+    var encodedUri = encodeURI(csvContent);
+    window.open(encodedUri);
+
+  }else {
+  // 任務尚未結束，前往下一任務
+    var r = confirm("是否進入下一任務？");
+    if (r == true ) {
+      $(".identification").empty();
+      currentTask++;
+      addTaskElements(taskIndex[currentTask]);
+      $(".js_taskNum").text(currentTask+1);
+      arrData.push(timeIndex()+"Index"+currentTask+"/Task"+taskIndex[currentTask]+"." );
+    }
   }
-  // 確認
 
 });
 
@@ -19,7 +34,7 @@ $(document).on("click",".gotoNextTask",function(){
 $( document ).ready(function() {
   // 取得總長25的數列 ===================
   var arr = [];
-  for (var i = 0; i < 25; i++) {
+  for (var i = 0; i < totalTask; i++) {
     arr[i] = i;
   }
   // 打亂數列的排序 ===================
@@ -28,6 +43,9 @@ $( document ).ready(function() {
     taskIndex[i] = arr[j];
     arr.splice(j, 1);
   }
+  $(".js_totalTask").text(totalTask);
+  arrData.push(timeIndex()+"Index="+taskIndex);
+  arrData.push(timeIndex()+"Index"+currentTask+"/Task"+taskIndex[currentTask]+"." );
   addTaskElements(taskIndex[currentTask]);
 });
 
@@ -36,3 +54,5 @@ $( document ).ready(function() {
 function addTaskElements(e) {
   $("#task" + e).appendTo(".identification");
 }
+
+//Arrat2CSV================================================================
