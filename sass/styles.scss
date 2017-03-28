@@ -14,6 +14,7 @@ $z-sysControl:500;
 $z-toolBar:499;
 $z-element:1;
 $z-popview:400;
+$z-table:300;
 
 
 
@@ -23,6 +24,17 @@ a, a:active, a:visited{ color:$xkGreen; }
 a:focus{ box-shadow: none;}
 
 button{ background-color:lighten($xkGreen,15%);}
+
+.mockup{
+	height: 100%;
+	width: 100%;
+	background-image: url(../img/iphoneWireframe.png);
+  background-position: center;
+  background-size: 280px;
+  background-repeat: no-repeat;
+	position: relative;
+  top:-27px;
+}
 .sysControl{
 	position: absolute;
 	top: 0px;
@@ -186,10 +198,10 @@ button{ background-color:lighten($xkGreen,15%);}
 	 display: none;
 }
 .ooo-section{
-	background-image:url('../img/iphoneWireframe.png');
-	background-position: center;
-	background-size: 280px;
-	background-repeat: no-repeat;
+	// background-image:url('../img/iphoneWireframe.png');
+	// background-position: center;
+	// background-size: 280px;
+	// background-repeat: no-repeat;
 	position: absolute;
 	top: $sysUIUnit;
 	width: 100%;
@@ -394,6 +406,7 @@ button{ background-color:lighten($xkGreen,15%);}
 	.picker-item{font-size: 17px;}
 }
 #tableview{
+	position: $z-table;
 	.list-block{
 		margin: 0px;
 	}

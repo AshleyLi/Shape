@@ -40,7 +40,7 @@ var cellMidline; // cell的中線x位置
 
 var undoString = ""; // 紀錄undo時要執行的：eventType類型、target目標、action動作、task執行項目
 
-var arrData =[]; // User behavior storage
+
 
 
 // Basic settings ==============================================================
@@ -235,17 +235,15 @@ window.Ashley = {
     // Tableview ===============================================================
     // Create a tableview.
     function ATableview(){
-      currentID++;
-      arrData.push(timeIndex()+"CreateElement:"+"Talbeview" );
-      undoString = "$('[xkID="+ currentID +"]').remove();";
+
+
+
       if(tableiQty != 1){
         $("#tableview").css({
           "display" : "initial",
           "width":MCScreenW+ "px",
           // "height": MCScreenH + 2 +"px",
           "left": popPosX +"px"});
-        addXkID("#tableview");
-
         // 判斷tableview 是否會超出 iphone 螢幕範圍，若超過則放置於邊界處
         if( tableY[0] < popPosY){
           $("#tableview").css("top", popPosY);
@@ -265,6 +263,10 @@ window.Ashley = {
       }else{
         arrData.push(timeIndex()+"CreateElement:"+"Talbeview twice." );
       }
+      $("#tableview").clone().appendTo(".tableContainer")attr("xkID",currentID ).removeAttr("id");
+      arrData.push(timeIndex()+"CreateElement:"+"Talbeview" );
+      undoString = "$('[xkID="+ currentID +"]').remove();";
+      currentID++;
     }
     // drawing a rect on a cell.
     function ACellRectangle(){
@@ -872,7 +874,6 @@ function timeIndex(){
   var d = new Date();
   var time = d.getHours()+":" + d.getMinutes() +":"+ d.getSeconds() +"--";
   return time;
-
 }
 // timeIndex for data log ID  ==============================================================
 function getAllElementsWithAttribute(attribute)

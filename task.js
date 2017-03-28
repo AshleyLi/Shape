@@ -2,32 +2,8 @@ var currentTask = 0; // 任務順序
 var comletedTaskQty = 0; // 目前完成的任務數量
 var taskIndex = []; //
 var totalTask = 3;
-//TaskController================================================================
-$(document).on("click",".gotoNextTask",function(){
-  // 任務已經全部完成，則開始儲存.csv
-  if(currentTask+1 == totalTask){
-    alert("儲存測試資料");
+var arrData =[]; // User behavior storage
 
-  	var csvContent = "data:text/csv;charset=utf-8,";
-		arrData.forEach(function(infoArray, index){
-			csvContent += infoArray+ "\n";
-		});
-		var encodedUri = encodeURI(csvContent);
-		window.open(encodedUri);
-
-  }else {
-  // 任務尚未結束，前往下一任務
-    var r = confirm("是否進入任務"+(currentTask+2)+"？");
-    if (r == true ) {
-      $(".identification").empty();
-      currentTask++;
-      addTaskElements(taskIndex[currentTask]);
-      $(".js_taskNum").text(currentTask+1);
-      arrData.push(timeIndex()+"Index"+currentTask+"/Task"+taskIndex[currentTask]+"." );
-    }
-  }
-
-});
 
 
 //TaskController================================================================
@@ -54,3 +30,29 @@ $( document ).ready(function() {
 function addTaskElements(e) {
   $("#task" + e).appendTo(".identification");
 }
+//TaskController================================================================
+$(document).on("click",".gotoNextTask",function(){
+  // 任務已經全部完成，則開始儲存.csv
+  if(currentTask+1 == totalTask){
+    alert("儲存測試資料");
+
+  	var csvContent = "data:text/csv;charset=utf-8,";
+		arrData.forEach(function(infoArray, index){
+			csvContent += infoArray+ "\n";
+		});
+		var encodedUri = encodeURI(csvContent);
+		window.open(encodedUri);
+
+  }else {
+  // 任務尚未結束，前往下一任務
+    var r = confirm("是否進入任務"+(currentTask+2)+"？");
+    if (r == true ) {
+      $(".identification").empty();
+      currentTask++;
+      addTaskElements(taskIndex[currentTask]);
+      $(".js_taskNum").text(currentTask+1);
+      arrData.push(timeIndex()+"Index"+currentTask+"/Task"+taskIndex[currentTask]+"." );
+    }
+  }
+
+});
