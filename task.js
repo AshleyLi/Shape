@@ -1,23 +1,30 @@
 var currentTask = 0; // 任務順序
 var comletedTaskQty = 0; // 目前完成的任務數量
 var taskIndex = []; //
-var totalTask = 5;
+var totalTask = 3;
 //TaskController================================================================
 $(document).on("click",".gotoNextTask",function(){
   // 任務已經全部完成，則開始儲存.csv
   if(currentTask+1 == totalTask){
     alert("儲存測試資料");
-    var csvContent = "data:text/csv;charset=utf-8,";
-    arrData.forEach(function(infoArray, index){
-       dataString = infoArray.join(",");
-       csvContent += index < data.length ? dataString+ "\n" : dataString;
-    });
-    var encodedUri = encodeURI(csvContent);
-    window.open(encodedUri);
+
+    var test_array = [["name1", 2, 3], ["name2", 4, 5], ["name3", 6, 7], ["name4", 8, 9], ["name5", 10, 11]];
+  	var fname = "IJGResults";
+
+  	var csvContent = "data:text/csv;charset=utf-8,";
+  		arrData.forEach(function(infoArray, index){
+  			dataString = infoArray.join(",");
+  			csvContent += index < infoArray.length ? dataString+ "\n" : dataString;
+  		});
+  		var encodedUri = encodeURI(csvContent);
+  		window.open(encodedUri);
+
+
+
 
   }else {
   // 任務尚未結束，前往下一任務
-    var r = confirm("是否進入下一任務？");
+    var r = confirm("是否進入任務"+(currentTask+2)+"？");
     if (r == true ) {
       $(".identification").empty();
       currentTask++;
@@ -54,5 +61,3 @@ $( document ).ready(function() {
 function addTaskElements(e) {
   $("#task" + e).appendTo(".identification");
 }
-
-//Arrat2CSV================================================================
