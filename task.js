@@ -8,19 +8,12 @@ $(document).on("click",".gotoNextTask",function(){
   if(currentTask+1 == totalTask){
     alert("儲存測試資料");
 
-    var test_array = [["name1", 2, 3], ["name2", 4, 5], ["name3", 6, 7], ["name4", 8, 9], ["name5", 10, 11]];
-  	var fname = "IJGResults";
-
   	var csvContent = "data:text/csv;charset=utf-8,";
-  		arrData.forEach(function(infoArray, index){
-  			dataString = infoArray.join(",");
-  			csvContent += index < infoArray.length ? dataString+ "\n" : dataString;
-  		});
-  		var encodedUri = encodeURI(csvContent);
-  		window.open(encodedUri);
-
-
-
+		arrData.forEach(function(infoArray, index){
+			csvContent += infoArray+ "\n";
+		});
+		var encodedUri = encodeURI(csvContent);
+		window.open(encodedUri);
 
   }else {
   // 任務尚未結束，前往下一任務
