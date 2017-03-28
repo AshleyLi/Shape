@@ -34,7 +34,7 @@ $(document).on("click",".gotoNextTask",function(){
       arrData.push(timeIndex()+"Index"+currentTask+"/Task"+taskIndex[currentTask]+"." );
     }
   }
-
+});
 
 
 //TaskController================================================================

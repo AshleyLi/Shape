@@ -40,6 +40,8 @@ var cellMidline; // cell的中線x位置
 
 var undoString = ""; // 紀錄undo時要執行的：eventType類型、target目標、action動作、task執行項目
 
+var arrData =[]; // User behavior storage
+
 
 
 
@@ -263,7 +265,7 @@ window.Ashley = {
       }else{
         arrData.push(timeIndex()+"CreateElement:"+"Talbeview twice." );
       }
-      $("#tableview").clone().appendTo(".tableContainer")attr("xkID",currentID ).removeAttr("id");
+      $("#tableview").clone().appendTo(".tableContainer").attr("xkID",currentID ).removeAttr("id");
       arrData.push(timeIndex()+"CreateElement:"+"Talbeview" );
       undoString = "$('[xkID="+ currentID +"]').remove();";
       currentID++;
