@@ -10,15 +10,16 @@ $toolSize: 40px;
 $toolColor: #9B9B9B;
 $xkDeepGrey: #53585F;
 $sysUIUnit: 50px;
-$z-sysControl:500;
-$z-toolBar:499;
+
 $z-element:1;
-$z-popview:400;
 $z-table:300;
+$z-popview:400;
+$z-storke:498;
+$z-toolBar:499;
+$z-sysControl:500;
 
 
-
-
+.ooo-canvas-full{z-index: $z-storke;}
 .mgt50{ margin-top: 50px; overflow: visible;}
 a, a:active, a:visited{ color:$xkGreen; }
 a:focus{ box-shadow: none;}
