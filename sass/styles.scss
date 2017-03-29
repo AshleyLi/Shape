@@ -17,8 +17,8 @@ $z-popview:400;
 $z-storke:498;
 $z-toolBar:499;
 $z-sysControl:500;
-
-
+i.icon.icon-f7{background-image: url('../img/img_default.jpg');  background-size:cover;}
+.hide{ display: none;}
 .ooo-canvas-full{z-index: $z-storke;}
 .mgt50{ margin-top: 50px; overflow: visible;}
 a, a:active, a:visited{ color:$xkGreen; }
@@ -250,7 +250,7 @@ button{ background-color:lighten($xkGreen,15%);}
 		border:1px solid rgba(80, 227, 149, 1);
 	}
 }
-.popview{
+.popview, .popContainer{
 	position: absolute;
 	z-index: $z-popview;
 	min-width: 100px;
@@ -273,6 +273,21 @@ button{ background-color:lighten($xkGreen,15%);}
 	}
 }
 .bootstrap-iso .popover{max-width:none;}
+
+
+// <!-- framework7 -->
+.popover{
+	opacity: 1;
+	width: auto;
+	max-width:none;
+	.modal{
+		left: auto;
+		top: auto;
+		font-size: 12px;
+	}
+	.modal-button{font-size: 12px;height: 36px; line-height: 36px;}
+}
+
 #js_popviewType{
 	left: 45px;
 	top:-6px;
@@ -306,21 +321,6 @@ button{ background-color:lighten($xkGreen,15%);}
 		li:active{ background-color: #FFFDE1;}
 	}
 }
-
-// <!-- framework7 -->
-.popover{
-	opacity: 1;
-	width: auto;
-	max-width:none;
-	.modal{
-		left: auto;
-		top: auto;
-		font-size: 12px;
-	}
-	.modal-button{font-size: 12px;height: 36px; line-height: 36px;}
-}
-
-
 #pop-alert{
 	&.modal{
 		width: 200px;

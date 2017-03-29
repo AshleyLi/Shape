@@ -33,10 +33,11 @@ var xShift, yShift;
 
 var tableiQty = 0;
 var tableviewMode = false, repeatCellMode = false;
-var tablePos;
+var tablePos; //表格的位置
 var tableX = [], tableY = []; // 形成t字兩線斷的 x and y
 var tolerance = 50; // T字判斷 線段偏離容許值
 var cellMidline; // cell的中線x位置
+
 
 var undoString = ""; // 紀錄undo時要執行的：eventType類型、target目標、action動作、task執行項目
 
@@ -183,6 +184,7 @@ window.Ashley = {
       pointsX[0] < tablePos.left + $("#tableview").width()
     ){
       // && tableY[0] < pointsY[0] && pointsY[0] < (tableY[0] + MCScreenH)
+      // 筆畫落於表格範圍內
       switch (shapeName) {
         case 'rectangle':
           ACellRectangle();
@@ -237,16 +239,16 @@ window.Ashley = {
     // Tableview ===============================================================
     // Create a tableview.
     function ATableview(){
-
-
-
+      // 畫布中沒有表格
       if(tableiQty != 1){
+        // 初始化表格
         $("#tableview").css({
+          "position": "absolute",
           "display" : "initial",
           "width":MCScreenW+ "px",
           // "height": MCScreenH + 2 +"px",
           "left": popPosX +"px"});
-        // 判斷tableview 是否會超出 iphone 螢幕範圍，若超過則放置於邊界處
+        // 判斷 表格 是否會超出 iphone 螢幕範圍，若超過則放置於邊界處
         if( tableY[0] < popPosY){
           $("#tableview").css("top", popPosY);
         }else if( tableY[0] > popPosY + MCScreenH){
@@ -256,7 +258,7 @@ window.Ashley = {
         }
         // set #tableview position
         tablePos = $("#tableview").position();
-        // 於tableview加入cell
+        // 於表格中加入cell
         for (var i = 0; i < 5; i++) {
           $(".js_tableUl").append("<li class='item-content'><div class='item-inner'><div class='item-title'></div></div></li>");
         }
@@ -265,6 +267,7 @@ window.Ashley = {
       }else{
         arrData.push(timeIndex()+"CreateElement:"+"Talbeview twice." );
       }
+      // 執行表格產生後的行為：移動、動作寫入log、設定undo、更新id
       $("#tableview").clone().appendTo(".tableContainer").attr("xkID",currentID ).removeAttr("id");
       arrData.push(timeIndex()+"CreateElement:"+"Talbeview" );
       undoString = "$('[xkID="+ currentID +"]').remove();";
@@ -272,8 +275,10 @@ window.Ashley = {
     }
     // drawing a rect on a cell.
     function ACellRectangle(){
-      if (pointsX[0] < cellMidline) {
-        // console.log("列表 左側的矩形");
+      var strokeCP = pointsX[0]+(pointsX[1]-pointsX[0])/2; //筆畫@表格 的中心點
+      // 判斷筆畫中心點、cell中心點、表格左右範圍之關係
+      if (strokeCP <= cellMidline && strokeCP > tablePos.left  ) {
+        // 矩形＠表格左側
         if( $(".icon.icon-f7").length == 0 ){
           $(".js_tableUl > .item-content").prepend("<div class='item-media'><i class='icon icon-f7'></i></div>");
           undoString = "$('.js_tableUl > .item-content > .item-media').remove();";
@@ -281,58 +286,72 @@ window.Ashley = {
         }
         arrData.push(timeIndex()+"ErrorStroke:"+ "existed@table-left");
         clearCanvas();
-      } else {
-        // console.log("列表 右側的矩形"); = 加上「 > 」
-        $(".item-content").addClass("item-link");
-        arrData.push(timeIndex()+"CreateElement:"+"@table-right(arrow)" );
-        undoString = "$('item-content').removeClass('item-link');";
+      } else if( strokeCP > cellMidline && strokeCP < tablePos.left + $("#tableview").width() ) {
+        // 矩形＠表格左側、加上「 > 」
+        console.log("沒事沒事兒。");
+        // $(".item-content").addClass("item-link");
+        // arrData.push(timeIndex()+"CreateElement:"+"@table-right(arrow)" );
+        // undoString = "$('item-content').removeClass('item-link');";
 
+      }else {
+        console.log("不左不右");
+        arrData.push(timeIndex()+"ErrorStroke:"+ shapeName+ "@table");
       }
+      console.log("清除");
       clearCanvas();
-      arrData.push(timeIndex()+"ErrorStroke:"+ shapeName+ "@table" );
     }
+    // ==========================================(線段＠表格)======================================================
     function ACellLine(){
       currentID++;
+      var strokeCP = pointsX[0]+(pointsX[1]-pointsX[0])/2; //筆畫@表格 的中心點
+      // 判斷筆畫中心點、cell中心點、表格左右範圍之關係
 
-      // 線段＠列表左側 及 右側
-      if (pointsX[0]+(pointsX[1]-pointsX[0])/2 <= cellMidline) {
-        // console.log("列表 左側的線段");
+      if ( strokeCP <= cellMidline && strokeCP > tablePos.left ) {
+        // ================================（線段＠左側）==========================================
+        console.log("線段＠左");
+
         if( $(".item-title").is(':empty') && $(".subforCell").length == 0 ){
+          // case 1: title & subtitle 都不存在 > 增加 title
           $(".js_tableUl > .item-content > .item-inner > .item-title").append("Item title");
           undoString = "$('.js_tableUl > .item-content > .item-inner > .item-title').empty();"; // (((undo)))
           arrData.push(timeIndex()+"CreateElement:"+"Item title@table-left" );
 
         }else if( $(".item-title").length > 0 && $(".subforCell").length == 0){
+          // case 2: 有 title ，無 subtitle > 增加 subtitle
           $(".js_tableUl > .item-content > .item-inner > .item-title").append("<div class='subforCell' xkID='"+currentID+"'>subtitle</div>");
           undoString = "$('[xkID="+ currentID +"]').remove();"; // (((undo)))
-          arrData.push(timeIndex()+"CreateElement:"+"subtitle@table-left" );
+          arrData.push(timeIndex()+"CreateElement:"+"subTitle@table-left" );
         }else{
+          // case 3: 兩者皆有
           alert("已存在元件故無法新增。");
           arrData.push(timeIndex()+"ErrorStroke:"+ "existed@table-left");
         }
         clearCanvas();
         arrData.push(timeIndex()+"ErrorStroke:"+shapeName+"@table-left");
-      } else {
-        // 確認左側尚無元件存在
-        if( $(".item-after").is(':empty')){
-          // 於表格中增加左側元件
+      } else if( strokeCP > cellMidline && strokeCP < tablePos.left + $("#tableview").width() ){
+        // ======================================（線段＠右側）====================================
+        if( $(".item-after").length==0){
+          // 1. 左側無元件 > 增加預設元件、寫入undo & log
           $(".js_tableUl > .item-content > .item-inner").append("<div class='item-after' xkID='"+currentID+"'>Label</div>");
           undoString = "$('[xkID="+ currentID +"]').remove();"; // (((undo)))
           arrData.push(timeIndex()+"CreateElement:"+"Label@table-right" );
-          // 開啟建議元件列表
-          $(".cell").css({
+          // 2. 開啟建議元件列表
+
+          $(".js_suggestions.cell").css({
             "display":"block",
             "left": tablePos.left + MCScreenW - 5 +"px",
             "top": tablePos.top
           });
-          // 依據有無使用 subforCell 關閉建議元件列表中的 控制項類別元件(cell_left_controller)
-          if($(".subforCell").is(':empty')){
+
+          // 3. 依據有無使用 subforCell 關閉建議元件列表中的 控制項類別元件(cell_left_controller)
+          if($(".subforCell").length == 0 ){
             $(".cell_left_controller").show();
             undoString = "$('.cell_left_controller').hide();"; // (((undo)))
             arrData.push(timeIndex()+"CreateElement:"+"leftController@table-right" );
           }
 
         }else {
+          // 1. 左側有元件 > NOOOOO!!!
           alert("已存在元件故無法新增。");
           arrData.push(timeIndex()+"ErrorStroke:"+ "existed@table-right");
         }
@@ -426,7 +445,7 @@ window.Ashley = {
       var popviewElement = $(".popview").position(); // pop mask 的位置
 
       xShift = pointsX[0] - popviewElement.left - popCustomPopView.left ;
-      yShift = pointsY[0] - popviewElement.top - popCustomPopView.top ;
+      yShift = pointsY[0] - popviewElement.top - popCustomPopView.top + 50 ;
       $("#pop-customPopView").css("display", "block");
 
       // 辨識筆畫 矩形 or 線段
@@ -630,7 +649,7 @@ window.Ashley = {
           arrData.push(timeIndex()+"CreateElement:"+"picker-items[xkID="+currentID +"]by "+shapeName+"@Picker-Inside-Left" );
         }else if( mid_pointsY > mid_v_w && $(".js_rightPickerCol").length == 0){
           // console.log("Inside and right." );
-          $(".js_pickerBase").after("<div xkID='"+ currentID + "' class='picker-items-col picker-items-col-absolute js_rightPickerCol' style='width: 82px;'><div class='picker-items-col-wrapper' style='transform: translate3d(0px, -18px, 0px); transition-duration: 0ms;'><div class='picker-item' data-picker-value='Man' style='transform: translate3d(0px, 108px, 0px) rotateX(54deg); transition-duration: 0ms;'>Man</div> <div class='picker-item' data-picker-value='Luthor' style='transform: translate3d(0px, 108px, 0px) rotateX(36deg); transition-duration: 0ms;'>Luthor</div><div class='picker-item' data-picker-value='Woman' style='transform: translate3d(0px, 108px, 0px) rotateX(18deg); transition-duration: 0ms;'>Woman</div><div class='picker-item picker-selected' data-picker-value='Boy' style='transition-duration: 0ms; transform: translate3d(0px, 108px, 0px) rotateX(0deg);'>Boy</div><div class='picker-item' data-picker-value='Girl' style='transform: translate3d(0px, 108px, 0px) rotateX(-18deg); transition-duration: 0ms;'>Girl</div><div class='picker-item' data-picker-value='Person' style='transform: translate3d(0px, 108px, 0px) rotateX(-36deg); transition-duration: 0ms;'>Person</div><div class='picker-item' data-picker-value='Cutie' style='transform: translate3d(0px, 108px, 0px) rotateX(-54deg); transition-duration: 0ms;'>Cutie</div><div class='picker-item' data-picker-value='Babe' style='transform: translate3d(0px, 108px, 0px) rotateX(-72deg); transition-duration: 0ms;'>Babe</div><div class='picker-item' data-picker-value='Raccoon' style='transform: translate3d(0px, 108px, 0px) rotateX(-90deg); transition-duration: 0ms;'>Raccoon</div></div></div>");
+          $(".js_pickerBase").after("<div xkID='"+ currentID + "' class='picker-items-col picker-items-col-absolute js_rightPickerCol' style='width: 82px;'><div class='picker-items-col-wrapper' style='transform: translate3d(0px, -18px, 0px); transition-duration: 0ms;'><div class='picker-item' data-picker-value='Man' style='transform: translate3d(0px, 108px, 0px) rotateX(54deg); transition-duration: 0ms;'>Man</div> <div class='picker-item' data-picker-value='Luthor' style='transform: translate3d(0px, 108px, 0px) rotateX(36deg); transition-duration: 0ms;'>Luthor</div><div class='picker-item' data-picker-value='Woman' style='transform: translate3d(0px, 108px, 0px) rotateX(18deg); transition-duration: 0ms;'>Woman</div><div class='picker-item picker-selected' data-picker-value='Boy' style='transition-duration: 0ms; transform: translate3d(0px, 108px, 0px) rotateX(0deg);'>Boy</div><div class='picker-item' data-picker-value='Girl' style='transform: translate3d(0px,108px, 0px) rotateX(-18deg); transition-duration: 0ms;'>Girl</div><div class='picker-item' data-picker-value='Person' style='transform: translate3d(0px, 108px, 0px) rotateX(-36deg); transition-duration: 0ms;'>Person</div><div class='picker-item' data-picker-value='Cutie' style='transform: translate3d(0px, 108px, 0px) rotateX(-54deg); transition-duration: 0ms;'>Cutie</div><div class='picker-item' data-picker-value='Babe' style='transform: translate3d(0px, 108px, 0px) rotateX(-72deg); transition-duration: 0ms;'>Babe</div><div class='picker-item' data-picker-value='Raccoon' style='transform: translate3d(0px, 108px, 0px) rotateX(-90deg); transition-duration: 0ms;'>Raccoon</div></div></div>");
           arrData.push(timeIndex()+"CreateElement:"+"picker-items[xkID="+currentID +"]by "+shapeName+"@Picker-Inside-Right" );
           undoString = "$('[xkID="+ currentID +"]').remove();";// (((undo)))
         }
@@ -844,6 +863,8 @@ $(document).on("click",".js_clear",function(){
       // location.reload();
       $("#task" + taskIndex[currentTask]).appendTo(".tasklist");
       $(".identification").empty();
+      $(".tableContainer").empty();
+      tableviewMode = false;
       $("#task" + taskIndex[currentTask]).appendTo(".identification");
   }
 });
