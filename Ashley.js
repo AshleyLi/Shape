@@ -618,7 +618,7 @@ window.Ashley = {
       });
       clearCanvas();
     }
-    // Picker ----------------<)))))
+    // Picker wa di jia----------------<)))))
     function popPicker(){
       currentID++;
       var popviewElement = $(".popview").position(); // pop mask 的位置

@@ -27,11 +27,13 @@ $(document).on("click",".gotoNextTask",function(){
   // 任務尚未結束，前往下一任務
     var r = confirm("是否進入任務"+(currentTask+2)+"？");
     if (r == true ) {
-      $(".identification").empty();
+
+      clearElements();
+
       currentTask++;
       addTaskElements(taskIndex[currentTask]);
       $(".js_taskNum").text(currentTask+1);
-      arrData.push(timeIndex()+"Index"+currentTask+"/Task"+taskIndex[currentTask]+"." );
+      arrData.push(timeIndex()+"No."+currentTask+", Task"+taskIndex[currentTask]+"." );
     }
   }
 });
@@ -52,14 +54,14 @@ $( document ).ready(function() {
   }
   $(".js_totalTask").text(totalTask);
   arrData.push(timeIndex()+"Index="+taskIndex);
-  arrData.push(timeIndex()+"Index"+currentTask+"/Task"+taskIndex[currentTask]+"." );
+  arrData.push(timeIndex()+"No."+currentTask+", Task"+taskIndex[currentTask]+"." );
   addTaskElements(taskIndex[currentTask]);
 });
 
 
 //Add task elements==========================================================
 function addTaskElements(e) {
-  $("#task" + e).appendTo(".identification");
+  $("#task" + e).clone().appendTo(".identification");
 }
 //TaskController================================================================
 $(document).on("click",".gotoNextTask",function(){
