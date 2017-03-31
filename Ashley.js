@@ -55,7 +55,6 @@ $( document ).ready(function() {
   popPosY = Math.floor($(".ooo-section").height()/2 - MCScreenH/2 -2);
   cellMidline = popPosX + Math.floor(MCScreenW/2);
 
-
 });
 
 
@@ -861,11 +860,11 @@ $(document).on("click",".js_clear",function(){
   var r = confirm("是否清除畫布所有元件？");
   if (r == true) {
       // location.reload();
-      $("#task" + taskIndex[currentTask]).appendTo(".tasklist");
+      $("#task" + studyTask[currentTask]).appendTo(".tasklist");
       $(".identification").empty();
       $(".tableContainer").empty();
       tableviewMode = false;
-      $("#task" + taskIndex[currentTask]).appendTo(".identification");
+      $("#task" + studyTask[currentTask]).appendTo(".identification");
   }
 });
 

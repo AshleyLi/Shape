@@ -17,6 +17,17 @@ $z-popview:400;
 $z-storke:498;
 $z-toolBar:499;
 $z-sysControl:500;
+
+
+
+.taskImg{
+	h2{}
+	p{}
+	.thumbnail{}
+	.fullimg{}
+	a{display:block; background-color:#79828c; color:white; padding: 10px 20px;}
+}
+
 i.icon.icon-f7{background-image: url('../img/img_default.jpg');  background-size:cover;}
 .hide{ display: none;}
 .ooo-canvas-full{z-index: $z-storke;}

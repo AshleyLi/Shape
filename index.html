@@ -17,7 +17,7 @@
   <link rel="icon" type="image/png" sizes="96×96" href="https://webdemo.myscript.com/assets/img/demo/WebDemoIcon-Shape_96x96.png">
   <link rel="apple-touch-icon" type="image/png" sizes="96×96" href="https://webdemo.myscript.com/assets/img/demo/WebDemoIcon-Shape_96x96.png">
 
-  <title> Shape the world !!!</title>
+  <title>筆畫測試</title>
 
   <!-- bootstrap -->
   <link rel="stylesheet" href="css/bootstrap-iso/bootstrap-iso.css">
@@ -41,11 +41,12 @@
   <script src="semantic/dist/semantic.min.js"></script>
 
   <!--Configuration file used to store identifiers and some parameters-->
-  <script type="text/javascript" src="./files/configuration.js"></script>
-  <script type="text/javascript" src="./popjsfunct.js"></script>
-  <script type="text/javascript" src="./Ashley.js"></script>
-  <script type="text/javascript" src="./popview.js"></script>
-  <script type="text/javascript" src="./task.js"></script>
+  <script type="text/javascript" src="files/configuration.js"></script>
+  <script type="text/javascript" src="popjsfunct.js"></script>
+  <script type="text/javascript" src="Ashley.js"></script>
+  <script type="text/javascript" src="popview.js"></script>
+  <script type="text/javascript" src="taskSetting.js"></script>
+  <script type="text/javascript" src="task.js"></script>
 
 
 
@@ -64,6 +65,7 @@
 
 <body touch-action="none" onload="load()">
   <div id="content">
+    <!-- ========================= ＮＡＶＩＧＡＴＩＯＮ =========================== -->
     <div class="bootstrap-iso sysControl">
       <div class="navigation">
         <div class="closePopviewEdior" style="display:none;">
@@ -127,7 +129,14 @@
       </ul>
     </div>
     <div class="mockup"></div>
-    <!-- ========================= INFOMATION AREA =========================== -->
+    <img class="thumbnail" src="" alt="">
+    <div class="taskImg">
+      <h2>任務<span>4</span></h2>
+      <p>請繪製紅色虛線處之元件。</p>
+      <img class="fullimg" src="" alt="">
+      <a href="">確認</a>
+    </div>
+    <!-- ========================= ＩＮＦＯＲＭＡＴＩＯＮ =========================== -->
     <div class="showInfo2  js_showCount" role="alert">
       <ul>
         <li>Shape:
