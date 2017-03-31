@@ -13,16 +13,15 @@
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
+<input type="button" value="test" id="btnx" />
 
-<button>Toggle 'em</button>
-<p>Hiya</p>
-<p>Such interesting text, eh?</p>
+
 
 <script>
-$( "button" ).click(function() {
-  $( "p" ).toggle( "slow" );
-});
+function notify() {
+  alert( "clicked" );
+}
+$( "#btnx" ).on( "click", notify());
 </script>
-
 </body>
 </html>

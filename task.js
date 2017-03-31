@@ -1,4 +1,4 @@
-var currentTask = 0; // 當前任務順序
+var currentTask = 0; // 當前任務順序(內容編號)
 var comletedTaskQty = 0; // 目前完成的任務數量
 var taskIndex = []; // totalTask個的測試的順序（非內容編號）
 var totalTask = 45; // 任務總數量
@@ -10,6 +10,8 @@ var taskIndex3 = [43, 23, 39, 41, 13, 6, 26, 0, 9, 27, 15, 7, 35, 11, 17, 12, 10
 var taskIndex4 = [43, 28, 3, 31, 16, 42, 0, 6, 30, 25, 27, 8, 37, 34, 40, 38, 5, 39, 29, 18, 15, 44, 17, 33, 32, 12, 20, 21, 36, 35, 9, 7, 19, 14, 22, 4, 11, 23, 10, 26, 41, 24, 13, 2, 1];
 var taskIndex5 = [8, 30, 12, 0, 11, 3, 35, 22, 1, 39, 27, 13, 32, 9, 4, 17, 14, 42, 15, 41, 21, 43, 10, 20, 7, 2, 19, 37, 6, 26, 33, 24, 16, 23, 29, 44, 25, 38, 28, 5, 18, 31, 36, 34, 40];
 var taskIndex6 = [29, 36, 37, 2, 22, 34, 1, 35, 19, 14, 18, 42, 32, 6, 13, 10, 16, 21, 44, 3, 17, 8, 5, 11, 26, 15, 0, 7, 27, 25, 30, 9, 43, 39, 41, 23, 40, 28, 4, 33, 38, 20, 24, 31, 12];
+var testTask = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44];
+var testTaskPart = [29,30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44];
 
 var studyTask = []; // 目前執行哪一個亂數順序
 
@@ -27,22 +29,33 @@ $(document).ready(function() {
   //   taskIndex[i] = arr[j];
   //   arr.splice(j, 1);
   // }
-  studyTask = taskIndex1;
+  // (一)設定任務
+  studyTask = testTaskPart; //****************************************(ＴＡＳＫ ＳＥＴＴＩＮＧ)****************************************
   $(".js_totalTask").text(totalTask);
+  // (二)寫入ＬＯＧ
   arrData.push(timeIndex()+"Index="+studyTask);
   arrData.push(timeIndex()+"No."+currentTask+", Task"+studyTask[currentTask]+"." );
+  // (三)設定ＴＡＳＫ
   addTaskElements(studyTask[currentTask]);
   $(".js_taskimg").attr("src", "img/tasks/taskimg"+studyTask[currentTask]+".jpeg");
+  // (四)確認是否為單頁動畫任務
+  checkTask();
+
+
+
 });
 
 
 //Add task elements==========================================================
 function addTaskElements(e) {
+  var idddd = getCurrentID() ;
   $("#task" + e).clone().appendTo(".identification");
+  currentID++;
 }
 //TaskController================================================================
 $(document).on("click",".gotoNextTask",function(){
-  // 任務已經全部完成，則開始儲存.csv
+
+  // （一）判斷任務是否全部完成，若已完成則開始儲存.csv
   if(currentTask+1 == totalTask){
     alert("儲存測試資料");
 
@@ -57,10 +70,13 @@ $(document).on("click",".gotoNextTask",function(){
   // 任務尚未結束，前往下一任務
     var r = confirm("是否進入任務"+(currentTask+2)+"？");
     if (r == true ) {
+
       // 清除畫面
       $(".identification").empty();
       // 更新編號
       currentTask++;
+      // 確認是否為單頁動畫任務
+      checkTask();
       // 更新畫面為新任務之佈局
       addTaskElements(studyTask[currentTask]);
       // 變更任務指示圖片及文字
@@ -72,13 +88,89 @@ $(document).on("click",".gotoNextTask",function(){
     }
   }
 
+
 });
 // 關閉任務圖片
 $(document).on("click",".taskImg",function(){
   $(this).css("display","none");
 });
 // 開任務圖片
-$(document).on("click",".thumbnail", showTaskImg() );
 function showTaskImg(){
   $(".taskImg").css("display","flex");
+}
+
+//=====（ＳＰＥＣＩＦＩＣ＿ＴＡＳＫＳ）=====================================================
+function checkTask(){
+  //（四）初始化特定任務所需環境
+  if( studyTask[currentTask] >= 30){
+
+    switch (studyTask[currentTask]) {
+      // Action Sheet =======
+      case 30:
+        console.log("Task 30.");
+        openPopview("Action sheet");
+        break;
+      case 31:
+        console.log("Task 31.");
+        openPopview("Action sheet");
+        break;
+      case 32:
+        console.log("Task 32.");
+        openPopview("Alert");
+        break;
+      // Alert ==============
+      case 33:
+        oopenPopview("Alert");
+        break;
+      case 34:
+        console.log("Task 34.");
+        openPopview("Alert");
+        break;
+      case 35:
+        console.log("Task 35.");
+        openPopview("Alert");
+        break;
+      case 36:
+        console.log("Task 36.");
+        openPopview("Alert");
+        break;
+      // Custom Popview ========
+      case 37:
+        console.log("Task 37.");
+        openPopview("Custom pop view");
+        break;
+      case 38:
+        console.log("Task 34.");
+        openPopview("Custom pop view");
+        break;
+      case 39:
+        console.log("Task 33.");
+        openPopview("Custom pop view");
+        break;
+      case 40:
+        console.log("Task 34.");
+        openPopview("Custom pop view");
+        break;
+      // Picker ===============
+      case 41:
+        console.log("Task 41.");
+        openPopview("Picker");
+        break;
+      case 42:
+        console.log("Task 42.");
+        openPopview("Picker");
+        break;
+      case 43:
+        console.log("Task 43.");
+        openPopview("Picker");
+        break;
+      case 44:
+        console.log("Task 44.");
+        openPopview("Picker");
+        break;
+      default:
+
+    }
+
+  }
 }

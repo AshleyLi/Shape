@@ -129,7 +129,8 @@
       </ul>
     </div>
     <div class="mockup"></div>
-    <img class="thumbnail js_taskimg" src="" alt="">
+    <!-- ＴＡＳＫ＿ＩＮＦＯＲＭＡＴＩＯＮ  -->
+    <img class="thumbnail js_taskimg" src="" alt="" onclick="showTaskImg()" >
     <div class="taskImg ">
       <div>
         <h2>任務<span class="js_taskNum">1</span></h2>
@@ -138,50 +139,50 @@
         <a class="js_closeTaskImg" href="">關閉任務說明</a>
       </div>
     </div>
-    <!-- ========================= ＩＮＦＯＲＭＡＴＩＯＮ =========================== -->
-    <div class="showInfo2  js_showCount" role="alert">
-      <ul>
-        <li>Shape:
-          <span class="js_shapeName"></span>
-        </li>
-        <li>pointsX:
-          <span class="js_pointsX"></span>
-        </li>
-        <li>pointsY:
-          <span class="js_pointsY"></span>
-        </li>
-        <li>Width:
-          <span class="js_shapeW"></span>
-        </li>
-        <li>Height:
-          <span class="js_shapeH"></span>
-        </li>
-        <li>js_suggestions.height:
-          <span class="js_sudkj"></span>
-        </li>
-      </ul>
+    <!-- ========================= ＳＨＡＰＥ＿ＩＮＦＯＲＭＡＴＩＯＮ =========================== -->
+    <div style="display:none">
+      <div class="showInfo2  js_showCount" role="alert">
+        <ul>
+          <li>Shape:
+            <span class="js_shapeName"></span>
+          </li>
+          <li>pointsX:
+            <span class="js_pointsX"></span>
+          </li>
+          <li>pointsY:
+            <span class="js_pointsY"></span>
+          </li>
+          <li>Width:
+            <span class="js_shapeW"></span>
+          </li>
+          <li>Height:
+            <span class="js_shapeH"></span>
+          </li>
+          <li>js_suggestions.height:
+            <span class="js_sudkj"></span>
+          </li>
+        </ul>
+      </div>
+      <div class="showInfo2  js_showCount right" >
+        <ul>
+          <li>ShapeQty:
+            <span class="js_ShapeQty"></span>
+          </li>
+          <li>You got :
+            <span class="js_correctness"></span>p / total:
+            <span class="js_totalScore"></span>p (
+            <span class="js_percentage"></span>)</li>
+          <li>
+            <hr>
+          </li>
+        </ul>
+        <ul class="score"></ul>
+      </div>
     </div>
-    <div class="showInfo2  js_showCount right" style="display:none">
-      <ul>
-        <li>ShapeQty:
-          <span class="js_ShapeQty"></span>
-        </li>
-        <li>You got :
-          <span class="js_correctness"></span>p / total:
-          <span class="js_totalScore"></span>p (
-          <span class="js_percentage"></span>)</li>
-        <li>
-          <hr>
-        </li>
-      </ul>
-      <ul class="score"></ul>
-    </div>
 
 
 
-
-
-    <!-- BASIC ================================================================= -->
+    <!-- ＢＡＳＩＣ＿ＥＬＥＭＥＮＴＳ ================================================================= -->
     <div class="identification">
     </div>
     <!--<<< regular js_suggestions >>>-->
@@ -325,7 +326,7 @@
       </div>
     </div>
 
-    <!-- TABLE ================================================================= -->
+    <!-- ＴＡＢＬＥ ================================================================= -->
     <div class="tableContainer"></div>
     <!--<<< template >>>-->
     <div style="visibility: hidden;">
@@ -406,107 +407,16 @@
     </div>
 
 
-    <!-- POP =================================================================== -->
+    <!-- ＰＯＰＶＩＥＷ =================================================================== -->
     <div class="popContainer"></div>
     <!--<<< template >>>-->
-    <div style="visibility: hidden;">
-      <div class="popview" style="display:none;">
-        <!-- 1:pop-alert -->
-        <div id="pop-alert" class="modal modal-in" style="display:none;">
-          <div class="modal-inner">
-            <div class="modal-title">簡短文字</div>
-            <div class="modal-text" style="display:none;">以簡短句子補充敘述標題內容。</div>
-            <input type="text" class="modal-text-input"  placeholder="Input text..." style="display:none;">
-          </div>
-          <div class="modal-buttons">
-            <span class="modal-button">按鈕</span>
-          </div>
-        </div>
-        <!-- 2:pop-actionSheet -->
-        <div id="pop-actionSheet" class="modal modal-in" style="display:none;">
-          <div class="actions-modal modal-in">
-            <div class="actions-modal-group">
-              <!-- <div class="actions-modal-label">Do something</div> -->
-              <div class="actions-modal-button">按鈕1</div>
-              <div class="actions-modal-button">按鈕2</div>
-            </div>
-            <div class="actions-modal-group">
-              <div class="actions-modal-button color-red">取消</div>
-            </div>
-          </div>
-        </div>
-        <!-- 3:pop-customPopView -->
-        <div id="pop-customPopView" style="display:none;">
-        </div>
-        <!-- 4:pop-picker -->
-        <div id="pop-picker" style="display:none;">
-          <!-- Views:framework7.picker-->
-          <div class="views">
-            <!-- Your main view, should have "view-main" class-->
-            <div class="view view-main">
-              <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
-              <div class="pages navbar-through toolbar-through">
-                <!-- Page, data-page contains page name-->
-                <div data-page="index" class="page">
-                  <!-- Scrollable page content-->
-                  <div class="page-content">
-                    <div class="picker-modal picker-columns  picker-3d remove-on-close modal-in" style="display: block;">
-                      <div class="picker-modal-inner picker-items">
-                          <!-- <div class="picker-items-col picker-items-col-absolute js_leftPickerCol" style="width: 44px;display:none;">
-                              <div class="picker-items-col-wrapper" style="transform: translate3d(0px, 90px, 0px); transition-duration: 0ms;">
-                                  <div class="picker-item picker-selected" data-picker-value="Mr" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(0deg);">Mr</div>
-                                  <div class="picker-item" data-picker-value="Ms" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-18deg);">Ms</div>
-                              </div>
-                          </div> -->
-                          <div class="picker-items-col picker-items-col-left picker-items-col-absolute js_pickerBase" style="width: 98px;">
-                              <div class="picker-items-col-wrapper" style="transform: translate3d(0px, 90px, 0px); transition-duration: 0ms;">
-                                  <div class="picker-item picker-selected" data-picker-value="Super" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(0deg);">Super</div>
-                                  <div class="picker-item" data-picker-value="Lex" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-18deg);">Lex</div>
-                                  <div class="picker-item" data-picker-value="Amazing" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-36deg);">Amazing</div>
-                                  <div class="picker-item" data-picker-value="Bat" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-54deg);">Bat</div>
-                                  <div class="picker-item" data-picker-value="Iron" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-72deg);">Iron</div>
-                                  <div class="picker-item" data-picker-value="Rocket" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-90deg);">Rocket</div>
-                                  <div class="picker-item" data-picker-value="Lex" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-108deg);">Lex</div>
-                                  <div class="picker-item" data-picker-value="Cool" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-126deg);">Cool</div>
-                                  <div class="picker-item" data-picker-value="Beautiful" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-144deg);">Beautiful</div>
-                                  <div class="picker-item" data-picker-value="Wonderful" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-162deg);">Wonderful</div>
-                                  <div class="picker-item" data-picker-value="Raining" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Raining</div>
-                                  <div class="picker-item" data-picker-value="Happy" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Happy</div>
-                                  <div class="picker-item" data-picker-value="Amazing" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Amazing</div>
-                                  <div class="picker-item" data-picker-value="Funny" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Funny</div>
-                                  <div class="picker-item" data-picker-value="Cool" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Cool</div>
-                                  <div class="picker-item" data-picker-value="Hot" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Hot</div>
-                              </div>
-                          </div>
-                          <!-- <div class="picker-items-col picker-items-col-absolute js_rightPickerCol" style="width: 82px; display:none;">
-                              <div class="picker-items-col-wrapper" style="transform: translate3d(0px, -18px, 0px); transition-duration: 0ms;">
-                                  <div class="picker-item" data-picker-value="Man" style="transform: translate3d(0px, 108px, 0px) rotateX(54deg); transition-duration: 0ms;">Man</div>
-                                  <div class="picker-item" data-picker-value="Luthor" style="transform: translate3d(0px, 108px, 0px) rotateX(36deg); transition-duration: 0ms;">Luthor</div>
-                                  <div class="picker-item" data-picker-value="Woman" style="transform: translate3d(0px, 108px, 0px) rotateX(18deg); transition-duration: 0ms;">Woman</div>
-                                  <div class="picker-item picker-selected" data-picker-value="Boy" style="transition-duration: 0ms; transform: translate3d(0px, 108px, 0px) rotateX(0deg);">Boy</div>
-                                  <div class="picker-item" data-picker-value="Girl" style="transform: translate3d(0px, 108px, 0px) rotateX(-18deg); transition-duration: 0ms;">Girl</div>
-                                  <div class="picker-item" data-picker-value="Person" style="transform: translate3d(0px, 108px, 0px) rotateX(-36deg); transition-duration: 0ms;">Person</div>
-                                  <div class="picker-item" data-picker-value="Cutie" style="transform: translate3d(0px, 108px, 0px) rotateX(-54deg); transition-duration: 0ms;">Cutie</div>
-                                  <div class="picker-item" data-picker-value="Babe" style="transform: translate3d(0px, 108px, 0px) rotateX(-72deg); transition-duration: 0ms;">Babe</div>
-                                  <div class="picker-item" data-picker-value="Raccoon" style="transform: translate3d(0px, 108px, 0px) rotateX(-90deg); transition-duration: 0ms;">Raccoon</div>
-                              </div>
-                          </div> -->
-                          <div class="picker-center-highlight"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- /Views:framework7.picker-->
-        </div>
-        <!-- /pop-picker -->
-      </div>
+    <div class="popview" style="display:none;">
+
     </div>
 
 
-    <!-- STROKE ================================================================ -->
+
+    <!-- ＳＴＲＯＫＥ＿ＩＮＰＵＴ ================================================================ -->
     <section class="ooo-section">
       <!-- Declare a SHAPE WebComponent, with typeset=true to render the recognition result on the component -->
       <myscript-common-element id="shape-input" class="ooo-canvas-full" type="SHAPE" typeset="true" >
@@ -586,84 +496,226 @@
   <script type="text/javascript" src="javascripts/js/framework7.min.js"></script>
   <!-- Path to your app js-->
   <script type="text/javascript" src="javascripts/js/my-app.js"></script>
-  <!-- 測試任務 -->
+  <!-- ＴＡＳＫＳ＿ＥＬＥＭＥＮＴＳ ============================================================= -->
   <div class="bootstrap-iso">
+    <div class="popTemp" style="display:none;">
+      <!-- 1:ＡＬＥＲＴ -->
+      <div id="pop-alert" class="modal modal-in" style="display:none;">
+        <div class="modal-inner">
+          <div class="modal-title">簡短文字</div>
+          <div class="modal-text" style="display:none;">以簡短句子補充敘述標題內容。</div>
+          <input type="text" class="modal-text-input"  placeholder="Input text..." style="display:none;">
+        </div>
+        <div class="modal-buttons">
+          <span class="modal-button">按鈕</span>
+        </div>
+      </div>
+      <!-- 2:ＡＣＴＩＯＮ＿ＳＨＥＥＴ -->
+      <div id="pop-actionSheet" class="modal modal-in" style="display:none;">
+        <div class="actions-modal modal-in">
+          <div class="actions-modal-group">
+            <!-- <div class="actions-modal-label">Do something</div> -->
+            <div class="actions-modal-button">按鈕1</div>
+            <div class="actions-modal-button">按鈕2</div>
+          </div>
+          <div class="actions-modal-group">
+            <div class="actions-modal-button color-red">取消</div>
+          </div>
+        </div>
+      </div>
+      <!-- 3:ＣＵＳＴＯＭ＿ＰＯＰＶＩＥＷ -->
+      <div id="pop-customPopView" style="display:none;"></div>
+      <!-- 4:ＰＩＣＫＥＲ -->
+      <div id="pop-picker" style="display:none;">
+        <!-- Views:framework7.picker-->
+        <div class="views">
+          <!-- Your main view, should have "view-main" class-->
+          <div class="view view-main">
+            <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <div class="pages navbar-through toolbar-through">
+              <!-- Page, data-page contains page name-->
+              <div data-page="index" class="page">
+                <!-- Scrollable page content-->
+                <div class="page-content">
+                  <div class="picker-modal picker-columns  picker-3d remove-on-close modal-in" style="display: block;">
+                    <div class="picker-modal-inner picker-items">
+                        <!-- <div class="picker-items-col picker-items-col-absolute js_leftPickerCol" style="width: 44px;display:none;">
+                            <div class="picker-items-col-wrapper" style="transform: translate3d(0px, 90px, 0px); transition-duration: 0ms;">
+                                <div class="picker-item picker-selected" data-picker-value="Mr" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(0deg);">Mr</div>
+                                <div class="picker-item" data-picker-value="Ms" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-18deg);">Ms</div>
+                            </div>
+                        </div> -->
+                        <div class="picker-items-col picker-items-col-left picker-items-col-absolute js_pickerBase" style="width: 98px;">
+                            <div class="picker-items-col-wrapper" style="transform: translate3d(0px, 90px, 0px); transition-duration: 0ms;">
+                                <div class="picker-item picker-selected" data-picker-value="Super" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(0deg);">Super</div>
+                                <div class="picker-item" data-picker-value="Lex" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-18deg);">Lex</div>
+                                <div class="picker-item" data-picker-value="Amazing" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-36deg);">Amazing</div>
+                                <div class="picker-item" data-picker-value="Bat" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-54deg);">Bat</div>
+                                <div class="picker-item" data-picker-value="Iron" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-72deg);">Iron</div>
+                                <div class="picker-item" data-picker-value="Rocket" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-90deg);">Rocket</div>
+                                <div class="picker-item" data-picker-value="Lex" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-108deg);">Lex</div>
+                                <div class="picker-item" data-picker-value="Cool" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-126deg);">Cool</div>
+                                <div class="picker-item" data-picker-value="Beautiful" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-144deg);">Beautiful</div>
+                                <div class="picker-item" data-picker-value="Wonderful" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-162deg);">Wonderful</div>
+                                <div class="picker-item" data-picker-value="Raining" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Raining</div>
+                                <div class="picker-item" data-picker-value="Happy" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Happy</div>
+                                <div class="picker-item" data-picker-value="Amazing" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Amazing</div>
+                                <div class="picker-item" data-picker-value="Funny" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Funny</div>
+                                <div class="picker-item" data-picker-value="Cool" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Cool</div>
+                                <div class="picker-item" data-picker-value="Hot" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px) rotateX(-180deg);">Hot</div>
+                            </div>
+                        </div>
+                        <!-- <div class="picker-items-col picker-items-col-absolute js_rightPickerCol" style="width: 82px; display:none;">
+                            <div class="picker-items-col-wrapper" style="transform: translate3d(0px, -18px, 0px); transition-duration: 0ms;">
+                                <div class="picker-item" data-picker-value="Man" style="transform: translate3d(0px, 108px, 0px) rotateX(54deg); transition-duration: 0ms;">Man</div>
+                                <div class="picker-item" data-picker-value="Luthor" style="transform: translate3d(0px, 108px, 0px) rotateX(36deg); transition-duration: 0ms;">Luthor</div>
+                                <div class="picker-item" data-picker-value="Woman" style="transform: translate3d(0px, 108px, 0px) rotateX(18deg); transition-duration: 0ms;">Woman</div>
+                                <div class="picker-item picker-selected" data-picker-value="Boy" style="transition-duration: 0ms; transform: translate3d(0px, 108px, 0px) rotateX(0deg);">Boy</div>
+                                <div class="picker-item" data-picker-value="Girl" style="transform: translate3d(0px, 108px, 0px) rotateX(-18deg); transition-duration: 0ms;">Girl</div>
+                                <div class="picker-item" data-picker-value="Person" style="transform: translate3d(0px, 108px, 0px) rotateX(-36deg); transition-duration: 0ms;">Person</div>
+                                <div class="picker-item" data-picker-value="Cutie" style="transform: translate3d(0px, 108px, 0px) rotateX(-54deg); transition-duration: 0ms;">Cutie</div>
+                                <div class="picker-item" data-picker-value="Babe" style="transform: translate3d(0px, 108px, 0px) rotateX(-72deg); transition-duration: 0ms;">Babe</div>
+                                <div class="picker-item" data-picker-value="Raccoon" style="transform: translate3d(0px, 108px, 0px) rotateX(-90deg); transition-duration: 0ms;">Raccoon</div>
+                            </div>
+                        </div> -->
+                        <div class="picker-center-highlight"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Views:framework7.picker-->
+      </div>
+    </div>
     <div class=" hidden tasklist">
-      <div id="task0">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務0</span>
-      </div>
-      <div id="task1">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務1</span>
-      </div>
-      <div id="task2">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務2</span>
-      </div>
-      <div id="task3">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務3</span>
-      </div>
-      <div id="task4">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務4</span>
-      </div>
-      <div id="task5">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務5</span>
-      </div>
-      <div id="task6">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務6</span>
-      </div>
-      <div id="task7">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務7</span>
-      </div>
+      <div id="task0"></div>
+      <div id="task1"></div>
+      <div id="task2"></div>
+      <div id="task3"></div>
+      <div id="task4"></div>
+      <div id="task5"></div>
+      <div id="task6"></div>
+      <div id="task7"></div>
       <div id="task8">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務8</span>
-      </div>
+        <span style="width:115px;left:383px;top:130px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">氣象快報</span>
+        <img src="/img/img_default.jpg"  style="width: 225px;height:142px;left: 380px;top: 398px;">
+        <span style="width:92px;left: 381px;top: 367px;text-overflow:ellipsis;white-space: nowrap;overflow:hidden;font-size:20px;">衛星雲圖</span></div>
       <div id="task9">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務9</span>
-      </div>
+        <span style="width:115px;left:383px;top:130px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">天氣預報</span></div>
       <div id="task10">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務10</span>
+        <span style="width: 44px; left: 388px; top: 125px; white-space: nowrap; overflow: hidden; font-size: 12px;">天氣預報</span>
       </div>
       <div id="task11">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務11</span>
+        <span style="width:100px;left:383px;top: 376px;text-overflow:ellipsis;white-space: nowrap;overflow:hidden;font-size:20px;">氣象快報</span>
       </div>
       <div id="task12">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務12</span>
-      </div>
+        <span style="width: 46px; left: 396px; top: 293px; white-space: nowrap; overflow: hidden; font-size: 12px;">評論</span></div>
       <div id="task13">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務13</span>
+        <span style="width: 50px;left: 386px;top: 130px;white-space: nowrap;overflow: hidden;font-size: 12px;">建立貼文</span>
       </div>
       <div id="task14">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務14</span>
+        <span style="width: 68px; left: 408px; top: 301px; white-space: nowrap; overflow: hidden; font-size: 12px;">訂閱電子報</span>
       </div>
       <div id="task15">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務15</span>
+        <span style="width: 40px; left: 379px; top: 446px; white-space: nowrap; overflow: hidden; font-size: 12px;">留言</span>
       </div>
-      <div id="task16">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務16</span>
-      </div>
+      <div id="task16"></div>
       <div id="task17">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務17</span>
+        <img src="/img/img_default.jpg" style="width: 222px;height:203px;left: 382px;top:129px;">
+        <span style="width:123px;left:380px;top: 339px;text-overflow:ellipsis;white-space: nowrap;overflow:hidden;font-size:20px;">商品名稱</span>
+        <div style="width: 225px;height: 116px;left: 380px;top: 365px;overflow:hidden;">今明兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。</div>
       </div>
       <div id="task18">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務18</span>
+        <img src="/img/img_default.jpg" style="width: 222px;height:203px;left: 382px;top: 168px;">
+        <div style="width: 226px;height: 169px;left: 380px;top: 379px;overflow:hidden;">今明兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。</div>
       </div>
       <div id="task19">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務19</span>
+        <img src="/img/img_default.jpg" style="width: 230px;height:238px;left: 378px;top: 124px;">
+        <button type="button" style="width: 119px;height:37px;left: 379px;top: 367px;">按鈕</button>
       </div>
-      <div id="task20">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務20</span>
-      </div>
-      <div id="task21">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務21</span>
-      </div>
+      <div id="task20"></div>
+      <div id="task21"></div>
       <div id="task22">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務22</span>
+        <img src="/img/img_default.jpg" style="width: 230px;height:238px;left: 378px;top: 124px;">
       </div>
       <div id="task23">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務23</span>
+        <img src="/img/img_default.jpg" style="width: 232px;height: 113px;left: 378px;top:121px;">
+        <span style="width:90px;left:382px;top:251px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">文字文字</span>
+        <span style="width: 50px;left: 552px;top: 248px;white-space: nowrap;overflow: hidden;font-size: 12px;">文字文字</span>
+        <img src="/img/img_default.jpg" style="width: 70px;height: 70px;left: 376px;top: 282px;">
+        <img src="/img/img_default.jpg" style="width: 70px;height: 70px;left: 457px;top: 282px;">
+        <img src="/img/img_default.jpg" style="width: 70px;height: 70px;left:538px;top: 283px;">
+        <hr style="width:227px;height:1px;left:376px;top: 410px;background-color:lightgrey;margin:0px;padding:0px;">
+        <img src="/img/img_default.jpg" style="width: 70px;height: 70px;left: 379px;top:424px;">
+        <img src="/img/img_default.jpg" style="width: 70px;height: 70px;left: 457px;top: 424px;">
+        <img src="/img/img_default.jpg" style="width: 70px;height: 70px;left: 535px;top: 424px;">
+        <span style="width: 70px; left: 377px; top: 498px; white-space: nowrap; overflow: hidden; font-size: 12px;">文字文字文字文字文字文字文字文字</span>
+        <span style="width: 70px;left: 456px;top: 497px;white-space: nowrap;overflow: hidden;font-size: 12px;">文字文字文字文字文字文字文字文字</span>
+        <span style="width: 70px;left: 534px;top: 497px;white-space: nowrap;overflow: hidden;font-size: 12px;">文字文字文字文字文字文字文字文字</span>
       </div>
       <div id="task24">
-        <span xkid="default" style="width:261px;left:347px;top:380px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">任務24</span>
+        <div style="width: 242px;height: 38px;left: 371px;top: 117px;background-color:#eee;"></div>
+        <span style="width: 100px;left: 379px;top: 126px;white-space: nowrap;overflow: hidden;font-size: 12px;">文字文字</span>
+        <img src="/img/img_default.jpg" style="width:77px;height:76px;left:381px;top:170px;">
+        <span style="width: 52px; left: 462px; top: 173px; white-space: nowrap; overflow: hidden; font-size: 12px;">文字文字文字</span>
+        <button type="button" xkid="5" style="width:63px;height:28px;left:537px;top:205px;">按鈕</button>
+        <img src="/img/img_default.jpg" xkid="6" style="width: 224px;height:136px;left: 380px;top: 302px;">
+        <div style="width: 219px;height: 102px;left: 379px;top: 447px;overflow:hidden;">今明兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。</div>
       </div>
+      <div id="task25">
+         <img src="/img/img_default.jpg" style="width: 230px;height:91px;left: 376px;top: 123px;">
+         <span style="width:94px;left:446px;top:229px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;">文字文字</span>
+         <span style="width: 100px;left: 450px;top: 290px;white-space: nowrap;overflow: hidden;font-size: 12px;">文字文字文字</span>
+         <img src="/img/img_default.jpg" style="width:218px;height:88px;left:383px;top:345px;">
+         <span style="width:83px;left: 450px;top: 443px;text-overflow:ellipsis;white-space: nowrap;overflow:hidden;font-size:20px;">文字文字</span>
+         <span style="width: 74px;left: 450px;top: 502px;white-space: nowrap;overflow: hidden;font-size: 12px;">文字文字文字</span>
+      </div>
+      <div id="task26">
+        <span style="width: 28px;left: 391px;top: 202px;white-space: nowrap;overflow: hidden;font-size: 12px;">設定</span>
+      </div>
+      <div id="task27">
+        <div style="width: 241px;height: 40px;left: 371px;top: 118px;background-color:#eee;"></div>
+        <span style="width:155px;left: 470px;top: 128px;text-overflow:ellipsis;white-space: nowrap;overflow:hidden;font-size:20px;">設定</span>
+      </div>
+      <div id="task28">
+        <span style="width: 100px;left: 391px;top: 202px;white-space: nowrap;overflow: hidden;font-size: 12px;">應用程式</span>
+      </div>
+      <div id="task29">
+        <span style="width: 100px;left: 391px;top: 300px;white-space: nowrap;overflow: hidden;font-size: 12px;">通知設定</span>
+      </div>
+      <div id="task30">
+        <div id="pop-actionSheet" class="modal modal-in" style="display: block; top: 0px; width: 243px; height: 430px;">
+          <div class="actions-modal modal-in">
+            <div class="actions-modal-group">
+              <!-- <div class="actions-modal-label">Do something</div> -->
+              <div class="actions-modal-button">按鈕1</div>
+              <div class="actions-modal-button">按鈕2</div>
+            </div>
+            <div class="actions-modal-group">
+              <div class="actions-modal-button color-red">取消</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="task31"></div>
+      <div id="task32"></div>
+      <div id="task33"></div>
+      <div id="task34"></div>
+      <div id="task35"></div>
+      <div id="task36"></div>
+      <div id="task37"></div>
+      <div id="task38"></div>
+      <div id="task39"></div>
+      <div id="task40"></div>
+      <div id="task41"></div>
+      <div id="task42"></div>
+      <div id="task43"></div>
+      <div id="task44"></div>
+      <div id="task45"></div>
+
+
 
 
 

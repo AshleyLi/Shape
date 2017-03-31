@@ -26,7 +26,7 @@ var xkID, currentID = 0;
 
 var popEditor = false;
 var popPosX , popPosY ;
-var selectedType;
+var selectedType = "none";
 
 var ASTitle = false;
 var xShift, yShift;
@@ -444,7 +444,7 @@ window.Ashley = {
       var popviewElement = $(".popview").position(); // pop mask 的位置
 
       xShift = pointsX[0] - popviewElement.left - popCustomPopView.left ;
-      yShift = pointsY[0] - popviewElement.top - popCustomPopView.top + 50 ;
+      yShift = pointsY[0] - popviewElement.top - popCustomPopView.top  ;
       $("#pop-customPopView").css("display", "block");
 
       // 辨識筆畫 矩形 or 線段
@@ -528,7 +528,7 @@ window.Ashley = {
           //筆畫落於 ActionSheet 之外的線段
           if(ASTitle == false){
             ASTitle = true;
-            $(".actions-modal-group:first-child").prepend("<div class='actions-modal-label' xkID='"+ currentID + "'>Do something</div>");
+            $(".actions-modal-group:first-child").prepend("<div class='actions-modal-label' xkID='"+ currentID + "'>說明文字</div>");
             arrData.push(timeIndex()+"CreateElement:"+"title["+currentID +"]by"+shapeName+"@ActionSheet-Outside" );
           }else {
             // title 已存在則只能新增 button
@@ -865,9 +865,12 @@ $(document).on("click",".js_clear",function(){
       $(".tableContainer").empty();
       tableviewMode = false;
       $("#task" + studyTask[currentTask]).appendTo(".identification");
+      resetPage();
   }
 });
-
+function resetPage(){
+  ("[xkID]").remove();
+}
 // Clear the myScript canvas.===================================================
 function clearCanvas(){
   $("paper-fab[icon='delete']").trigger("click");
@@ -890,6 +893,10 @@ function addXkID(e){
   var targetComponent = e;
   $(targetComponent).attr("xkID",currentID);
   currentID++;
+}
+function getCurrentID() {
+  currentID++;
+  return currentID;
 }
 // timeIndex for data log ID  ==============================================================
 function timeIndex(){

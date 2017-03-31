@@ -22,7 +22,12 @@ $z-sysControl:500;
 .thumbnail{position: absolute; z-index: 600;
 	right: 40px;
 	top: 80px;
-	width: 20%;}
+	width: 20%;    border: 1px solid #ccc;
+    border-width: 1px 1px 3px 1px;
+    border-bottom-color: rgba(0,0,0,0.3);
+		opacity: 0.8;
+	}
+
 .taskImg{
 	color:white;
 	background-color: rgba(0,0,0,0.8);
@@ -61,7 +66,7 @@ button{ background-color:lighten($xkGreen,15%);}
   background-size: 280px;
   background-repeat: no-repeat;
 	position: relative;
-  top:-27px;
+  top:15px;
 }
 .sysControl{
 	position: absolute;
