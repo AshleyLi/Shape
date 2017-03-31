@@ -16,8 +16,6 @@ var studyTask = []; // 目前執行哪一個亂數順序
 
 //TaskController================================================================
 $(document).ready(function() {
-  alert("沒有彈出來啊!!!!!!!");
-
   // // 取得總長25的數列 ===================
   // var arr = [];
   // for (var i = 0; i < totalTask; i++) {
@@ -34,7 +32,7 @@ $(document).ready(function() {
   arrData.push(timeIndex()+"Index="+studyTask);
   arrData.push(timeIndex()+"No."+currentTask+", Task"+studyTask[currentTask]+"." );
   addTaskElements(studyTask[currentTask]);
-  $(".thumbnail")attr("src", "img/tasks/taskimg"+studyTask[currentTask]+".jpeg");
+  $(".js_taskimg").attr("src", "img/tasks/taskimg"+studyTask[currentTask]+".jpeg");
 });
 
 
@@ -59,46 +57,28 @@ $(document).on("click",".gotoNextTask",function(){
   // 任務尚未結束，前往下一任務
     var r = confirm("是否進入任務"+(currentTask+2)+"？");
     if (r == true ) {
+      // 清除畫面
       $(".identification").empty();
+      // 更新編號
       currentTask++;
+      // 更新畫面為新任務之佈局
       addTaskElements(studyTask[currentTask]);
+      // 變更任務指示圖片及文字
       $(".js_taskNum").text(currentTask+1);
+      $(".js_taskimg").css("display","flex").attr("src", "img/tasks/taskimg"+studyTask[currentTask]+".jpeg");
+      showTaskImg();
+      // 寫入紀錄
       arrData.push(timeIndex()+"Index"+currentTask+"/Task"+studyTask[currentTask]+"." );
     }
   }
 
 });
-//TaskController================================================================
-$(document).on("click",".gotoNextTask",function(){
-  // 任務已經全部完成，則開始儲存.csv
-  if(currentTask+1 == totalTask){
-    alert("儲存測試資料");
-
-    var test_array = [["name1", 2, 3], ["name2", 4, 5], ["name3", 6, 7], ["name4", 8, 9], ["name5", 10, 11]];
-  	var fname = "IJGResults";
-
-  	var csvContent = "data:text/csv;charset=utf-8,";
-  		arrData.forEach(function(infoArray, index){
-  			dataString = infoArray.join(",");
-  			csvContent += index < infoArray.length ? dataString+ "\n" : dataString;
-  		});
-  		var encodedUri = encodeURI(csvContent);
-  		window.open(encodedUri);
-
-
-
-
-  }else {
-  // 任務尚未結束，前往下一任務
-    var r = confirm("是否進入任務"+(currentTask+2)+"？");
-    if (r == true ) {
-
-      clearElements();
-
-      currentTask++;
-      addTaskElements(studyTask[currentTask]);
-      $(".js_taskNum").text(currentTask+1);
-      arrData.push(timeIndex()+"No."+currentTask+", Task"+studyTask[currentTask]+"." );
-    }
-  }
+// 關閉任務圖片
+$(document).on("click",".taskImg",function(){
+  $(this).css("display","none");
 });
+// 開任務圖片
+$(document).on("click",".thumbnail", showTaskImg() );
+function showTaskImg(){
+  $(".taskImg").css("display","flex");
+}
