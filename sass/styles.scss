@@ -282,6 +282,13 @@ button{ background-color:lighten($xkGreen,15%);}
 		border:1px solid rgba(80, 227, 149, 1);
 	}
 }
+
+
+
+
+// <!-- framework7 -->
+
+//==================================（ＰＯＰ）====================================
 .popview, .popContainer{
 	position: absolute;
 	z-index: $z-popview;
@@ -304,10 +311,6 @@ button{ background-color:lighten($xkGreen,15%);}
 		text-align: center;
 	}
 }
-.bootstrap-iso .popover{max-width:none;}
-
-
-// <!-- framework7 -->
 .popover{
 	opacity: 1;
 	width: auto;
@@ -319,7 +322,7 @@ button{ background-color:lighten($xkGreen,15%);}
 	}
 	.modal-button{font-size: 12px;height: 36px; line-height: 36px;}
 }
-
+.bootstrap-iso .popover{max-width:none;}
 #js_popviewType{
 	left: 45px;
 	top:-6px;
@@ -368,7 +371,7 @@ button{ background-color:lighten($xkGreen,15%);}
 	}
 	.modal-buttons{
 		.modal-button{
-		font-size: 16px;
+		font-size: 13px;
 		line-height: 36px;}
 		&:last-child {
 			border-bottom:none;
@@ -378,7 +381,7 @@ button{ background-color:lighten($xkGreen,15%);}
 		}
 	}
 }
-#pop-actionSheet{
+#pop-actionSheet, .pop-actionSheet{
 	&.modal{
 		width:100%;
 		left: auto;
@@ -389,7 +392,7 @@ button{ background-color:lighten($xkGreen,15%);}
 	.actions-modal-button{font-size: 14px; height: 44px; line-height: 44px;}
 	.actions-modal-button, .actions-modal-label{background: rgba(255,255,255,.8);}
 }
-#pop-customPopView{
+#pop-customPopView, .pop-customPopView{
 		border-radius: 4px;
 		background-color: white;
 		min-height: 100px;
@@ -402,8 +405,7 @@ button{ background-color:lighten($xkGreen,15%);}
 			font-family: 'Architects Daughter', cursive;
 		}
 }
-
-#pop-picker{
+#pop-picker, .pop-picker{
 	.picker-columns{
 		height: 200px;
 	}
@@ -438,6 +440,9 @@ button{ background-color:lighten($xkGreen,15%);}
 	}
 	.picker-item{font-size: 17px;}
 }
+
+//==================================（ＴＡＢＬＥ）====================================
+
 #tableview{
 	position: $z-table;
 	.list-block{

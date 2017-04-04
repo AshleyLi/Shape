@@ -23,6 +23,7 @@ var componentP = [5,4,3,2,1];
 var totalScore = 0;
 var popSuggestionsX, popSuggestionsY ;
 var xkID, currentID = 0;
+var popviewCanvas; // for popview position
 
 var popEditor = false;
 var popPosX , popPosY ;
@@ -103,7 +104,7 @@ window.Ashley = {
           shapeName = "table" ;
         }else{
           arrData.push(timeIndex()+"ErrorStroke:"+"Talbe");
-          clearCanvas();
+          cleanCanvas();
         }
     }else{
       shapeName = responseObject.result.segments[0].candidates[0].label;
@@ -115,8 +116,9 @@ window.Ashley = {
 
 
 
-
-    // Get shape information
+//====================================================================================================
+// ==================================（ＧＥＴ＿ＳＨＡＰＥ＿ＩＮＦＯＲＭＡＴＩＯＮ）===========================
+//====================================================================================================
     function getShapeInfo(){
       if(shapeName == "rectangle" || shapeName == "square"){
         // rectangle:  Get shape posX and posY array
@@ -166,24 +168,23 @@ window.Ashley = {
         arrData.push(timeIndex()+"ErrorStroke:"+ shapeName);
         removeWrongShape();
       }
-      // Show shape information ====================================================================
+      // Show shape information ===============
       $(".js_pointsX").text(pointsX);
       $(".js_pointsY").text(pointsY);
 
     }
-    // Recognizing the shape====================================================
     getShapeInfo();
+//====================================================================================================
+// ==================================（ＲＥＣＯＧＮＩＺＩＮＧ＿ＳＨＡＰＥ）==================================
+//====================================================================================================
 
-
-    // 判斷筆畫是否繪製於 talbeview or popover，皆否則為一般圖形
+    // （一）筆畫於 talbeview 內 ==================
     if(tableviewMode == true &&
       pointsY[0] > tablePos.top &&
       pointsY[0] < tablePos.top + $("#tableview").height() &&
       pointsX[0] > tablePos.left  &&
       pointsX[0] < tablePos.left + $("#tableview").width()
     ){
-      // && tableY[0] < pointsY[0] && pointsY[0] < (tableY[0] + MCScreenH)
-      // 筆畫落於表格範圍內
       switch (shapeName) {
         case 'rectangle':
           ACellRectangle();
@@ -197,9 +198,10 @@ window.Ashley = {
         default:
           removeWrongShape();
       }
+    // （二）筆畫於  popover ==================
     }else if( popEditor == true ){
-      var popviewCanvas = $(".popview").position();
-      switch (selectedType) {
+      popviewCanvas = $(".popview").position();
+      switch ( selectedType ) {
         case "Custom pop view":
           popCustomPopview();
           break;
@@ -214,6 +216,7 @@ window.Ashley = {
           break;
         default:
       }
+    // （三）筆畫為一般圖形 ==================
     }else {
       switch (shapeName) {
         case 'rectangle':
@@ -233,10 +236,13 @@ window.Ashley = {
       }
     }
 
+//======================================================================================================
+//==================================（ＳＨＡＰＥ＿ＥＶＥＮＴ）==============================================
+//======================================================================================================
 
 
-    // Tableview ===============================================================
-    // Create a tableview.
+    // （一）ＴＡＢＬＥ ==========================================================================ＴＡＢＬＥ
+    // 1. Create a tableview.
     function ATableview(){
       // 畫布中沒有表格
       if(tableiQty != 1){
@@ -267,12 +273,12 @@ window.Ashley = {
         arrData.push(timeIndex()+"CreateElement:"+"Talbeview twice." );
       }
       // 執行表格產生後的行為：移動、動作寫入log、設定undo、更新id
-      $("#tableview").clone().appendTo(".tableContainer").attr("xkID",currentID ).removeAttr("id");
+      $("#tableview").clone().appendTo(".tableContainer").attr("xkID", getCurrentID() ).removeAttr("id");
       arrData.push(timeIndex()+"CreateElement:"+"Talbeview" );
       undoString = "$('[xkID="+ currentID +"]').remove();";
-      currentID++;
+
     }
-    // drawing a rect on a cell.
+    // 2. A rectangle @ tableview.
     function ACellRectangle(){
       var strokeCP = pointsX[0]+(pointsX[1]-pointsX[0])/2; //筆畫@表格 的中心點
       // 判斷筆畫中心點、cell中心點、表格左右範圍之關係
@@ -284,7 +290,7 @@ window.Ashley = {
           arrData.push(timeIndex()+"CreateElement:"+"img@table-left" );
         }
         arrData.push(timeIndex()+"ErrorStroke:"+ "existed@table-left");
-        clearCanvas();
+        cleanCanvas();
       } else if( strokeCP > cellMidline && strokeCP < tablePos.left + $("#tableview").width() ) {
         // 矩形＠表格左側、加上「 > 」
         console.log("沒事沒事兒。");
@@ -297,9 +303,9 @@ window.Ashley = {
         arrData.push(timeIndex()+"ErrorStroke:"+ shapeName+ "@table");
       }
       console.log("清除");
-      clearCanvas();
+      cleanCanvas();
     }
-    // ==========================================(線段＠表格)======================================================
+    // 3. A rectangle @ tableview.
     function ACellLine(){
       currentID++;
       var strokeCP = pointsX[0]+(pointsX[1]-pointsX[0])/2; //筆畫@表格 的中心點
@@ -325,7 +331,7 @@ window.Ashley = {
           alert("已存在元件故無法新增。");
           arrData.push(timeIndex()+"ErrorStroke:"+ "existed@table-left");
         }
-        clearCanvas();
+        cleanCanvas();
         arrData.push(timeIndex()+"ErrorStroke:"+shapeName+"@table-left");
       } else if( strokeCP > cellMidline && strokeCP < tablePos.left + $("#tableview").width() ){
         // ======================================（線段＠右側）====================================
@@ -354,16 +360,15 @@ window.Ashley = {
           alert("已存在元件故無法新增。");
           arrData.push(timeIndex()+"ErrorStroke:"+ "existed@table-right");
         }
-        clearCanvas();
+        cleanCanvas();
         arrData.push(timeIndex()+"ErrorStroke:"+shapeName +"@table");
       }
     }
 
-    // Show regular suggestion =================================================
-    // Rect ------<)))))
+    // （二）ＢＡＳＩＣ ========================================================================= ＢＡＳＩＣ
+    // 1. Rect ------<)))))
     function ARectangle() {
-      currentID++;
-      undoString = "$('[xkID="+ currentID +"]').remove();"; // (((undo)))
+      undoString = "$('[xkID="+ getCurrentID() +"]').remove();"; // (((undo)))
       checkedElement(".popover-title");
       if(rectW >= rectH){
         if(rectH > unitH){
@@ -413,10 +418,10 @@ window.Ashley = {
       idtagX = pointsX[0];
       idtagY = pointsY[0];
     }
-    // Line ------<)))))
+    // 2. Line ------<)))))
     function ALine() {
-      currentID++;
-      undoString = "$('[xkID="+ currentID +"]').remove();";// (((undo)))
+
+      undoString = "$('[xkID="+ getCurrentID() +"]').remove();";// (((undo)))
       // Create the first component & set undo event
       $(".identification").append("<span xkID='"+ currentID+"' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+(pointsY[0]-10) +"px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>今明兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。</span>");
       arrData.push(timeIndex()+"CreateElement:"+"span["+currentID +"]@canvas" );
@@ -435,10 +440,9 @@ window.Ashley = {
       $(".js_suggestions.regular").css({"display":"initial","left": pointsX[1]+10 + "px","top": pointsY[0] + shift -$(".js_suggestions.regular").height()/2 + "px"});
     }
 
-    // Draw popview elements  ==================================================
-    // Custom Pop modul ------<)))))
+    // （三）ＰＯＰＶＩＥＷＳ =============================================================== ＰＯＰＶＩＥＷＳ
+    // 1. Custom Popview ------<)))))
     function popCustomPopview(){
-      currentID++;
 
       var popCustomPopView = $("#pop-customPopView").position(); // pop 視窗的位置
       var popviewElement = $(".popview").position(); // pop mask 的位置
@@ -452,24 +456,24 @@ window.Ashley = {
         if(rectW >= rectH){
           if(rectH > unitH){
             // add an image & set a current elementID
-            $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift+ "px;position:absolute;'>");
+            $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ getCurrentID() + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift+ "px;position:absolute;'>");
             arrData.push(timeIndex()+"CreateElement:"+"img["+currentID +"]by "+shapeName+"@CustomPopview" );
             $(".js_wildRectB").css({"display" : "initial"});
           } else {
             // add a button & set a current elementID
-            $("#pop-customPopView").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + xShift + "px;top:" + yShift + "px;position:absolute;'>button</button>");
+            $("#pop-customPopView").append("<button type='button' xkID='"+ getCurrentID() + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + xShift + "px;top:" + yShift + "px;position:absolute;'>button</button>");
             arrData.push(timeIndex()+"CreateElement:"+"button["+currentID +"]by "+shapeName+"@CustomPopview" );
             $('.js_wildRectS').css({"display" : "block"});
           }
         }else {
           if(rectH > unitH){
             // add an image & set a current elementID
-            $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px;position:absolute;'>");
+            $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ getCurrentID() + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px;position:absolute;'>");
 
             $('.js_tallRectB').css({"display" : "block"});
           } else {
             // add an image & set a current elementID
-            $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px;position:absolute;'>");
+            $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ getCurrentID() + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px;position:absolute;'>");
             $('.js_tallRectS').css({"display" : "block"});
           }
           arrData.push(timeIndex()+"CreateElement:"+"img["+currentID +"]by "+shapeName+"@CustomPopview" );
@@ -493,7 +497,7 @@ window.Ashley = {
 
       }else if (shapeName == "line") {
         // Greate the first component
-        $("#pop-customPopView").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+ xShift +"px;top:"+ yShift +"px;position:absolute;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
+        $("#pop-customPopView").append("<span xkID='"+ getCurrentID() + "' style='width:"+lineW +"px;left:"+ xShift +"px;top:"+ yShift +"px;position:absolute;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
         arrData.push(timeIndex()+"CreateElement:"+"span["+currentID +"]@CustomPopview" );
         // // add the first suggeted conponent.
         // $("#pop-customPopView").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+ xShift +"px;top:"+ yShift  +"px;position:absolute;height:23px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
@@ -506,16 +510,15 @@ window.Ashley = {
       undoString = "$('[xkID="+ currentID +"]').remove();";// (((undo)))
       // the end of function popCustomPopview
     }
-    // Action sheet ----------<)))))
+    // 2. Action sheet --------<)))))
     function popActionSheet(){
       currentID++;
       $("div#pop-actionSheet").css("display", "block");
       var popElement = $(".popview").position();
       var modalGroup = $("#pop-actionSheet > .actions-modal").position();
-
+      // （一）＝ Outside. 筆畫落於 ActionSheet 之上
       if ( pointsY[0] > popElement.top && pointsY[0] < popElement.top + modalGroup.top ) {
-        // ＝ Outside. 筆畫落於 ActionSheet 之外
-        // 的矩形
+        // 1. 矩形
         if(shapeName == "rectangle" || shapeName == "square"){
           if(ASTitle == true){
             // 已存在action sheet toolbar 則
@@ -525,19 +528,20 @@ window.Ashley = {
           }
           arrData.push(timeIndex()+"CreateElement:"+"Button["+currentID +"]by "+shapeName+"@ActionSheet-Outside" );
         }else if (shapeName == "line") {
-          //筆畫落於 ActionSheet 之外的線段
-          if(ASTitle == false){
-            ASTitle = true;
+          // 2.筆畫落於 ActionSheet 之外的線段
+          if( $(".actions-modal-label").length == 0 ){
+            // Title isn't exist then create a title.
             $(".actions-modal-group:first-child").prepend("<div class='actions-modal-label' xkID='"+ currentID + "'>說明文字</div>");
             arrData.push(timeIndex()+"CreateElement:"+"title["+currentID +"]by"+shapeName+"@ActionSheet-Outside" );
           }else {
-            // title 已存在則只能新增 button
+            // Title is exist then create a button.
             $(".actions-modal-label").after("<div class='actions-modal-button' xkID='"+ currentID + "'>Button</div>");
             arrData.push(timeIndex()+"CreateElement:"+"Button["+currentID +"]by "+shapeName+"@ActionSheet-Outside" );
           }
         }
       } else if (pointsY[0] > popElement.top + modalGroup.top  && pointsY[0] < popElement.top + $(".popview").height() ) {
-        // ＝ Inside.
+      // （二） Inside.
+      // 1. All the line, rectangle and square
         if(shapeName == "rectangle" || shapeName == "square" || shapeName == "line"){
           $(".actions-modal-group:first-child").append("<div class='actions-modal-button' xkID='"+ currentID + "'>Button</div>");
           arrData.push(timeIndex()+"CreateElement:"+"Button["+currentID +"]by "+shapeName+"@ActionSheet-Inside" );
@@ -550,74 +554,111 @@ window.Ashley = {
         arrData.push(timeIndex()+"ErrorStroke:"+shapeName+"@ActionSheet" );
       }
       undoString = "$('[xkID="+ currentID +"]').remove();";// (((undo)))
-      clearCanvas();
+      cleanCanvas();
       arrData.push(timeIndex()+"ErrorStroke:"+shapeName+"@ActionSheet" );
 
     }
-    // Alert -----------------<)))))
+    // 3. Alert ---------------<)))))
     function popAlert(){
-      currentID++;
-      var popElement = $("#pop-alert").position();
-      var middleLine = $(".modal-buttons").position();
-      // 1.Sperate main areas
-      if( pointsY[0] >= popviewCanvas.top + popElement.top + middleLine.top){
-        // Bottom area ==========================
-        var bottomPopElement = popviewCanvas.top + popElement.top + $("#pop-alert").height();
 
-        if (pointsY[0] >= bottomPopElement ){
-          // 筆畫在.modal-buttons之下方
-          $("#pop-alert").append("<div class='modal-buttons' xkID='"+ currentID + "'><span class='modal-button'>Button</span></div>");
-          arrData.push(timeIndex()+"CreateElement:"+"Button["+currentID +"]by "+shapeName+"@Alert-down" );
+      var strokeCentralY = pointsY[1] - (pointsY[1]- pointsY[0])/2;
+      var strokeCentralX = pointsX[1] - (pointsX[1]- pointsX[0])/2;
+      var popviewCanvas = $(".popview").position() ;
+      var popElement = $("#pop-alert").position();
+      var centralLineY = $(".popview").position().top+ $("#pop-alert").position().top+$("#pop-alert > .modal-buttons").position().top ;
+      console.log("centralLineY=" + centralLineY+ ",strokeCentralY=" + strokeCentralY);
+      //（一）centralLineY中線以下
+      if( strokeCentralY >= centralLineY ){
+
+        // 1. Stroke is under the centralLine ==========================
+        var alertBoundaryBottomY =  popviewCanvas.top + popElement.top + $("#pop-alert").height() ; // the bottom margin of div#pop-alert.
+
+
+        // 1-1. Stroke is out of .modal-buttons
+        if ( strokeCentralY >= alertBoundaryBottomY ){
+          // There isn't 2 .modal-button.
+          if( $("#pop-alert .modal-buttons:first-child .modal-button").length != 2){
+            if (shapeName == "rectangle" || shapeName == "square" || shapeName == "line" ){
+              $("#pop-alert").append("<div class='modal-buttons' xkID='"+ getCurrentID() + "'><span class='modal-button'>Button</span></div>");
+              arrData.push(timeIndex()+"CreateElement:"+"Button["+currentID +"]by "+shapeName+"@Alert-down" );
+              undoString = "$('[xkID="+ currentID +"]').remove();";// (((undo)))
+              console.log("overstep the boundary of #pop-alert.");
+            }else {
+              arrData.push(timeIndex()+"ErrorStroke:"+shapeName+"@Alert-down" );
+            }
+          }else {
+            // remove .modal-button:last-child of row:first-child.
+            $("#pop-alert .modal-button:last-child").remove();
+            // add a modal-buttons with only one button.
+            for (var i = 0; i < 2; i++) {
+              $("#pop-alert").append("<div class='modal-buttons' xkID='"+ getCurrentID() + "'><span class='modal-button'>Button</span></div>");
+            }
+
+          }
+
+
+
+
         }else {
-          // 筆畫在.modal-buttons之中
-          var buttonQty = $(".modal-buttons > .modal-button").length;
-          if( buttonQty == 1){
-            // 只有一個btn則在其旁增加btn
-            $(".modal-buttons").append("<span class='modal-button' xkID='"+ currentID + "'>Button</span>");
+        // 1-2. Stroke is in .modal-buttons
+          console.log("inside of the boundary of #pop-alert.");
+          // 1-2 case 1 : 只有一個btn則在其旁增加btn =======================( case 1 )
+          if( $("#pop-alert .modal-button").length == 1){
+            $("#pop-alert .modal-buttons").append("<span class='modal-button' xkID='"+ getCurrentID() + "'>Button</span>");
             arrData.push(timeIndex()+"CreateElement:"+"Button==2inRoll["+currentID +"]by "+shapeName+"@Alert-Inside" );
+            undoString = "$('[xkID="+ currentID +"]').remove();";// (((undo)))
             console.log("在左邊新增");
-          }else if (buttonQty == 2) {
-            // 大於二則“改為”成垂直排列
-            $(".modal-buttons").remove();
-            for( i=0 ; i < buttonQty+1 ; i++ ){
-              $("#pop-alert").append("<div class='modal-buttons' xkID='"+ currentID + "'><span class='modal-button'>Button</span></div>");
+
+          // 1-2 case 2 :大於二則“改為”成垂直排列 ==========================( case 2 )
+          }else if ($("#pop-alert .modal-button").length == 2) {
+            // a. Remove the latter .modal-button in the same row.
+            $("#pop-alert .modal-buttons [xkID='"+currentID+"']").remove();
+            // b. Add 2 rows .modal-buttons which has one modal-button.
+            var idddd = getCurrentID();
+            for( i=0 ; i < 2 ; i++ ){
+              $("#pop-alert").append("<div class='modal-buttons' xkID='"+ idddd + "'><span class='modal-button'>Button</span></div>");
             }
             arrData.push(timeIndex()+"CreateElement:"+"Button==3in3Roll[xkID="+currentID +"]by "+shapeName+"@Alert-Inside" );
+            undoString = "$('[xkID="+ currentID +"]').remove(); $('#pop-alert .modal-buttons').append('<span class='modal-button'>Button</span>'); ";// (((undo)))
+
+          // 1-2 case 3 :大於三直接垂直增加 ===============================( case 3 )
           }else {
-            // 大於三直接垂直增加
             $("#pop-alert").append("<div class='modal-buttons' xkID='"+ currentID + "'><span class='modal-button'>Button</span></div>");
             arrData.push(timeIndex()+"CreateElement:"+"Button==NinNRoll["+currentID +"]by "+shapeName+"@Alert-Inside" );
+            undoString = "$('[xkID="+ currentID +"]').remove();";// (((undo)))
           }
+
+
         }
-        undoString = "$('[xkID="+ currentID +"]').remove();";// (((undo)))
+
       }else {
-        // Top area ==========================
-        if(shapeName == "line"){
+      // （二）中線以上 ==========================
+        if(shapeName == "line" && pointsY[0] >= popviewCanvas.top + popElement.top){
           // Opne the modal sub title
-          $(".modal-text").css("display","initial");
+          $("#pop-alert .modal-text").css("display","initial");
           arrData.push(timeIndex()+"CreateElement:"+"describtion[xkID="+currentID +"]by "+shapeName+"@Alert-top" );
-          undoString = "$('.modal-text').hide();";// (((undo)))
-        }else if (shapeName == "rectangle" || shapeName == "square" ){
+          undoString = "$('#pop-alert .modal-text').hide();";// (((undo)))
+        }else if (shapeName == "rectangle" || shapeName == "square"  && pointsY[0] >= popElement.top){
           // Opne the modal text input
-          $(".modal-text-input").css("display","initial");
+          $("#pop-alert .modal-text-input").css("display","initial");
           arrData.push(timeIndex()+"CreateElement:"+"TextField[xkID="+currentID +"]by "+shapeName+"@Alert-top" );
-          undoString = "$('.modal-text-input').hide();";// (((undo)))
+          undoString = "$('#pop-alert .modal-text-input').css('display','none');";// (((undo)))
         }else{
-          console.log("No shape.");
-          arrData.push(timeIndex()+"ErrorStroke:"+shapeName+"@Alert-top" );
+          console.log("Shape's wrong or out of the container.");
+          arrData.push(timeIndex()+"ErrorStroke:"+shapeName+"!= @Alert-top" );
         }
       }
-
+      console.log("centralLineY= " + centralLineY);
 
       // Resize alert after func add a new element.
        $("#pop-alert").css({
         "display":"block",
-        "left": $(".popview").width()/2 - $("#pop-alert").width()/2 ,
-        "top": $(".popview").height()/2 - $("#pop-alert").height()/2
-      });
-      clearCanvas();
+        "left": $(".popview").width()/2 - $("#pop-alert").width()/2 -2,
+        "top": $(".popview").height()/2 - $("#pop-alert").height()/2 -2
+        });
+      cleanCanvas();
     }
-    // Picker wa di jia----------------<)))))
+    // 4. Picker --------------<)))))
     function popPicker(){
       currentID++;
       var popviewElement = $(".popview").position(); // pop mask 的位置
@@ -631,9 +672,9 @@ window.Ashley = {
           $(".picker-modal").prepend("<div class='toolbar' xkID='"+ currentID + "'><div class='toolbar-inner'><div class='left'><a href='# class='link toolbar-randomize-link'>text</a></div><div class='right'><a href='# class='link close-picker'>text</a></div></div></div>");
           undoString = "$('[xkID="+ currentID +"]').remove();";// (((undo)))
           arrData.push(timeIndex()+"CreateElement:"+"toolbar[xkID="+currentID +"]by "+shapeName+"@Picker-top" );
-          clearCanvas();
+          cleanCanvas();
         }else {
-          clearCanvas();
+          cleanCanvas();
           arrData.push(timeIndex()+"ErrorStroke:"+shapeName+"@Picker-top" );
         }
       }else if (pointsY[0] >= midline && pointsY[0] < midline +$(".picker-modal").height() ){
@@ -656,7 +697,7 @@ window.Ashley = {
         console.log("Lower or nothing happened." );
         arrData.push(timeIndex()+"ErrorStroke:"+shapeName+"@Picker-Down" );
       }
-      clearCanvas();
+      cleanCanvas();
     }
     // end of popview
 
@@ -666,15 +707,9 @@ window.Ashley = {
   }
 }
 
-// UNDO ========================================================================
-$(document).on("click",".js_undo",function(){
-  $(".js_undo").css("color","");
-  eval(undoString);
-  arrData.push(timeIndex()+"Undo:"+undoString);
-  undoString = "" ;
-});
-
-// AFTER CONFIRM ===============================================================
+//======================================================================================================
+//==================================（ＣＯＭＦＩＲＭ）=====================================================
+//======================================================================================================
 $(document).on("click",".js_confirmType",function(){
     // Close suggestions pop
     $('.popover-content > div').css({"display" : "none"});
@@ -854,30 +889,48 @@ $(document).on("click",".js_confirmCell",function(){
   undoString = "$('[xkID="+ currentID +"]').remove();";// (((undo)))
 });
 
+
+
+
+//======================================================================================================
+//==================================（ＴＯＯＬＳ）=====================================================
+//======================================================================================================
+
+
 // Reload the page =============================================================
-$(document).on("click",".js_clear",function(){
+$(document).on("click",".js_clean",function(){
   var txt;
-  var r = confirm("是否清除畫布所有元件？");
+  var r = confirm("是否清除畫布所有元件及筆畫？");
   if (r == true) {
-      // location.reload();
+      resetPage();
       $("#task" + studyTask[currentTask]).appendTo(".tasklist");
       $(".identification").empty();
       $(".tableContainer").empty();
-      tableviewMode = false;
       $("#task" + studyTask[currentTask]).appendTo(".identification");
-      resetPage();
+
+      checkTask(); // Check if the current task is a specific task.
   }
 });
 function resetPage(){
-  ("[xkID]").remove();
+  cleanCanvas(); // remove wrong strokes.
+  $("[xkID]").remove(); // remove all user created modules.
+}
+//
+function initialforTaskSetting(){
+  $("[xkID]").remove(); // Tester created modules.
+  // Clean the container of modules.
+  $(".identification").empty();
+  $(".tableContainer").empty();
+  $(".popview").empty();
+
 }
 // Clear the myScript canvas.===================================================
-function clearCanvas(){
+function cleanCanvas(){
   $("paper-fab[icon='delete']").trigger("click");
 }
 // Remove the wrong shape ==================================================
 function removeWrongShape(){
-  clearCanvas();
+  cleanCanvas();
   shapeQty--;
   $(".js_ShapeQty").text(Math.round(shapeQty));
 }
@@ -889,7 +942,7 @@ function checkedElement(e){
   $(target+" .form-check:first-child input").attr("checked");
 }
 // Attr xkID  ==============================================================
-function addXkID(e){
+function addxkID(e){
   var targetComponent = e;
   $(targetComponent).attr("xkID",currentID);
   currentID++;
@@ -919,3 +972,10 @@ function getAllElementsWithAttribute(attribute)
   }
   return matchingElements;
 }
+// UNDO ========================================================================
+$(document).on("click",".js_undo",function(){
+  $(".js_undo").css("color","");
+  eval(undoString);
+  arrData.push(timeIndex()+"Undo:"+undoString);
+  undoString = "" ; // reset
+});

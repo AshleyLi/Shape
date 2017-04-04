@@ -37,6 +37,8 @@ $( document ).ready(function() {
 
 //=====（ＯＰＮＥ＿ＰＯＰＶＩＥＷ）=====================================================
 function openPopview(e){
+
+  selectedType = e; //for initial task
   popEditor = true ;
   console.log("e = "+ e);
   // （一）顯示pop基礎容器  ===============================================
@@ -47,7 +49,7 @@ function openPopview(e){
     "width":MCScreenW+ "px",
     "height": MCScreenH + 2 +"px",
     "left": popPosX +"px",
-    "top":  popPosY+42 +"px"});
+    "top":  popPosY- 9 +"px"});
     // 上為原始容器，下為因任務新增之容器
   // $(".popContainer").css({
   //   "display" : "initial",
@@ -64,50 +66,47 @@ function openPopview(e){
   // （四）設置所選的 popCanvas position  =================================
 
   if( e == "Alert"){
+
+    // 執行 Alert 產生後的行為：移動、動作寫入log、設定undo
+    $(".pop-alert").clone().appendTo(".popview").attr("id","pop-alert");
+    arrData.push(timeIndex()+"CreatePOPView:"+"Alert");
     $("#pop-alert").css({
       "display":"block",
-      "left": $(".popview").width()/2 - $("#pop-alert").width()/2 ,
+      "left": $(".popview").width()/2 - $("#pop-alert").width()/2,
       "top": $(".popview").height()/2 - $("#pop-alert").height()/2
     });
-    // 執行 Alert 產生後的行為：移動、動作寫入log、設定undo、更新id
-    $("#pop-alert").clone().appendTo(".popview").attr("xkID",currentID );
-    arrData.push(timeIndex()+"CreatePOPView:"+"Alert["+currentID+"]" );
-    currentID++;
   }
   else if ( e == "Action sheet") {
-    $("#pop-actionSheet").css({
+    $(".pop-actionSheet").css({
       "display":"block",
       "top":0,
       "width":MCScreenW+ "px",
       "height": MCScreenH+"px",
     });
-    // 執行 Action sheet 產生後的行為：移動、動作寫入log、設定undo、更新id
-    $("#pop-actionSheet").clone().appendTo(".popview").attr("xkID",currentID );
-    arrData.push(timeIndex()+"CreatePOPView:"+"ActionSheet["+currentID+"]" );
-    currentID++;
+    // 執行 Action sheet 產生後的行為：移動、動作寫入log、設定undo
+    $(".pop-actionSheet").clone().appendTo(".popview").attr("id","pop-actionSheet");
+    arrData.push(timeIndex()+"CreatePOPView:"+"ActionSheet");
   }
   else if ( e == "Custom pop view") {
-    $("#pop-customPopView").css( "width", $(".popview").width()*0.8);
-    $("#pop-customPopView").css({
+    $(".pop-customPopView").css( "width", $(".popview").width()*0.8);
+    $(".pop-customPopView").css({
       "display":"block",
-      "left": ($(".popview").width()- $("#pop-customPopView").width() )/2 ,
-      "top": $(".popview").height()/2 - $("#pop-customPopView").height()/2
+      "left": ($(".popview").width()- $(".pop-customPopView").width() )/2 ,
+      "top": $(".popview").height()/2 - $(".pop-customPopView").height()/2
     });
-    // 執行 Custom pop view 產生後的行為：移動、動作寫入log、設定undo、更新id
-    $("#pop-actionSheet").clone().appendTo(".popview").attr("xkID",currentID );
-    arrData.push(timeIndex()+"CreatePOPView:"+"CustomPopview["+currentID+"]");
-    currentID++;
+    // 執行 Custom pop view 產生後的行為：移動、動作寫入log、設定undo
+    $(".pop-customPopView").clone().appendTo(".popview").attr("id","pop-customPopView");
+    arrData.push(timeIndex()+"CreatePOPView:"+"CustomPopview");
   }
   else {
     // Picker
 
-    $("#pop-picker").css({
+    $(".pop-picker").css({
       "display":"block",
       "height": MCScreenH
     });
-    $("#pop-picker").clone().appendTo(".popview").attr("xkID",currentID );
-    arrData.push(timeIndex()+"CreatePOPView:"+"Picker["+currentID+"]" );
-    currentID++;
+    $(".pop-picker").clone().appendTo(".popview").attr("id","pop-picker");
+    arrData.push(timeIndex()+"CreatePOPView:"+"Picker");
   }
 
 }

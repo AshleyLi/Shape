@@ -3,7 +3,7 @@ var comletedTaskQty = 0; // 目前完成的任務數量
 var taskIndex = []; // totalTask個的測試的順序（非內容編號）
 var totalTask = 45; // 任務總數量
 
-// totalTask數量以亂數排出六種順序
+// totalTask數量以亂數排出六種順序。 數字＝圖片檔名。
 var taskIndex1 = [44, 0, 39, 5, 41, 1, 18, 28, 6, 7, 36, 3, 20, 22, 31, 26, 4, 12, 32, 11, 19, 15, 13, 35, 24, 29, 8, 17, 16, 38, 2, 21, 25, 10, 34, 42, 27, 40, 43, 30, 37, 23, 9, 33, 14];
 var taskIndex2 = [30, 35, 36, 13, 28, 20, 18, 24, 44, 21, 10, 19, 23, 43, 33, 37, 7, 4, 5, 22, 14, 6, 1, 17, 29, 16, 3, 39, 11, 34, 26, 9, 25, 42, 41, 27, 32, 15, 2, 31, 40, 12, 38, 8, 0];
 var taskIndex3 = [43, 23, 39, 41, 13, 6, 26, 0, 9, 27, 15, 7, 35, 11, 17, 12, 10, 14, 33, 36, 32, 38, 22, 30, 42, 5, 21, 8, 19, 1, 3, 16, 20, 24, 28, 4, 40, 34, 31, 18, 2, 25, 44, 29, 37];
@@ -11,7 +11,7 @@ var taskIndex4 = [43, 28, 3, 31, 16, 42, 0, 6, 30, 25, 27, 8, 37, 34, 40, 38, 5,
 var taskIndex5 = [8, 30, 12, 0, 11, 3, 35, 22, 1, 39, 27, 13, 32, 9, 4, 17, 14, 42, 15, 41, 21, 43, 10, 20, 7, 2, 19, 37, 6, 26, 33, 24, 16, 23, 29, 44, 25, 38, 28, 5, 18, 31, 36, 34, 40];
 var taskIndex6 = [29, 36, 37, 2, 22, 34, 1, 35, 19, 14, 18, 42, 32, 6, 13, 10, 16, 21, 44, 3, 17, 8, 5, 11, 26, 15, 0, 7, 27, 25, 30, 9, 43, 39, 41, 23, 40, 28, 4, 33, 38, 20, 24, 31, 12];
 var testTask = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44];
-var testTaskPart = [29,30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44];
+var testTaskPart = [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44];
 
 var studyTask = []; // 目前執行哪一個亂數順序
 
@@ -71,14 +71,11 @@ $(document).on("click",".gotoNextTask",function(){
     var r = confirm("是否進入任務"+(currentTask+2)+"？");
     if (r == true ) {
 
-      // 清除畫面
-      $(".identification").empty();
-      // 更新編號
-      currentTask++;
-      // 確認是否為單頁動畫任務
-      checkTask();
-      // 更新畫面為新任務之佈局
-      addTaskElements(studyTask[currentTask]);
+
+      initialforTaskSetting();  // Clean task modules & user create modules.
+      currentTask++;  // Update task index.
+      checkTask(); // Confirm if specific tasks.
+      addTaskElements(studyTask[currentTask]); // Update the new task layout.
       // 變更任務指示圖片及文字
       $(".js_taskNum").text(currentTask+1);
       $(".js_taskimg").css("display","flex").attr("src", "img/tasks/taskimg"+studyTask[currentTask]+".jpeg");
@@ -105,7 +102,7 @@ function checkTask(){
   if( studyTask[currentTask] >= 30){
 
     switch (studyTask[currentTask]) {
-      // Action Sheet =======
+      // Action Sheet =========================================（ Action Sheet ）
       case 30:
         console.log("Task 30.");
         openPopview("Action sheet");
@@ -116,11 +113,12 @@ function checkTask(){
         break;
       case 32:
         console.log("Task 32.");
-        openPopview("Alert");
+        openPopview("Action sheet");
         break;
-      // Alert ==============
+      // Alert =======================================================（ Alert ）
       case 33:
-        oopenPopview("Alert");
+        console.log("Task 33 = Alert");
+        openPopview("Alert");
         break;
       case 34:
         console.log("Task 34.");
@@ -134,7 +132,7 @@ function checkTask(){
         console.log("Task 36.");
         openPopview("Alert");
         break;
-      // Custom Popview ========
+      // Custom Popview =====================================（ Custom Popview ）
       case 37:
         console.log("Task 37.");
         openPopview("Custom pop view");
@@ -151,7 +149,7 @@ function checkTask(){
         console.log("Task 34.");
         openPopview("Custom pop view");
         break;
-      // Picker ===============
+      // Picker =======================================================（Picker）
       case 41:
         console.log("Task 41.");
         openPopview("Picker");
