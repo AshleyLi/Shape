@@ -110,3 +110,9 @@ function openPopview(e){
   }
 
 }
+function resizeCustomPopView() {
+  $("#pop-customPopView").css({
+    "left": ($(".popview").width()- $("#pop-customPopView").width() )/2 ,
+    "top": $(".popview").height()/2 - $("#pop-customPopView").height()/2
+  });
+}

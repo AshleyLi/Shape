@@ -73,7 +73,7 @@ window.Ashley = {
     segmentsLength = arrayShape.length;
     shapeQty++;
 
-    // if the shape == Tableview or not
+    // if the shape == Tableview or not ======================================================talbeview
     if(segmentsLength >= 2 ){
       for ( i = 0 ; i < 2; i++){
           var x = Math.floor(responseObject.result.segments[i].candidates[0].primitives[0].firstPoint.x);
@@ -179,7 +179,7 @@ window.Ashley = {
 //====================================================================================================
 
     // （一）筆畫於 talbeview 內 ==================
-    if(tableviewMode == true &&
+    if(tableviewMode == true && popEditor == false &&
       pointsY[0] > tablePos.top &&
       pointsY[0] < tablePos.top + $("#tableview").height() &&
       pointsX[0] > tablePos.left  &&
@@ -451,27 +451,31 @@ window.Ashley = {
       yShift = pointsY[0] - popviewElement.top - popCustomPopView.top  ;
       $("#pop-customPopView").css("display", "block");
 
-      // 辨識筆畫 矩形 or 線段
+      // 矩形 or 線段
       if(shapeName == "rectangle" || shapeName == "square"){
+        // （一）辨識筆畫 ＝ 矩形  ===========================================（矩形）
         if(rectW >= rectH){
+          // 1-1. 寬矩形
           if(rectH > unitH){
+            // 1-1-1. 寬矩形 && 高度 > 一單位
             // add an image & set a current elementID
             $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ getCurrentID() + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift+ "px;position:absolute;'>");
-            arrData.push(timeIndex()+"CreateElement:"+"img["+currentID +"]by "+shapeName+"@CustomPopview" );
             $(".js_wildRectB").css({"display" : "initial"});
           } else {
+            // 1-1-2. 寬矩形 && 高度 <= 一單位
             // add a button & set a current elementID
             $("#pop-customPopView").append("<button type='button' xkID='"+ getCurrentID() + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + xShift + "px;top:" + yShift + "px;position:absolute;'>button</button>");
-            arrData.push(timeIndex()+"CreateElement:"+"button["+currentID +"]by "+shapeName+"@CustomPopview" );
             $('.js_wildRectS').css({"display" : "block"});
           }
         }else {
+          // 1-2. 高矩形
           if(rectH > unitH){
+            // 1-2-1. 高矩形 && 高度 ＞ 一單位
             // add an image & set a current elementID
             $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ getCurrentID() + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px;position:absolute;'>");
-
             $('.js_tallRectB').css({"display" : "block"});
           } else {
+            // 1-2-2. 高矩形 && 高度 ＜ 一單位
             // add an image & set a current elementID
             $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ getCurrentID() + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px;position:absolute;'>");
             $('.js_tallRectS').css({"display" : "block"});
@@ -496,12 +500,12 @@ window.Ashley = {
         idtagY = pointsY[0];
 
       }else if (shapeName == "line") {
-        // Greate the first component
-        $("#pop-customPopView").append("<span xkID='"+ getCurrentID() + "' style='width:"+lineW +"px;left:"+ xShift +"px;top:"+ yShift +"px;position:absolute;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
+        // （二）辨識筆畫 ＝ 線段 ===========================================（線段）
+        // 2-1. Create the first component
+        $("#pop-customPopView").append("<span xkID='"+ getCurrentID() + "' style='width:"+lineW +"px;left:"+ xShift +"px;top:"+ yShift +"px;position:absolute;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>今明兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。</span>");
         arrData.push(timeIndex()+"CreateElement:"+"span["+currentID +"]@CustomPopview" );
-        // // add the first suggeted conponent.
-        // $("#pop-customPopView").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+ xShift +"px;top:"+ yShift  +"px;position:absolute;height:23px; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>");
-        // arrData.push(timeIndex()+"CreateElement:"+"span["+currentID +"]@CustomPopview" );
+
+
         // open & set suggestions pop positionX,Y
         $('.js_line').css({"display" : "initial"});
         $(".js_suggestions.regular").css({"display":"initial","left": pointsX[1]+10 + "px","top": pointsY[0] + shift -$(".js_suggestions.regular").height()/2 + "px"});
@@ -897,17 +901,20 @@ $(document).on("click",".js_confirmCell",function(){
 //======================================================================================================
 
 
-// Reload the page =============================================================
+// Clean the canvas =============================================================
 $(document).on("click",".js_clean",function(){
   var txt;
   var r = confirm("是否清除畫布所有元件及筆畫？");
   if (r == true) {
+      // reset undo
+      undoString ="";
+      $(".js_undo").css("color","#9B9B9B");
       resetPage();
-      $("#task" + studyTask[currentTask]).appendTo(".tasklist");
+      // $("#task" + studyTask[currentTask]).appendTo(".tasklist");
       $(".identification").empty();
       $(".tableContainer").empty();
-      $("#task" + studyTask[currentTask]).appendTo(".identification");
-
+      $(".popview").empty();
+      $("#task" + studyTask[currentTask]).clone().appendTo(".identification");
       checkTask(); // Check if the current task is a specific task.
   }
 });
