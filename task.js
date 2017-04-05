@@ -11,7 +11,7 @@ var taskIndex4 = [43, 28, 3, 31, 16, 42, 0, 6, 30, 25, 27, 8, 37, 34, 40, 38, 5,
 var taskIndex5 = [8, 30, 12, 0, 11, 3, 35, 22, 1, 39, 27, 13, 32, 9, 4, 17, 14, 42, 15, 41, 21, 43, 10, 20, 7, 2, 19, 37, 6, 26, 33, 24, 16, 23, 29, 44, 25, 38, 28, 5, 18, 31, 36, 34, 40];
 var taskIndex6 = [29, 36, 37, 2, 22, 34, 1, 35, 19, 14, 18, 42, 32, 6, 13, 10, 16, 21, 44, 3, 17, 8, 5, 11, 26, 15, 0, 7, 27, 25, 30, 9, 43, 39, 41, 23, 40, 28, 4, 33, 38, 20, 24, 31, 12];
 var testTask = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44];
-var testTaskPart = [41, 42, 43, 44, 39];
+var testTaskPart = [ 28, 29, 30];
 
 var studyTask = []; // 目前執行哪一個亂數順序
 
@@ -30,7 +30,7 @@ $(document).ready(function() {
   //   arr.splice(j, 1);
   // }
   // (一)設定任務
-  studyTask = testTaskPart; //****************************************(ＴＡＳＫ ＳＥＴＴＩＮＧ)****************************************
+  studyTask = taskIndex1; //****************************************(ＴＡＳＫ ＳＥＴＴＩＮＧ)****************************************
   $(".js_totalTask").text(totalTask);
   // (二)寫入ＬＯＧ
   arrData.push(timeIndex()+"Index="+studyTask);
@@ -70,7 +70,11 @@ $(document).on("click",".gotoNextTask",function(){
   // 任務尚未結束，前往下一任務
     var r = confirm("是否進入任務"+(currentTask+2)+"？");
     if (r == true ) {
+      resetUndo();
 
+      // reset popview
+      selectedType = "";
+      closePopviewEdior();
 
       initialforTaskSetting();  // Clean task modules & user create modules.
       currentTask++;  // Update task index.

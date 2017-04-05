@@ -442,8 +442,8 @@ button{ background-color:lighten($xkGreen,15%);}
 }
 
 //==================================（ＴＡＢＬＥ）====================================
-
-#tableview{
+.pa50px{    position: absolute;top: 50px;}
+#tableview, .tableview{
 	position: $z-table;
 	.list-block{
 		margin: 0px;

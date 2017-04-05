@@ -174,6 +174,7 @@ window.Ashley = {
 
     }
     getShapeInfo();
+
 //====================================================================================================
 // ==================================（ＲＥＣＯＧＮＩＺＩＮＧ＿ＳＨＡＰＥ）==================================
 //====================================================================================================
@@ -245,37 +246,50 @@ window.Ashley = {
     // 1. Create a tableview.
     function ATableview(){
       // 畫布中沒有表格
-      if(tableiQty != 1){
-        // 初始化表格
+      if( $("#tableview").length == 0){
+        // 1. Clone to the specific container.
+        $(".tableview").clone().appendTo(".tableContainer").attr({
+          id:"tableview",
+          xkID: getCurrentID()
+        });
+        // 2. 初始化表格
         $("#tableview").css({
           "position": "absolute",
           "display" : "initial",
           "width":MCScreenW+ "px",
           // "height": MCScreenH + 2 +"px",
           "left": popPosX +"px"});
-        // 判斷 表格 是否會超出 iphone 螢幕範圍，若超過則放置於邊界處
+        // 2-1. 於表格中加入cell
+        for (var i = 0; i < 5; i++) {
+          $("#tableview .js_tableUl").append("<li class='item-content'><div class='item-inner'><div class='item-title'></div></div></li>");
+        }
+        // 3. 判斷 表格 是否會超出 iphone 螢幕範圍，若超過則放置於邊界處
+        // 3-1.
         if( tableY[0] < popPosY){
-          $("#tableview").css("top", popPosY);
-        }else if( tableY[0] > popPosY + MCScreenH){
-          $("#tableview").css("top", popPosY+MCScreenH- $(".js_tableUl").height() );
+          $("#tableview").css("top", popPosY - 10);
+          console.log("高於");
+
+        // 3-2.
+        }else if( tableY[0] + $(".js_tableUl").height() > popPosY + MCScreenH){
+          $("#tableview").css("top", popPosY + MCScreenH - $(".js_tableUl").height() - 10 );
+          console.log("低於");
+        // 3-3.
         }else{
           $("#tableview").css("top",tableY[0]);
+          console.log("範圍內");
         }
-        // set #tableview position
+
+        // 4. set #tableview position
         tablePos = $("#tableview").position();
-        // 於表格中加入cell
-        for (var i = 0; i < 5; i++) {
-          $(".js_tableUl").append("<li class='item-content'><div class='item-inner'><div class='item-title'></div></div></li>");
-        }
+
         tableiQty = 1;
         tableviewMode = true;
       }else{
         arrData.push(timeIndex()+"CreateElement:"+"Talbeview twice." );
       }
-      // 執行表格產生後的行為：移動、動作寫入log、設定undo、更新id
-      $("#tableview").clone().appendTo(".tableContainer").attr("xkID", getCurrentID() ).removeAttr("id");
+      // 執行表格產生後的行為：動作寫入log、設定undo、更新id
       arrData.push(timeIndex()+"CreateElement:"+"Talbeview" );
-      undoString = "$('[xkID="+ currentID +"]').remove();";
+      undoString = "$('[xkID="+ currentID +"]').remove(); tableviewMode = false;";
 
     }
     // 2. A rectangle @ tableview.
@@ -315,15 +329,15 @@ window.Ashley = {
         // ================================（線段＠左側）==========================================
         console.log("線段＠左");
 
-        if( $(".item-title").is(':empty') && $(".subforCell").length == 0 ){
+        if( $("#tableview .item-title").is(':empty') && $("#tableview .subforCell").length == 0 ){
           // case 1: title & subtitle 都不存在 > 增加 title
-          $(".js_tableUl > .item-content > .item-inner > .item-title").append("Item title");
-          undoString = "$('.js_tableUl > .item-content > .item-inner > .item-title').empty();"; // (((undo)))
+          $("#tableview .js_tableUl > .item-content > .item-inner > .item-title").append("Item title");
+          undoString = "$('#tableview .js_tableUl > .item-content > .item-inner > .item-title').empty();"; // (((undo)))
           arrData.push(timeIndex()+"CreateElement:"+"Item title@table-left" );
 
-        }else if( $(".item-title").length > 0 && $(".subforCell").length == 0){
+        }else if( $("#tableview .item-title").length > 0 && $(".subforCell").length == 0){
           // case 2: 有 title ，無 subtitle > 增加 subtitle
-          $(".js_tableUl > .item-content > .item-inner > .item-title").append("<div class='subforCell' xkID='"+currentID+"'>subtitle</div>");
+          $("#tableview .js_tableUl > .item-content > .item-inner > .item-title").append("<div class='subforCell' xkID='"+currentID+"'>subtitle</div>");
           undoString = "$('[xkID="+ currentID +"]').remove();"; // (((undo)))
           arrData.push(timeIndex()+"CreateElement:"+"subTitle@table-left" );
         }else{
@@ -332,27 +346,31 @@ window.Ashley = {
           arrData.push(timeIndex()+"ErrorStroke:"+ "existed@table-left");
         }
         cleanCanvas();
-        arrData.push(timeIndex()+"ErrorStroke:"+shapeName+"@table-left");
+
+
+
       } else if( strokeCP > cellMidline && strokeCP < tablePos.left + $("#tableview").width() ){
         // ======================================（線段＠右側）====================================
-        if( $(".item-after").length==0){
-          // 1. 左側無元件 > 增加預設元件、寫入undo & log
-          $(".js_tableUl > .item-content > .item-inner").append("<div class='item-after' xkID='"+currentID+"'>Label</div>");
-          undoString = "$('[xkID="+ currentID +"]').remove();"; // (((undo)))
-          arrData.push(timeIndex()+"CreateElement:"+"Label@table-right" );
-          // 2. 開啟建議元件列表
+        if( $("#tableview .item-after").length == 0){
 
+          // 1. 左側無元件 > 增加預設元件、寫入undo & log
+          $("#tableview .js_tableUl > .item-content > .item-inner").append("<div xkID='"+ currentID +"' class='item-after'>Text</div>");
+          undoString = "$('[xkID='"+ currentID +"']').remove(); "; // (((undo)))
+          arrData.push(timeIndex()+"CreateElement:"+"Label@table-right" );
+
+
+          // 2-1. 開啟建議元件列表
           $(".js_suggestions.cell").css({
             "display":"block",
             "left": tablePos.left + MCScreenW - 5 +"px",
             "top": tablePos.top
           });
+          $(".js_cellConponents input[value='Text']").prop("checked", true);
+          $(".js_cellConponents").css("display","block");
 
-          // 3. 依據有無使用 subforCell 關閉建議元件列表中的 控制項類別元件(cell_left_controller)
-          if($(".subforCell").length == 0 ){
-            $(".cell_left_controller").show();
-            undoString = "$('.cell_left_controller').hide();"; // (((undo)))
-            arrData.push(timeIndex()+"CreateElement:"+"leftController@table-right" );
+          // 2-2. 依據有無使用 subforCell 關閉建議元件列表中的 控制項類別元件(cell_left_controller)
+          if($("#tableview .subforCell").length == 0 ){
+            $(".cell_left_controller").css("display","block");
           }
 
         }else {
@@ -376,12 +394,14 @@ window.Ashley = {
           $(".identification").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
           arrData.push(timeIndex()+"CreateElement:"+"img["+currentID +"]@canvas" );
           $(".js_wildRectB").css({"display" : "initial"});
+
           checkedElement(".js_wildRectB");
         } else {
           // add a button & set a current elementID
           $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>按鈕</button>");
           arrData.push(timeIndex()+"CreateElement:"+"button["+currentID +"]@canvas" );
           $('.js_wildRectS').css({"display" : "block"});
+
           checkedElement(".js_wildRectS");
         }
       }else {
@@ -441,6 +461,7 @@ window.Ashley = {
     }
 
     // （三）ＰＯＰＶＩＥＷＳ =============================================================== ＰＯＰＶＩＥＷＳ
+
     // 1. Custom Popview ------<)))))
     function popCustomPopview(){
 
@@ -703,6 +724,7 @@ window.Ashley = {
       }
       cleanCanvas();
     }
+
     // end of popview
 
   },
@@ -718,10 +740,12 @@ $(document).on("click",".js_confirmType",function(){
     // Close suggestions pop
     $('.popover-content > div').css({"display" : "none"});
     $('.js_suggestions.regular').css({"display":"none"});
+
     // Clear the stroke canvas.
-    $("paper-fab[icon='delete']").trigger("click");
+    cleanCanvas();
+
     // Show the indexP result display
-    $(".js_showCount").css("display","initial");
+    // $(".js_showCount").css("display","initial");
 
     // Show the indexP result
     var indexP = parseInt($( "input:checked" ).attr("indexP"));
@@ -729,7 +753,7 @@ $(document).on("click",".js_confirmType",function(){
 
     // 若選擇的項目!=推薦的第一項 && 非pop mode下的Custom pop view狀態，則重新產生element取代
     if( indexP != 5 && selectedType != "Custom pop view" ){
-
+      console.log("indexP="+indexP+",selectedType="+selectedType);
       // remove the old element
       $("[xkID='"+ currentID +"']").remove();
       // add a new selected element
@@ -739,6 +763,7 @@ $(document).on("click",".js_confirmType",function(){
             $(".identification").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
             arrData.push(timeIndex()+"ChangeElement:"+"img[xkID="+currentID +"][indexP="+indexP+"]@canvas" );
             break;
+
           case 'Button':
             if( shapeName == 'rectangle' && rectH >= 23  ){
               $(".identification").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:" + pointsX[0] + "px;top:" + pointsY[0] + "px;'>按鈕</button>");
@@ -749,14 +774,17 @@ $(document).on("click",".js_confirmType",function(){
             }
             arrData.push(timeIndex()+"ChangeElement:"+"button[xkID="+currentID +"][indexP="+indexP+"]@canvas" );
             break;
+
           case 'Shape':
             $(".identification").append("<div xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px; background-color:#eee;'>");
             arrData.push(timeIndex()+"ChangeElement:"+"shape[xkID="+currentID +"][indexP="+indexP+"]@canvas" );
             break;
+
           case 'TextView':
             $(".identification").append("<div xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] +"px; overflow:hidden;'>今明兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。</div>");
             arrData.push(timeIndex()+"ChangeElement:"+"TextView[xkID="+currentID +"][indexP="+indexP+"]@canvas" );
             break;
+
           case 'TextField':
             // 判斷高度以區別是否為多行。一行的高度單位為20px
             if(rectH <= 40){
@@ -768,10 +796,12 @@ $(document).on("click",".js_confirmType",function(){
               arrData.push(timeIndex()+"ChangeElement:"+"TextField.multLine[xkID="+currentID +"][indexP="+indexP+"]@canvas" );
             }
             break;
+
           case 'Text':
             $(".identification").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+pointsX[0]+"px;top:"+pointsY[0]-10 +"px;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>今明兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。");
             arrData.push(timeIndex()+"ChangeElement:"+"Text[xkID="+currentID +"][indexP="+indexP+"]@canvas" );
             break;
+
           case 'Line':
             $(".identification").append("<hr xkID='" + currentID + "' style='width:"+ lineW +"px;height:" + lineH + "px;left:" + pointsX[0]+"px;top:"+pointsY[0] +"px; background-color:lightgrey; margin:0px; padding:0px;'>");
             arrData.push(timeIndex()+"ChangeElement:"+"Line[xkID="+currentID +"][indexP="+indexP+"]@canvas" );
@@ -855,6 +885,7 @@ $(document).on("click",".js_confirmType",function(){
     $(".js_percentage").text(percentage + "%");
 
 });
+
 // table cell
 $(document).on("click",".js_confirmCell",function(){
   // Close suggestions pop
@@ -863,29 +894,29 @@ $(document).on("click",".js_confirmCell",function(){
   // Clear the stroke canvas.
   $("paper-fab[icon='delete']").trigger("click");
 
-  $(".item-after").empty();
+  $("#tableview [xkID='" + currentID + "']").remove();
   var elementType = $(".js_cellConponents input:checked ").val();
 
   switch (elementType) {
       case 'Text':
-        $(".item-after").append("<span xkID='"+currentID+"'>Text</span>");
+        $("#tableview .item-inner").append("<div xkID='"+ currentID +"' class='item-after'>Text</div>");
         arrData.push(timeIndex()+"ChangeElement:"+"text[xkID="+currentID +"][indexP="+indexP+"]@table-right" );
         break;
       case 'Text >':
-        $(".item-after").append("<span xkID='"+currentID+"'>Text ></span>");
-        arrData.push(timeIndex()+"ChangeElement:"+"text>[xkID="+currentID +"][indexP="+indexP+"]@table-right" );
+        $("#tableview .item-inner").append("<div xkID='"+ currentID +"' class='item-after'>Text ＞</div>");
+        arrData.push(timeIndex()+"ChangeElement:"+"text>[xkID="+currentID +"]@table-right" );
         break;
       case 'Text input':
-        $(".item-after").append("<span class='cellInput' xkID='"+currentID+"'>Text input</span>");
-        arrData.push(timeIndex()+"ChangeElement:"+"textField[xkID="+currentID +"][indexP="+indexP+"]@table-right" );
+        $("#tableview .item-inner").append("<div xkID='"+ currentID +"' class='item-after'><span class='cellInput'>Text input</span></div>");
+        arrData.push(timeIndex()+"ChangeElement:"+"textField[xkID="+currentID +"]@table-right" );
         break;
       case 'Check icon':
-        $(".item-after").append("<img xkID='"+currentID+"' src='img/icon_checkmark.png' alt='' style='height:12px;'>");
-        arrData.push(timeIndex()+"ChangeElement:"+"checkIcon[xkID="+currentID +"][indexP="+indexP+"]@table-right" );
+        $("#tableview .item-inner").append("<div xkID='"+ currentID +"' class='item-after'><img src='img/icon_checkmark.png' style='height:12px;'></div>");
+        arrData.push(timeIndex()+"ChangeElement:"+"checkIcon[xkID="+currentID +"]@table-right" );
         break;
       case 'Switch':
-        $(".item-after").append("<img xkID='"+currentID+"' src='img/icon_switchInactive.png' alt='' style='height:12px;'>");
-        arrData.push(timeIndex()+"ChangeElement:"+"switch[xkID="+currentID +"][indexP="+indexP+"]@table-right" );
+        $("#tableview .item-inner").append("<div xkID='"+ currentID +"' class='item-after'><img src='img/icon_switchInactive.png' style='height:12px;'></div>");
+        arrData.push(timeIndex()+"ChangeElement:"+"switch[xkID="+currentID +"]@table-right" );
         break;
     default:
 
@@ -894,14 +925,12 @@ $(document).on("click",".js_confirmCell",function(){
 });
 
 
-
-
 //======================================================================================================
 //==================================（ＴＯＯＬＳ）=====================================================
 //======================================================================================================
 
 
-// Clean the canvas =============================================================
+// Clean the canvas ============================================================
 $(document).on("click",".js_clean",function(){
   var txt;
   var r = confirm("是否清除畫布所有元件及筆畫？");
@@ -918,6 +947,7 @@ $(document).on("click",".js_clean",function(){
       checkTask(); // Check if the current task is a specific task.
   }
 });
+//
 function resetPage(){
   cleanCanvas(); // remove wrong strokes.
   $("[xkID]").remove(); // remove all user created modules.
@@ -931,24 +961,22 @@ function initialforTaskSetting(){
   $(".popview").empty();
 
 }
-// Clear the myScript canvas.===================================================
+//
 function cleanCanvas(){
   $("paper-fab[icon='delete']").trigger("click");
 }
-// Remove the wrong shape ==================================================
+//
 function removeWrongShape(){
   cleanCanvas();
   shapeQty--;
   $(".js_ShapeQty").text(Math.round(shapeQty));
 }
-
-
-// Suggestions checked =====================================================
+// Suggestions checked =========================================================
 function checkedElement(e){
   var target = e;
-  $(target+" .form-check:first-child input").attr("checked");
+  $(target+" .form-check:first-child input").prop("checked", true);
 }
-// Attr xkID  ==============================================================
+// Attr xkID  ==================================================================
 function addxkID(e){
   var targetComponent = e;
   $(targetComponent).attr("xkID",currentID);
@@ -964,25 +992,18 @@ function timeIndex(){
   var time = d.getHours()+":" + d.getMinutes() +":"+ d.getSeconds() +"--";
   return time;
 }
-// timeIndex for data log ID  ==============================================================
-function getAllElementsWithAttribute(attribute)
-{
-  var matchingElements = [];
-  var allElements = document.getElementsByTagName('*');
-  for (var i = 0, n = allElements.length; i < n; i++)
-  {
-    if (allElements[i].getAttribute(attribute) !== null)
-    {
-      // Element exists with attribute. Add to array.
-      matchingElements.push(allElements[i]);
-    }
-  }
-  return matchingElements;
-}
 // UNDO ========================================================================
 $(document).on("click",".js_undo",function(){
-  $(".js_undo").css("color","");
-  eval(undoString);
-  arrData.push(timeIndex()+"Undo:"+undoString);
-  undoString = "" ; // reset
+  if(undoString.length != 0){
+    eval(undoString);
+    arrData.push(timeIndex()+"Undo:"+undoString);
+    resetUndo();
+  }else {
+    alert("無可返回的操作。");
+  }
+
 });
+function resetUndo(){
+  $(".js_undo").css("color","");
+  undoString = "" ; // reset
+}

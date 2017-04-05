@@ -327,36 +327,15 @@
     </div>
 
     <!-- ＴＡＢＬＥ ================================================================= -->
-    <div class="tableContainer"></div>
+    <div class="tableContainer pa50px"></div>
     <!--<<< template >>>-->
     <div style="visibility: hidden;">
-      <div id="tableview" >
+      <div class="tableview" >
       <div class="page-content">
         <!-- <div class="content-block-title">Title</div> -->
         <div class="list-block">
           <ul class="js_tableUl">
-            <!--
-            <li class="item-content">
-              <div class="item-media"><i class="icon icon-f7"></i></div>
-              <div class="item-inner">
-                <div class="item-title">Item title</div>
-                <div class="item-after">Label</div>
-              </div>
-            </li>
-            <li class="item-content">
-              <div class="item-media"><i class="icon icon-f7"></i></div>
-              <div class="item-inner">
-                <div class="item-title">Item with badge</div>
-                <div class="item-after"><span class="badge">5</span></div>
-              </div>
-            </li>
-            <li class="item-content">
-              <div class="item-media"><i class="icon icon-f7"></i></div>
-              <div class="item-inner">
-                <div class="item-title">Another item</div>
-                <div class="item-after">Another label</div>
-              </div>
-            </li> -->
+
           </ul>
           <!-- <div class="list-block-label">List block label text goes here</div> -->
         </div>
@@ -364,6 +343,28 @@
     </div>
     </div>
     <!--<<< js_suggestions for cell >>>-->
+    <!--
+    <li class="item-content">
+      <div class="item-media"><i class="icon icon-f7"></i></div>
+      <div class="item-inner">
+        <div class="item-title">Item title</div>
+        <div class="item-after">Label</div>
+      </div>
+    </li>
+    <li class="item-content">
+      <div class="item-media"><i class="icon icon-f7"></i></div>
+      <div class="item-inner">
+        <div class="item-title">Item with badge</div>
+        <div class="item-after"><span class="badge">5</span></div>
+      </div>
+    </li>
+    <li class="item-content">
+      <div class="item-media"><i class="icon icon-f7"></i></div>
+      <div class="item-inner">
+        <div class="item-title">Another item</div>
+        <div class="item-after">Another label</div>
+      </div>
+    </li> -->
     <div class="bootstrap-iso" style="position:absolute; top:0px;  width:100%;">
       <div class=" popover right js_suggestions cell" style="display:none;">
         <div class="arrow"></div>
@@ -373,12 +374,12 @@
             <div class="cell_left_display">
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="js_cellConponents" value="Text"> 文字
+                  <input class="form-check-input" type="radio" name="js_cellConponents" value="Text" indexP="5"> 文字
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="js_cellConponents" value="Text >" > 文字 >
+                  <input class="form-check-input" type="radio" name="js_cellConponents" value="Text >" indexP="4"> 文字 >
                 </label>
               </div>
             </div>
@@ -399,7 +400,6 @@
                 </label>
               </div>
             </div>
-
           </div>
           <button type="button" class="btn btn-primary btn-block js_confirmCell">確認</button>
         </div>

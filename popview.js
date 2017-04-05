@@ -26,14 +26,15 @@ $( document ).ready(function() {
     openPopview(selectedType);
   });
 
-  $(".closePopviewEdior").mousedown(function() {
-    $(".popview").css("display","none");
-    $(this).css("display","none");
-    popEditor = false;
-  });
+  $(".closePopviewEdior").mousedown( closePopviewEdior() );
 
 
 });
+function closePopviewEdior() {
+  $(".popview").css("display","none");
+  $(".closePopviewEdior").css("display","none");
+  popEditor = false;
+}
 
 //=====（ＯＰＮＥ＿ＰＯＰＶＩＥＷ）=====================================================
 function openPopview(e){
