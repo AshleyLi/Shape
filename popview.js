@@ -41,7 +41,6 @@ function openPopview(e){
 
   selectedType = e; //for initial task
   popEditor = true ;
-  console.log("e = "+ e);
   // （一）顯示pop基礎容器  ===============================================
   $(".write-here").css("display","none");
   $(".popview > div").css("display","none");

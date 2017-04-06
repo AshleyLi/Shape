@@ -523,9 +523,17 @@ window.Ashley = {
       }else if (shapeName == "line") {
         // （二）辨識筆畫 ＝ 線段 ===========================================（線段）
         // 2-1. Create the first component
-        $("#pop-customPopView").append("<span xkID='"+ getCurrentID() + "' style='width:"+lineW +"px;left:"+ xShift +"px;top:"+ yShift +"px;position:absolute;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>今明兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。</span>");
+        $("#pop-customPopView").append("<span xkID='"+ getCurrentID() + "' style='width:"+lineW +"px;left:"+ xShift +"px;top:"+ (yShift-10) +"px;position:absolute;text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>今明兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。</span>");
         arrData.push(timeIndex()+"CreateElement:"+"span["+currentID +"]@CustomPopview" );
 
+        // 若線段長度 < screen/3 則字體設定為12px
+        if(pointsX[1]- pointsX[0] < MCScreenW/3){
+          $("[xkID='"+currentID+"']").css({
+            "font-size":"12px",
+            "text-overflow":"",
+            "white-space":" nowrap"
+          });
+        }
 
         // open & set suggestions pop positionX,Y
         $('.js_line').css({"display" : "initial"});
@@ -586,12 +594,12 @@ window.Ashley = {
     // 3. Alert ---------------<)))))
     function popAlert(){
 
-      var strokeCentralY = pointsY[1] - (pointsY[1]- pointsY[0])/2;
-      var strokeCentralX = pointsX[1] - (pointsX[1]- pointsX[0])/2;
-      var popviewCanvas = $(".popview").position() ;
-      var popElement = $("#pop-alert").position();
-      var centralLineY = $(".popview").position().top+ $("#pop-alert").position().top+$("#pop-alert > .modal-buttons").position().top ;
-      console.log("centralLineY=" + centralLineY+ ",strokeCentralY=" + strokeCentralY);
+      var strokeCentralY = pointsY[1] - (pointsY[1]- pointsY[0])/2; // 筆劃的y軸中心
+      var strokeCentralX = pointsX[1] - (pointsX[1]- pointsX[0])/2; // 筆劃的y軸中心
+      var popviewCanvas = $(".popview").position() ; // pop容器的位置
+      var popElement = $("#pop-alert").position();  // pop容器裏 alert的位置
+      var centralLineX = $(".popview").position().left+ $("#pop-alert").position().left + $("#pop-alert").width()/2;
+      var centralLineY = $(".popview").position().top+ $("#pop-alert").position().top+ $("#pop-alert > .modal-buttons").position().top ; //區隔 alert 的上下中線
       //（一）centralLineY中線以下
       if( strokeCentralY >= centralLineY ){
 
@@ -599,15 +607,16 @@ window.Ashley = {
         var alertBoundaryBottomY =  popviewCanvas.top + popElement.top + $("#pop-alert").height() ; // the bottom margin of div#pop-alert.
 
 
-        // 1-1. Stroke is out of .modal-buttons
+
         if ( strokeCentralY >= alertBoundaryBottomY ){
-          // There isn't 2 .modal-button.
-          if( $("#pop-alert .modal-buttons:first-child .modal-button").length != 2){
+        // 1-1. Stroke is out of .modal-buttons
+
+          if( $("#pop-alert .modal-buttons:nth-child(2) .modal-button").length != 2){
+            // There isn't 2 .modal-button.
             if (shapeName == "rectangle" || shapeName == "square" || shapeName == "line" ){
               $("#pop-alert").append("<div class='modal-buttons' xkID='"+ getCurrentID() + "'><span class='modal-button'>Button</span></div>");
               arrData.push(timeIndex()+"CreateElement:"+"Button["+currentID +"]by "+shapeName+"@Alert-down" );
-              undoString = "$('[xkID="+ currentID +"]').remove();";// (((undo)))
-              console.log("overstep the boundary of #pop-alert.");
+              undoString = "$('[xkID="+ currentID +"]').remove(); resizeAlert();";// (((undo)))
             }else {
               arrData.push(timeIndex()+"ErrorStroke:"+shapeName+"@Alert-down" );
             }
@@ -618,39 +627,51 @@ window.Ashley = {
             for (var i = 0; i < 2; i++) {
               $("#pop-alert").append("<div class='modal-buttons' xkID='"+ getCurrentID() + "'><span class='modal-button'>Button</span></div>");
             }
-
+            arrData.push(timeIndex()+"CreateElement:"+"Buttons["+currentID +"]by "+shapeName+"@Alert-down" );
+            undoString = "$('[xkID="+ currentID +"]').remove(); resizeAlert();";// (((undo)))
           }
-
-
-
-
         }else {
         // 1-2. Stroke is in .modal-buttons
-          console.log("inside of the boundary of #pop-alert.");
+
           // 1-2 case 1 : 只有一個btn則在其旁增加btn =======================( case 1 )
           if( $("#pop-alert .modal-button").length == 1){
-            $("#pop-alert .modal-buttons").append("<span class='modal-button' xkID='"+ getCurrentID() + "'>Button</span>");
-            arrData.push(timeIndex()+"CreateElement:"+"Button==2inRoll["+currentID +"]by "+shapeName+"@Alert-Inside" );
-            undoString = "$('[xkID="+ currentID +"]').remove();";// (((undo)))
-            console.log("在左邊新增");
+            console.log("只有一個.modal-button，依據 lineW 決定要新增短or長按鈕");
 
+            if (lineW > $("#pop-alert").width() / 2) {
+                // 線段 > 60%  $("#pop-alert").width()
+                $("#pop-alert").append("<div class='modal-buttons' xkID='" + currentID + "'><span class='modal-button'>Button</span></div>");
+                arrData.push(timeIndex() + "CreateElement:" + "Button==NinNRoll[" + currentID + "]by " + shapeName + "@Alert-Inside");
+                undoString = "$('[xkID=" + currentID + "]').remove();"; // (((undo)))
+            } else {
+                // 線段 < 60%  $("#pop-alert").width()
+                if (strokeCentralX < centralLineX) {
+                    //strokeCentralX 偏左 則 prepend ＠.modal-buttons
+                    $("#pop-alert .modal-buttons").prepend("<span class='modal-button' xkID='" + getCurrentID() + "'>Button</span>");
+                } else {
+                    //strokeCentralX 偏右 則 append ＠.modal-buttons
+                    $("#pop-alert .modal-buttons").append("<span class='modal-button' xkID='" + getCurrentID() + "'>Button</span>");
+                }
+                arrData.push(timeIndex() + "CreateElement:" + "Button==2inRoll[" + currentID + "]by " + shapeName + "@Alert-Inside");
+                undoString = "$('[xkID=" + currentID + "]').remove();"; // (((undo)))
+            }
           // 1-2 case 2 :大於二則“改為”成垂直排列 ==========================( case 2 )
-          }else if ($("#pop-alert .modal-button").length == 2) {
+          }else if ( $("#pop-alert > .modal-buttons").length == 1 && $("#pop-alert .modal-buttons:nth-child(2) .modal-button").length == 2) {
+            console.log("岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔岔");
             // a. Remove the latter .modal-button in the same row.
             $("#pop-alert .modal-buttons [xkID='"+currentID+"']").remove();
             // b. Add 2 rows .modal-buttons which has one modal-button.
-            var idddd = getCurrentID();
+            var iddddd= getCurrentID();
             for( i=0 ; i < 2 ; i++ ){
-              $("#pop-alert").append("<div class='modal-buttons' xkID='"+ idddd + "'><span class='modal-button'>Button</span></div>");
+              $("#pop-alert").append("<div class='modal-buttons' xkID='"+ iddddd + "'><span class='modal-button'>Button</span></div>");
             }
             arrData.push(timeIndex()+"CreateElement:"+"Button==3in3Roll[xkID="+currentID +"]by "+shapeName+"@Alert-Inside" );
-            undoString = "$('[xkID="+ currentID +"]').remove(); $('#pop-alert .modal-buttons').append('<span class='modal-button'>Button</span>'); ";// (((undo)))
-
+            undoString = "$('[xkID="+ currentID +"]').remove(); resizeAlert(); ";// (((undo)))
           // 1-2 case 3 :大於三直接垂直增加 ===============================( case 3 )
           }else {
-            $("#pop-alert").append("<div class='modal-buttons' xkID='"+ currentID + "'><span class='modal-button'>Button</span></div>");
+            console.log("下下下下下下下下下下下下下下下下下下下下下下下下下下");
+            $("#pop-alert").append("<div class='modal-buttons' xkID='"+ getCurrentID() + "'><span class='modal-button'>Button</span></div>");
             arrData.push(timeIndex()+"CreateElement:"+"Button==NinNRoll["+currentID +"]by "+shapeName+"@Alert-Inside" );
-            undoString = "$('[xkID="+ currentID +"]').remove();";// (((undo)))
+            undoString = "$('[xkID="+ currentID +"]').remove(); resizeAlert();";// (((undo)))
           }
 
 
@@ -660,27 +681,20 @@ window.Ashley = {
       // （二）中線以上 ==========================
         if(shapeName == "line" && pointsY[0] >= popviewCanvas.top + popElement.top){
           // Opne the modal sub title
-          $("#pop-alert .modal-text").css("display","initial");
-          arrData.push(timeIndex()+"CreateElement:"+"describtion[xkID="+currentID +"]by "+shapeName+"@Alert-top" );
-          undoString = "$('#pop-alert .modal-text').hide();";// (((undo)))
+          $("#pop-alert .modal-text").css("display","initial").attr("xkID", getCurrentID() );
+          arrData.push(timeIndex()+"CreateElement:"+"showDescribtion[xkID="+currentID +"]by "+shapeName+"@Alert-top" );
+          undoString = "$('#pop-alert .modal-text').hide(); resizeAlert();";// (((undo)))
         }else if (shapeName == "rectangle" || shapeName == "square"  && pointsY[0] >= popElement.top){
           // Opne the modal text input
-          $("#pop-alert .modal-text-input").css("display","initial");
-          arrData.push(timeIndex()+"CreateElement:"+"TextField[xkID="+currentID +"]by "+shapeName+"@Alert-top" );
-          undoString = "$('#pop-alert .modal-text-input').css('display','none');";// (((undo)))
+          $("#pop-alert .modal-text-input").css("display","initial").attr("xkID", getCurrentID() );
+          arrData.push(timeIndex()+"CreateElement:"+"showTextField[xkID="+currentID +"]by "+shapeName+"@Alert-top" );
+          undoString = "$('#pop-alert .modal-text-input').css('display','none'); resizeAlert(); ";// (((undo)))
         }else{
           console.log("Shape's wrong or out of the container.");
           arrData.push(timeIndex()+"ErrorStroke:"+shapeName+"!= @Alert-top" );
         }
       }
-      console.log("centralLineY= " + centralLineY);
-
-      // Resize alert after func add a new element.
-       $("#pop-alert").css({
-        "display":"block",
-        "left": $(".popview").width()/2 - $("#pop-alert").width()/2 -2,
-        "top": $(".popview").height()/2 - $("#pop-alert").height()/2 -2
-        });
+      resizeAlert();
       cleanCanvas();
     }
     // 4. Picker --------------<)))))
@@ -823,11 +837,11 @@ $(document).on("click",".js_confirmType",function(){
             break;
           case 'Button':
             if( shapeName == 'rectangle' && rectH >= 23  ){
-              $("#pop-customPopView").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:"+ xShift +"px;top:"+ yShift + "px;'>按鈕</button>");
+              $("#pop-customPopView").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:"+ xShift +"px;top:"+ (yShift- rectH/2)+ "px;  position:absolute;'>按鈕</button>");
             }else if( shapeName == 'rectangle' && rectH < 23){
               $("#pop-customPopView").append("<button type='button' xkID='"+ currentID + "' style='width:"+ rectW +"px;height: 23px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute;'>按鈕</button>");
             }else{
-              $("#pop-customPopView").append("<button type='button' xkID='"+ currentID + "' style='width:"+ lineW +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute;'>按鈕</button>");
+              $("#pop-customPopView").append("<button type='button' xkID='"+ currentID + "' style='width:"+ lineW +"px;left:"+ xShift +"px;top:"+ (yShift- 15) + "px; position:absolute;'>按鈕</button>");
             }
             arrData.push(timeIndex()+"ChangeElement:"+"button[xkID="+currentID +"][indexP="+indexP+"]@CustomPopView" );
             break;
@@ -842,16 +856,16 @@ $(document).on("click",".js_confirmType",function(){
           case 'TextField':
             // 判斷高度以區別是否為多行。一行的高度單位為20px
             if(rectH <= 40){
-              $("#pop-customPopView").append("<input type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; border:1px solid lightgrey;' placeholder='輸入文字...'>");
+              $("#pop-customPopView").append("<input type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:"+ xShift +"px;top:"+ (yShift- rectH/2) + "px; position:absolute; border:1px solid lightgrey;' placeholder='輸入文字...'>");
               arrData.push(timeIndex()+"ChangeElement:"+"textField.singleLine[xkID="+currentID +"][indexP="+indexP+"]@CustomPopView" );
             }else {
               var rows = Math.round(rectH/20) ;
               arrData.push(timeIndex()+"ChangeElement:"+"textField.multLine[xkID="+currentID +"][indexP="+indexP+"]@CustomPopView" );
-              $("#pop-customPopView").append("<textarea type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; border:1px solid lightgrey;' placeholder='輸入文字...'></textarea>");
+              $("#pop-customPopView").append("<textarea type='text' xkID='" + currentID + "' style='width:"+ rectW +"px;height:" + rectH + "px;left:"+ xShift +"px;top:"+ (yShift- 10)+ "px; position:absolute; border:1px solid lightgrey;' placeholder='輸入文字...'></textarea>");
             }
             break;
           case 'Text':
-            $("#pop-customPopView").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+ xShift +"px;top:"+ yShift + "px; position:absolute; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>今明（２２日、２３日）兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。</span>");
+            $("#pop-customPopView").append("<span xkID='"+ currentID + "' style='width:"+lineW +"px;left:"+ xShift +"px;top:"+ yShift-10 + "px; position:absolute; text-overflow:ellipsis; white-space: nowrap; overflow:hidden; font-size:20px; ;'>今明（２２日、２３日）兩天天氣不穩定，有局部較大雨勢發生的機率；今日鋒面接近，臺灣中部以北地區及澎湖、金門、馬祖有短暫陣雨或雷雨，東半部地區亦有局部短暫陣雨，南部地區為短暫陣雨後多雲；明日鋒面通過及大陸冷氣團南下，各地氣溫下降；臺灣北部、東北部地區及金門、馬祖有陣雨或雷雨，中部、東部、東南部地區及澎湖有短暫陣雨，其他地區亦有局部短暫陣雨。今明兩天金門、馬祖易有局部霧或低雲影響能見度，請注意。</span>");
             arrData.push(timeIndex()+"ChangeElement:"+"text[xkID="+currentID +"][indexP="+indexP+"]@CustomPopView" );
             break;
           case 'Line':
@@ -1004,6 +1018,13 @@ $(document).on("click",".js_undo",function(){
 
 });
 function resetUndo(){
-  $(".js_undo").css("color","");
+  $(".js_undo").css("color","#9B9B9D");
   undoString = "" ; // reset
+}
+function resizeAlert() {
+  $("#pop-alert").css({
+   "display":"block",
+   "left": $(".popview").width()/2 - $("#pop-alert").width()/2 -2,
+   "top": $(".popview").height()/2 - $("#pop-alert").height()/2 -2
+   });
 }

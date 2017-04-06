@@ -284,7 +284,10 @@ button{ background-color:lighten($xkGreen,15%);}
 }
 
 
-
+.img_component{ height:30px; float: right;    right: 0px;}
+.bootstrap-iso input[type="radio"], .bootstrap-iso input[type="checkbox"]{ margin-top: 11px;}
+.bootstrap-iso label.form-check-label { width: 100%;    border-bottom: 1px solid #eee;padding-bottom: 7px;}
+.form-check:last-child .form-check-label{ border-bottom: 0px;}
 
 // <!-- framework7 -->
 
