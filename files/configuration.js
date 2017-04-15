@@ -7,9 +7,13 @@ configuration = {
         applicationKey: 'ed45a5b4-946d-45c4-8234-fb840fb6416b',
         hmacKey: 'a1789a80-8514-3d17-acd0-cc5d6674acea'
     },
+    // shape: {
+    //     applicationKey: '9faa1259-48ba-44c4-9857-b3c86d986f94',
+    //     hmacKey: 'fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0'
+    // },
     shape: {
-        applicationKey: '9faa1259-48ba-44c4-9857-b3c86d986f94',
-        hmacKey: 'fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0'
+        applicationKey: '55ccacf7-0913-497e-8804-601b4f234897',
+        hmacKey: 'e903285c-d764-4e09-89ff-3b27cd721651'
     },
     math: {
         applicationKey: '7850ae71-6073-469c-8b8e-8abc8be44662',
