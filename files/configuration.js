@@ -1,5 +1,5 @@
 configuration = {
-    host: 'webdemoapi.m	yscript.com',
+    host: 'webdemoapi.myscript.com',
     ssl: true,
     offline: false,
     language: 'en_US',
