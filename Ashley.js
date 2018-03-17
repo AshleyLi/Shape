@@ -391,7 +391,7 @@ window.Ashley = {
       if(rectW >= rectH){
         if(rectH > unitH){
           // add an image & set a current elementID
-          $(".identification").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
+          $(".identification").append("<img src='img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
           arrData.push(timeIndex()+"CreateElement:"+"img["+currentID +"]@canvas" );
           $(".js_wildRectB").css({"display" : "initial"});
 
@@ -407,13 +407,13 @@ window.Ashley = {
       }else {
         if(rectH > unitH){
           // add an image & set a current elementID
-          $(".identification").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
+          $(".identification").append("<img src='img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
           arrData.push(timeIndex()+"CreateElement:"+"img["+currentID +"]@canvas" );
           $('.js_tallRectB').css({"display" : "block"});
           checkedElement(".js_tallRectB");
         } else {
           // add an image & set a current elementID
-          $(".identification").append("<img src='/img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
+          $(".identification").append("<img src='img/img_default.jpg' xkID='"+ currentID + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+pointsX[0]+"px;top:"+pointsY[0] + "px;'>");
           arrData.push(timeIndex()+"CreateElement:"+"img["+currentID +"]@canvas" );
           $('.js_tallRectS').css({"display" : "block"});
           checkedElement(".js_tallRectS");
@@ -480,7 +480,7 @@ window.Ashley = {
           if(rectH > unitH){
             // 1-1-1. 寬矩形 && 高度 > 一單位
             // add an image & set a current elementID
-            $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ getCurrentID() + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift+ "px;position:absolute;'>");
+            $("#pop-customPopView").append("<img src='img/img_default.jpg' xkID='"+ getCurrentID() + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift+ "px;position:absolute;'>");
             $(".js_wildRectB").css({"display" : "initial"});
           } else {
             // 1-1-2. 寬矩形 && 高度 <= 一單位
@@ -493,12 +493,12 @@ window.Ashley = {
           if(rectH > unitH){
             // 1-2-1. 高矩形 && 高度 ＞ 一單位
             // add an image & set a current elementID
-            $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ getCurrentID() + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px;position:absolute;'>");
+            $("#pop-customPopView").append("<img src='img/img_default.jpg' xkID='"+ getCurrentID() + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px;position:absolute;'>");
             $('.js_tallRectB').css({"display" : "block"});
           } else {
             // 1-2-2. 高矩形 && 高度 ＜ 一單位
             // add an image & set a current elementID
-            $("#pop-customPopView").append("<img src='/img/img_default.jpg' xkID='"+ getCurrentID() + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px;position:absolute;'>");
+            $("#pop-customPopView").append("<img src='img/img_default.jpg' xkID='"+ getCurrentID() + "' style='width:"+ rectW +"px;height:" + rectH +"px;left:"+ xShift +"px;top:"+ yShift + "px;position:absolute;'>");
             $('.js_tallRectS').css({"display" : "block"});
           }
           arrData.push(timeIndex()+"CreateElement:"+"img["+currentID +"]by "+shapeName+"@CustomPopview" );
